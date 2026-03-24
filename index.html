@@ -23,7 +23,6 @@
 }
 body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
-/* HEADER */
 header { background: var(--text); color: #f5f3ee; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 60px; position: sticky; top: 0; z-index: 200; }
 .logo { font-family: 'DM Mono', monospace; font-size: 15px; font-weight: 500; display: flex; align-items: center; gap: 12px; }
 .logo-tag { background: var(--accent); color: #fff; font-size: 10px; padding: 2px 7px; border-radius: 3px; letter-spacing: 1px; }
@@ -35,15 +34,12 @@ header { background: var(--text); color: #f5f3ee; padding: 0 40px; display: flex
 .btn-add-top { padding: 7px 16px; background: var(--green); color: #fff; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; }
 .btn-refresh { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); color: #f5f3ee; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-family: inherit; cursor: pointer; }
 
-/* LOADING */
 .loading-screen { position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 500; gap: 16px; }
 .spinner { width: 36px; height: 36px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* MAIN */
 main { padding: 28px 40px; }
 
-/* STATS */
 .stats-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 24px; }
 .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; position: relative; overflow: hidden; }
 .stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
@@ -52,12 +48,10 @@ main { padding: 28px 40px; }
 .stat-label { font-size: 11px; color: var(--muted); font-weight: 500; margin-bottom: 8px; }
 .stat-value { font-size: 30px; font-weight: 700; font-family: 'DM Mono', monospace; letter-spacing: -1px; }
 
-/* VIEWS */
 .view { display: none; } .view.active { display: block; }
 .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
 .section-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
 
-/* KANBAN */
 .kanban-board { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 20px; }
 .kanban-col { flex-shrink: 0; width: 270px; }
 .kanban-col-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-radius: 8px 8px 0 0; border: 1px solid var(--border); border-bottom: none; background: var(--surface2); }
@@ -66,7 +60,6 @@ main { padding: 28px 40px; }
 .col-count { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); background: var(--border); padding: 2px 7px; border-radius: 10px; }
 .kanban-cards { border: 1px solid var(--border); border-radius: 0 0 8px 8px; background: var(--surface2); padding: 8px; min-height: 120px; display: flex; flex-direction: column; gap: 8px; }
 
-/* CARD */
 .applicant-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px; cursor: pointer; transition: all 0.15s; box-shadow: var(--shadow); }
 .applicant-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px rgba(200,80,42,0.12); transform: translateY(-1px); }
 .card-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
@@ -79,7 +72,6 @@ main { padding: 28px 40px; }
 .card-resume { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--accent2); text-decoration: none; font-weight: 500; padding: 5px 8px; background: #eef5ff; border-radius: 4px; }
 .card-resume-empty { font-size: 11px; color: #bbb; padding: 5px 8px; background: var(--bg); border-radius: 4px; border: 1px dashed #ccc; }
 
-/* TABLE */
 .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
 thead { background: var(--text); color: #f5f3ee; }
@@ -94,14 +86,12 @@ tr:hover td { background: #faf9f7; }
 .s-최종합격 { background: #f0fdf4; color: #1a7a45; }
 .s-불합격 { background: #f5f5f5; color: #888; }
 
-/* SCHEDULE */
 .schedule-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
 .schedule-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; border-left: 4px solid var(--accent2); }
 .schedule-time { font-family: 'DM Mono', monospace; font-size: 15px; color: var(--accent2); margin-bottom: 6px; }
 .schedule-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
 .schedule-meta { font-size: 12px; color: var(--muted); }
 
-/* MODAL */
 .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
 .modal-overlay.open { display: flex; }
 .modal { background: var(--surface); border-radius: 14px; width: 520px; max-width: 95vw; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-lg); animation: slideUp 0.2s ease; }
@@ -111,8 +101,6 @@ tr:hover td { background: #faf9f7; }
 .modal-subtitle { font-size: 13px; color: var(--muted); margin-top: 2px; }
 .modal-close { background: none; border: none; font-size: 20px; color: var(--muted); cursor: pointer; }
 .modal-body { padding: 20px 24px; }
-.modal-section { margin-bottom: 20px; }
-.modal-section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); margin-bottom: 12px; }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .form-group { display: flex; flex-direction: column; gap: 5px; }
 .form-group.full { grid-column: 1/-1; }
@@ -120,16 +108,14 @@ tr:hover td { background: #faf9f7; }
 .form-input { padding: 9px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; font-family: inherit; background: var(--bg); color: var(--text); outline: none; transition: border-color 0.15s; }
 .form-input:focus { border-color: var(--accent2); }
 select.form-input { cursor: pointer; }
-.form-actions { display: flex; gap: 10px; justify-content: flex-end; padding-top: 8px; border-top: 1px solid var(--border); }
+.form-actions { display: flex; gap: 10px; justify-content: flex-end; padding-top: 8px; border-top: 1px solid var(--border); margin-top: 8px; }
 .btn-cancel { padding: 9px 18px; background: var(--surface2); color: var(--text); border: 1px solid var(--border); border-radius: 6px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; }
 .btn-submit { padding: 9px 20px; background: var(--accent2); color: #fff; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; }
 .btn-delete { padding: 9px 18px; background: #fff0ee; color: var(--accent); border: 1px solid #fad4c8; border-radius: 6px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; }
 .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
 
-/* TOAST */
 .toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(10px); background: var(--text); color: #f5f3ee; padding: 10px 20px; border-radius: 8px; font-size: 13px; opacity: 0; transition: all 0.3s; pointer-events: none; z-index: 9999; }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
 .empty-col { text-align: center; color: #ccc; font-size: 12px; padding: 24px 0; }
 </style>
 </head>
@@ -183,7 +169,7 @@ select.form-input { cursor: pointer; }
   </div>
 </main>
 
-<!-- ADD/EDIT MODAL -->
+<!-- MODAL -->
 <div class="modal-overlay" id="modal" onclick="closeModal(event)">
   <div class="modal">
     <div class="modal-header">
@@ -194,26 +180,24 @@ select.form-input { cursor: pointer; }
       <button class="modal-close" onclick="closeModalDirect()">✕</button>
     </div>
     <div class="modal-body">
-      <div class="modal-section">
-        <div class="form-grid">
-          <div class="form-group"><label class="form-label">이름 *</label><input class="form-input" id="f-name" placeholder="홍길동"></div>
-          <div class="form-group"><label class="form-label">부서 *</label><input class="form-input" id="f-dept" placeholder="플랫폼 사업팀"></div>
-          <div class="form-group"><label class="form-label">포지션 *</label><input class="form-input" id="f-position" placeholder="OTA관리자"></div>
-          <div class="form-group"><label class="form-label">지원 플랫폼</label>
-            <select class="form-input" id="f-platform">
-              <option>잡코리아</option><option>사람인</option><option>원티드</option><option>잡플래닛</option><option>그룹바이</option><option>기타</option>
-            </select>
-          </div>
-          <div class="form-group"><label class="form-label">채용 단계</label>
-            <select class="form-input" id="f-stage">
-              <option>서류검토</option><option>1차면접</option><option>2차면접</option><option>최종합격</option><option>불합격</option>
-            </select>
-          </div>
-          <div class="form-group"><label class="form-label">면접일</label><input class="form-input" id="f-interview" placeholder="수요일 오전 10:00"></div>
-          <div class="form-group full"><label class="form-label">이력서 링크 (Google Drive)</label><input class="form-input" id="f-resume" placeholder="https://drive.google.com/..."></div>
-          <div class="form-group full"><label class="form-label">연락처</label><input class="form-input" id="f-contact" placeholder="010-0000-0000"></div>
-          <div class="form-group full"><label class="form-label">메모</label><textarea class="form-input" id="f-memo" rows="3" placeholder="특이사항, 메모 등..."></textarea></div>
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">이름 *</label><input class="form-input" id="f-name" placeholder="홍길동"></div>
+        <div class="form-group"><label class="form-label">부서 *</label><input class="form-input" id="f-dept" placeholder="플랫폼 사업팀"></div>
+        <div class="form-group"><label class="form-label">포지션 *</label><input class="form-input" id="f-position" placeholder="OTA관리자"></div>
+        <div class="form-group"><label class="form-label">지원 플랫폼</label>
+          <select class="form-input" id="f-platform">
+            <option>잡코리아</option><option>사람인</option><option>원티드</option><option>잡플래닛</option><option>그룹바이</option><option>기타</option>
+          </select>
         </div>
+        <div class="form-group"><label class="form-label">채용 단계</label>
+          <select class="form-input" id="f-stage">
+            <option>서류검토</option><option>1차면접</option><option>2차면접</option><option>최종합격</option><option>불합격</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">면접일</label><input class="form-input" id="f-interview" placeholder="수요일 오전 10:00"></div>
+        <div class="form-group full"><label class="form-label">이력서 링크 (Google Drive)</label><input class="form-input" id="f-resume" placeholder="https://drive.google.com/..."></div>
+        <div class="form-group full"><label class="form-label">연락처</label><input class="form-input" id="f-contact" placeholder="010-0000-0000"></div>
+        <div class="form-group full"><label class="form-label">메모</label><textarea class="form-input" id="f-memo" rows="3" placeholder="특이사항, 메모 등..."></textarea></div>
       </div>
       <div class="form-actions">
         <button type="button" class="btn-delete" id="btn-delete" style="display:none" onclick="deleteApplicant()">삭제</button>
@@ -230,15 +214,29 @@ select.form-input { cursor: pointer; }
 let applicants = [];
 let editingId = null;
 
+// ── Airtable 컬럼명 매핑 (실제 Airtable 컬럼명 기준)
+const FIELDS = {
+  name:      'Name',
+  dept:      'Department',
+  position:  'Position Applied For',
+  platform:  'Application Platform',
+  stage:     'Hiring Stage',
+  interview: 'Interview Date',
+  resume:    'Resume Link',
+  contact:   'Contact Information',  // ✅ Airtable 실제 컬럼명
+  memo:      'Notes',
+};
+
 // ── API ──
 async function api(method, params = {}, body = null) {
-  console.log("API call:", method, params, body);
   const qs = new URLSearchParams(params).toString();
   const url = `/api/applicants${qs ? '?' + qs : ''}`;
   const opts = { method, headers: { 'Content-Type': 'application/json' } };
   if (body) opts.body = JSON.stringify(body);
   const r = await fetch(url, opts);
-  return r.json();
+  const data = await r.json();
+  if (!r.ok) throw new Error(data.error?.message || data.error || `HTTP ${r.status}`);
+  return data;
 }
 
 // ── LOAD ──
@@ -247,34 +245,35 @@ async function loadData() {
   try {
     const data = await api('GET', { table: 'Applicants' });
     applicants = (data.records || []).map(r => ({
-      id: r.id,
-      name: r.fields['Name'] || r.fields['Candidate Name'] || r.fields['이름'] || '(이름없음)',
-      dept: r.fields['Department'] || r.fields['부서'] || '',
-      position: r.fields['Position Applied For'] || r.fields['Position'] || r.fields['포지션'] || '',
-      platform: r.fields['Application Platform'] || r.fields['플랫폼'] || '',
-      stage: r.fields['Hiring Stage'] || r.fields['채용단계'] || r.fields['Screening Status'] || '서류검토',
-      interview: r.fields['Interview Date'] || r.fields['Application Date'] || r.fields['면접일'] || '',
-      resume: r.fields['Resume Link'] || r.fields['Resume'] || r.fields['이력서'] || '',
-      contact: r.fields['Contact'] || r.fields['Email'] || r.fields['연락처'] || '',
-      memo: r.fields['Notes'] || r.fields['메모'] || '',
+      id:        r.id,
+      name:      r.fields[FIELDS.name]      || '(이름없음)',
+      dept:      r.fields[FIELDS.dept]      || '',
+      position:  r.fields[FIELDS.position]  || '',
+      platform:  r.fields[FIELDS.platform]  || '',
+      stage:     r.fields[FIELDS.stage]     || '서류검토',
+      interview: r.fields[FIELDS.interview] || '',
+      resume:    r.fields[FIELDS.resume]    || '',
+      contact:   r.fields[FIELDS.contact]   || '',
+      memo:      r.fields[FIELDS.memo]      || '',
     }));
     updateStats();
     buildKanban();
     buildTable();
     buildSchedule();
   } catch(e) {
-    showToast('❌ 데이터 로드 실패');
+    showToast('❌ 데이터 로드 실패: ' + e.message);
+    console.error('loadData error:', e);
   }
   document.getElementById('loading').style.display = 'none';
 }
 
 // ── STATS ──
 function updateStats() {
-  document.getElementById('st-total').textContent = applicants.length;
-  document.getElementById('st-review').textContent = applicants.filter(a => (a.stage||'').includes('서류')).length;
-  document.getElementById('st-interview').textContent = applicants.filter(a => (a.stage||'').includes('면접')).length;
-  document.getElementById('st-passed').textContent = applicants.filter(a => (a.stage||'').includes('합격')).length;
-  document.getElementById('st-rejected').textContent = applicants.filter(a => (a.stage||'').includes('불합격')).length;
+  document.getElementById('st-total').textContent     = applicants.length;
+  document.getElementById('st-review').textContent    = applicants.filter(a => stageMatch(a,'서류검토')).length;
+  document.getElementById('st-interview').textContent = applicants.filter(a => stageMatch(a,'1차면접') || stageMatch(a,'2차면접')).length;
+  document.getElementById('st-passed').textContent    = applicants.filter(a => stageMatch(a,'최종합격')).length;
+  document.getElementById('st-rejected').textContent  = applicants.filter(a => stageMatch(a,'불합격')).length;
 }
 
 // ── KANBAN ──
@@ -283,17 +282,16 @@ const STAGES = [
   { key:'1차면접', label:'1차 면접', color:'#2a6ec8' },
   { key:'2차면접', label:'2차 면접', color:'#c8502a' },
   { key:'최종합격', label:'최종 합격', color:'#2a8c5a' },
-  { key:'불합격', label:'불합격', color:'#aaa' },
+  { key:'불합격',  label:'불합격',    color:'#aaa' },
 ];
 
 function stageMatch(a, key) {
-  const s = (a.stage||'').toLowerCase();
-  const sOrig = (a.stage||'');
-  if (key==='서류검토') return sOrig.includes('서류') || s.includes('screening') || sOrig === '검토중' || sOrig.includes('검토');
-  if (key==='1차면접') return sOrig.includes('1차');
-  if (key==='2차면접') return sOrig.includes('2차');
-  if (key==='최종합격') return sOrig.includes('합격') && !sOrig.includes('불');
-  if (key==='불합격') return sOrig.includes('불합격');
+  const s = (a.stage || '');
+  if (key === '서류검토') return s.includes('서류') || s.includes('검토') || s === '';
+  if (key === '1차면접')  return s.includes('1차');
+  if (key === '2차면접')  return s.includes('2차');
+  if (key === '최종합격') return s.includes('합격') && !s.includes('불');
+  if (key === '불합격')   return s.includes('불합격');
   return false;
 }
 
@@ -323,9 +321,9 @@ function cardHTML(a) {
   return `
     <div class="applicant-card" onclick="openEditModal('${a.id}')">
       <div class="card-name">${a.name}</div>
-      <div class="card-position">${a.position}</div>
+      <div class="card-position">${a.position || '포지션 미정'}</div>
       <div class="card-tags">
-        ${a.dept ? `<span class="tag tag-dept">${a.dept}</span>` : ''}
+        ${a.dept     ? `<span class="tag tag-dept">${a.dept}</span>` : ''}
         ${a.platform ? `<span class="tag tag-platform">${a.platform}</span>` : ''}
       </div>
       ${a.interview ? `<div class="card-interview">🕐 ${a.interview}</div>` : ''}
@@ -336,6 +334,10 @@ function cardHTML(a) {
 // ── TABLE ──
 function buildTable() {
   const tbody = document.getElementById('table-body');
+  if (!applicants.length) {
+    tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:32px">지원자가 없습니다</td></tr>`;
+    return;
+  }
   tbody.innerHTML = applicants.map(a => {
     const sc = stageClass(a.stage);
     const resumeCell = a.resume
@@ -343,11 +345,11 @@ function buildTable() {
       : `<span style="color:#ccc;font-size:12px">없음</span>`;
     return `<tr style="cursor:pointer" onclick="openEditModal('${a.id}')">
       <td style="font-weight:700">${a.name}</td>
-      <td style="color:#666">${a.dept}</td>
-      <td>${a.position}</td>
-      <td style="color:#999">${a.platform}</td>
+      <td style="color:#666">${a.dept || '-'}</td>
+      <td>${a.position || '-'}</td>
+      <td style="color:#999">${a.platform || '-'}</td>
       <td><span class="stage-badge ${sc}">${a.stage}</span></td>
-      <td style="color:var(--accent2);font-size:12px">${a.interview||'-'}</td>
+      <td style="color:var(--accent2);font-size:12px">${a.interview || '-'}</td>
       <td onclick="event.stopPropagation()">${resumeCell}</td>
       <td><button style="padding:4px 10px;border:1px solid var(--border);background:var(--surface2);border-radius:4px;font-size:11px;cursor:pointer;font-family:inherit" onclick="event.stopPropagation();openEditModal('${a.id}')">수정</button></td>
     </tr>`;
@@ -356,10 +358,10 @@ function buildTable() {
 
 function stageClass(s) {
   if (!s) return 's-서류검토';
-  if (s.includes('서류')||s.includes('검토')) return 's-서류검토';
+  if (s.includes('서류') || s.includes('검토')) return 's-서류검토';
   if (s.includes('1차')) return 's-1차면접';
   if (s.includes('2차')) return 's-2차면접';
-  if (s.includes('합격')&&!s.includes('불')) return 's-최종합격';
+  if (s.includes('합격') && !s.includes('불')) return 's-최종합격';
   if (s.includes('불합격')) return 's-불합격';
   return 's-서류검토';
 }
@@ -368,22 +370,25 @@ function stageClass(s) {
 function buildSchedule() {
   const grid = document.getElementById('schedule-grid');
   const withInterview = applicants.filter(a => a.interview);
-  if (!withInterview.length) { grid.innerHTML = '<div style="color:var(--muted);font-size:13px">면접 일정 없음</div>'; return; }
+  if (!withInterview.length) {
+    grid.innerHTML = '<div style="color:var(--muted);font-size:13px">면접 일정 없음</div>';
+    return;
+  }
   grid.innerHTML = withInterview.map(a => `
     <div class="schedule-card">
       <div class="schedule-time">${a.interview}</div>
       <div class="schedule-name">${a.name}</div>
-      <div class="schedule-meta">${a.position} · ${a.dept} · ${a.stage}</div>
+      <div class="schedule-meta">${a.position || ''} · ${a.dept || ''} · ${a.stage}</div>
     </div>`).join('');
 }
 
 // ── MODAL ──
 function openAddModal() {
   editingId = null;
-  document.getElementById('modal-title').textContent = '지원자 추가';
+  document.getElementById('modal-title').textContent    = '지원자 추가';
   document.getElementById('modal-subtitle').textContent = '새 지원자 정보를 입력하세요';
-  document.getElementById('btn-delete').style.display = 'none';
-  document.getElementById('btn-submit').textContent = '추가';
+  document.getElementById('btn-delete').style.display   = 'none';
+  document.getElementById('btn-submit').textContent     = '추가';
   clearForm();
   document.getElementById('modal').classList.add('open');
 }
@@ -392,26 +397,28 @@ function openEditModal(id) {
   editingId = id;
   const a = applicants.find(x => x.id === id);
   if (!a) return;
-  document.getElementById('modal-title').textContent = a.name + ' 수정';
+  document.getElementById('modal-title').textContent    = a.name + ' 수정';
   document.getElementById('modal-subtitle').textContent = `${a.dept} · ${a.position}`;
-  document.getElementById('btn-delete').style.display = 'block';
-  document.getElementById('btn-submit').textContent = '저장';
-  document.getElementById('f-name').value = a.name;
-  document.getElementById('f-dept').value = a.dept;
-  document.getElementById('f-position').value = a.position;
-  document.getElementById('f-platform').value = a.platform || '잡코리아';
-  document.getElementById('f-stage').value = a.stage || '서류검토';
+  document.getElementById('btn-delete').style.display   = 'block';
+  document.getElementById('btn-submit').textContent     = '저장';
+  document.getElementById('f-name').value      = a.name;
+  document.getElementById('f-dept').value      = a.dept;
+  document.getElementById('f-position').value  = a.position;
+  document.getElementById('f-platform').value  = a.platform || '잡코리아';
+  document.getElementById('f-stage').value     = a.stage    || '서류검토';
   document.getElementById('f-interview').value = a.interview;
-  document.getElementById('f-resume').value = a.resume;
-  document.getElementById('f-contact').value = a.contact;
-  document.getElementById('f-memo').value = a.memo;
+  document.getElementById('f-resume').value    = a.resume;
+  document.getElementById('f-contact').value   = a.contact;
+  document.getElementById('f-memo').value      = a.memo;
   document.getElementById('modal').classList.add('open');
 }
 
 function clearForm() {
-  ['f-name','f-dept','f-position','f-interview','f-resume','f-contact','f-memo'].forEach(id => document.getElementById(id).value = '');
+  ['f-name','f-dept','f-position','f-interview','f-resume','f-contact','f-memo'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
   document.getElementById('f-platform').value = '잡코리아';
-  document.getElementById('f-stage').value = '서류검토';
+  document.getElementById('f-stage').value    = '서류검토';
 }
 
 function closeModal(e) { if (e.target === document.getElementById('modal')) closeModalDirect(); }
@@ -420,19 +427,22 @@ function closeModalDirect() { document.getElementById('modal').classList.remove(
 async function submitForm() {
   const name = document.getElementById('f-name').value.trim();
   if (!name) { showToast('이름을 입력해주세요'); return; }
-  const btn = document.getElementById('btn-submit');
-  btn.disabled = true; btn.textContent = '저장 중...';
 
+  const btn = document.getElementById('btn-submit');
+  btn.disabled = true;
+  btn.textContent = '저장 중...';
+
+  // ✅ Airtable 실제 컬럼명으로 전송
   const fields = {
-    'Name': name,
-    'Department': document.getElementById('f-dept').value,
-    'Position Applied For': document.getElementById('f-position').value,
-    'Application Platform': document.getElementById('f-platform').value,
-    'Hiring Stage': document.getElementById('f-stage').value,
-    'Interview Date': document.getElementById('f-interview').value,
-    'Resume Link': document.getElementById('f-resume').value,
-    'Contact': document.getElementById('f-contact').value,
-    'Notes': document.getElementById('f-memo').value,
+    [FIELDS.name]:      name,
+    [FIELDS.dept]:      document.getElementById('f-dept').value,
+    [FIELDS.position]:  document.getElementById('f-position').value,
+    [FIELDS.platform]:  document.getElementById('f-platform').value,
+    [FIELDS.stage]:     document.getElementById('f-stage').value,
+    [FIELDS.interview]: document.getElementById('f-interview').value,
+    [FIELDS.resume]:    document.getElementById('f-resume').value,
+    [FIELDS.contact]:   document.getElementById('f-contact').value,
+    [FIELDS.memo]:      document.getElementById('f-memo').value,
   };
 
   try {
@@ -446,8 +456,10 @@ async function submitForm() {
     closeModalDirect();
     await loadData();
   } catch(e) {
-    showToast('❌ 저장 실패');
+    showToast('❌ 저장 실패: ' + e.message);
+    console.error('submitForm error:', e);
   }
+
   btn.disabled = false;
   btn.textContent = editingId ? '저장' : '추가';
 }
@@ -461,7 +473,7 @@ async function deleteApplicant() {
     closeModalDirect();
     await loadData();
   } catch(e) {
-    showToast('❌ 삭제 실패');
+    showToast('❌ 삭제 실패: ' + e.message);
   }
 }
 
@@ -475,8 +487,9 @@ function showView(name, btn) {
 
 function showToast(msg) {
   const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2500);
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
 }
 
 loadData();
