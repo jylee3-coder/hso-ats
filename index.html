@@ -247,14 +247,14 @@ async function loadData() {
     const data = await api('GET', { table: 'Applicants' });
     applicants = (data.records || []).map(r => ({
       id: r.id,
-      name: r.fields['Name'] || r.fields['이름'] || '',
+      name: r.fields['Name'] || r.fields['Candidate Name'] || r.fields['이름'] || '(이름없음)',
       dept: r.fields['Department'] || r.fields['부서'] || '',
-      position: r.fields['Position Applied For'] || r.fields['포지션'] || '',
+      position: r.fields['Position Applied For'] || r.fields['Position'] || r.fields['포지션'] || '',
       platform: r.fields['Application Platform'] || r.fields['플랫폼'] || '',
       stage: r.fields['Hiring Stage'] || r.fields['채용단계'] || r.fields['Screening Status'] || '서류검토',
-      interview: r.fields['Interview Date'] || r.fields['면접일'] || '',
-      resume: r.fields['Resume Link'] || r.fields['이력서'] || '',
-      contact: r.fields['Contact'] || r.fields['연락처'] || '',
+      interview: r.fields['Interview Date'] || r.fields['Application Date'] || r.fields['면접일'] || '',
+      resume: r.fields['Resume Link'] || r.fields['Resume'] || r.fields['이력서'] || '',
+      contact: r.fields['Contact'] || r.fields['Email'] || r.fields['연락처'] || '',
       memo: r.fields['Notes'] || r.fields['메모'] || '',
     }));
     updateStats();
@@ -287,11 +287,12 @@ const STAGES = [
 
 function stageMatch(a, key) {
   const s = (a.stage||'').toLowerCase();
-  if (key==='서류검토') return s.includes('서류') || s.includes('screening') || s.includes('검토중');
-  if (key==='1차면접') return s.includes('1차');
-  if (key==='2차면접') return s.includes('2차');
-  if (key==='최종합격') return s.includes('합격') && !s.includes('불');
-  if (key==='불합격') return s.includes('불합격');
+  const sOrig = (a.stage||'');
+  if (key==='서류검토') return sOrig.includes('서류') || s.includes('screening') || sOrig === '검토중' || sOrig.includes('검토');
+  if (key==='1차면접') return sOrig.includes('1차');
+  if (key==='2차면접') return sOrig.includes('2차');
+  if (key==='최종합격') return sOrig.includes('합격') && !sOrig.includes('불');
+  if (key==='불합격') return sOrig.includes('불합격');
   return false;
 }
 
