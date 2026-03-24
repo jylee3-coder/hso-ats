@@ -232,6 +232,7 @@ let editingId = null;
 
 // ── API ──
 async function api(method, params = {}, body = null) {
+  console.log("API call:", method, params, body);
   const qs = new URLSearchParams(params).toString();
   const url = `/api/applicants${qs ? '?' + qs : ''}`;
   const opts = { method, headers: { 'Content-Type': 'application/json' } };
