@@ -324,6 +324,17 @@ textarea.form-input { resize: vertical; }
 .role-desc { font-size: 11px; color: var(--muted); display: block; margin-top: 2px; }
 .role-bar { background: var(--text); color: #f5f3ee; padding: 6px 16px; border-radius: 20px; font-size: 12px; display: flex; align-items: center; gap: 8px; cursor: pointer; }
 .role-bar:hover { background: #333; }
+.pwd-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:2000; display:flex; align-items:center; justify-content:center; }
+.pwd-box { background:var(--surface); border-radius:14px; padding:32px; width:360px; box-shadow:var(--shadow-lg); text-align:center; }
+.pwd-icon { font-size:40px; margin-bottom:12px; }
+.pwd-title { font-size:18px; font-weight:700; margin-bottom:6px; }
+.pwd-desc { font-size:13px; color:var(--muted); margin-bottom:20px; }
+.pwd-input { width:100%; padding:10px 14px; border:2px solid var(--border); border-radius:8px; font-size:16px; font-family:'DM Mono',monospace; text-align:center; letter-spacing:4px; outline:none; margin-bottom:12px; }
+.pwd-input:focus { border-color:var(--accent2); }
+.pwd-input.error { border-color:var(--accent); animation:shake 0.3s; }
+.pwd-btn { width:100%; padding:11px; background:var(--accent2); color:#fff; border:none; border-radius:8px; font-size:14px; font-weight:700; font-family:inherit; cursor:pointer; }
+.pwd-error { color:var(--accent); font-size:12px; margin-top:8px; display:none; }
+@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
 </style>
 </head>
 <body>
@@ -614,6 +625,22 @@ textarea.form-input { resize: vertical; }
         <button type="button" class="btn-cancel" onclick="closeModalDirect()">취소</button>
         <button type="button" class="btn-submit" id="btn-submit" onclick="submitForm()">저장</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- PASSWORD OVERLAY -->
+<div class="pwd-overlay" id="pwd-overlay" style="display:none">
+  <div class="pwd-box">
+    <div class="pwd-icon" id="pwd-icon">🔒</div>
+    <div class="pwd-title" id="pwd-title">접근 제한</div>
+    <div class="pwd-desc" id="pwd-desc">이 메뉴는 권한이 필요합니다</div>
+    <input class="pwd-input" id="pwd-input" type="password" placeholder="••••" maxlength="20"
+      onkeydown="if(event.key==='Enter')checkPassword()">
+    <button class="pwd-btn" onclick="checkPassword()">확인</button>
+    <div class="pwd-error" id="pwd-error">비밀번호가 맞지 않아요</div>
+    <div style="margin-top:12px">
+      <button style="background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;font-family:inherit" onclick="cancelPassword()">취소</button>
     </div>
   </div>
 </div>
@@ -2109,13 +2136,73 @@ async function deleteApplicant() {
 }
 
 // ── NAV ──
+// ── PASSWORD PROTECTION ──
+// 비밀번호 설정 (여기서 변경하세요)
+const PASSWORDS = {
+  evaluation: 'hso2025',   // 면접 평가서 비밀번호
+  review:     'hso3month', // 3개월 평가 비밀번호
+};
+const unlockedTabs = new Set(); // 세션 중 한번 입력하면 유지
+let pendingView = null;
+let pendingBtn  = null;
+
 function showView(name, btn) {
+  // 보호된 탭 체크
+  if ((name === 'evaluation' || name === 'review') && !unlockedTabs.has(name)) {
+    pendingView = name;
+    pendingBtn  = btn;
+    openPasswordPrompt(name);
+    return;
+  }
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('view-' + name).classList.add('active');
   if (btn) btn.classList.add('active');
   if (name === 'report') buildReport();
   if (name === 'archive') buildArchiveTable();
+}
+
+function openPasswordPrompt(tab) {
+  const labels = {
+    evaluation: { icon:'📋', title:'면접 평가서', desc:'HR/면접관 전용 메뉴입니다\n비밀번호를 입력하세요' },
+    review:     { icon:'🌱', title:'3개월 평가',  desc:'HR 전용 메뉴입니다\n비밀번호를 입력하세요' },
+  };
+  const l = labels[tab];
+  document.getElementById('pwd-icon').textContent  = l.icon;
+  document.getElementById('pwd-title').textContent = l.title;
+  document.getElementById('pwd-desc').textContent  = l.desc;
+  document.getElementById('pwd-input').value        = '';
+  document.getElementById('pwd-error').style.display = 'none';
+  document.getElementById('pwd-input').classList.remove('error');
+  document.getElementById('pwd-overlay').style.display = 'flex';
+  setTimeout(() => document.getElementById('pwd-input').focus(), 100);
+}
+
+function checkPassword() {
+  const val = document.getElementById('pwd-input').value;
+  const correct = PASSWORDS[pendingView];
+  if (val === correct) {
+    unlockedTabs.add(pendingView);
+    document.getElementById('pwd-overlay').style.display = 'none';
+    // 원래 가려던 탭으로 이동
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('view-' + pendingView).classList.add('active');
+    if (pendingBtn) pendingBtn.classList.add('active');
+    showToast('✅ 접근이 허용됐어요');
+  } else {
+    const inp = document.getElementById('pwd-input');
+    inp.classList.add('error');
+    document.getElementById('pwd-error').style.display = 'block';
+    inp.value = '';
+    setTimeout(() => inp.classList.remove('error'), 400);
+  }
+}
+
+function cancelPassword() {
+  document.getElementById('pwd-overlay').style.display = 'none';
+  pendingView = null;
+  pendingBtn  = null;
 }
 
 function showToast(msg) {
