@@ -338,7 +338,6 @@ textarea.form-input { resize: vertical; }
     <button class="nav-btn" onclick="showView('hiring',this)">채용현황</button>
     <button class="nav-btn" onclick="showView('kanban',this)">칸반보드</button>
     <button class="nav-btn" onclick="showView('table',this)">지원자 목록</button>
-    <button class="nav-btn" onclick="showView('schedule',this)">면접 일정</button>
     <button class="nav-btn" id="nav-eval" onclick="showView('evaluation',this)">면접 평가서</button>
     <button class="nav-btn" id="nav-review" onclick="showView('review',this)">3개월 평가</button>
     <button class="nav-btn" onclick="showView('report',this)">📊 분기 리포트</button>
@@ -408,8 +407,13 @@ textarea.form-input { resize: vertical; }
     <div class="kanban-filters">
       <span class="filter-label">부서</span>
       <button class="filter-btn active" onclick="setDeptFilter('전체',this)">전체</button>
-      <div id="dept-filter-btns"></div>
-      <span style="margin-left:12px" class="filter-label">정렬</span>
+      <div id="dept-filter-btns" style="display:contents"></div>
+      <span style="margin-left:16px" class="filter-label">면접일</span>
+      <button class="filter-btn" id="kf-today" onclick="setInterviewFilter('today',this)">오늘</button>
+      <button class="filter-btn" id="kf-week" onclick="setInterviewFilter('week',this)">이번주</button>
+      <button class="filter-btn" id="kf-hasdate" onclick="setInterviewFilter('hasdate',this)">일정있음</button>
+      <button class="filter-btn" id="kf-nodate" onclick="setInterviewFilter('nodate',this)">미정</button>
+      <span style="margin-left:16px" class="filter-label">정렬</span>
       <select class="sort-select" id="kanban-sort" onchange="buildKanban()">
         <option value="default">기본순</option>
         <option value="date">면접일순</option>
@@ -511,7 +515,10 @@ textarea.form-input { resize: vertical; }
   <div id="view-archive" class="view">
     <div class="section-header">
       <span class="section-title">🗂 아카이브 — 채용 완료 데이터</span>
-      <button class="btn-submit" style="font-size:12px;padding:6px 14px" onclick="archiveCompleted()">✓ 완료건 아카이브 처리</button>
+      <div style="display:flex;gap:8px">
+        <button class="btn-submit" style="font-size:12px;padding:6px 14px;background:var(--green)" onclick="downloadArchiveCSV()">⬇ CSV 다운로드</button>
+        <button class="btn-submit" style="font-size:12px;padding:6px 14px" onclick="archiveCompleted()">✓ 아카이브 처리</button>
+      </div>
     </div>
     <div style="background:#fff8e6;border:1px solid #f0d080;border-radius:8px;padding:14px 18px;margin-bottom:16px;font-size:13px;color:#7a5c00;">
       💡 <strong>아카이브란?</strong> 최종합격 + 3개월 평가 완료된 지원자를 Active에서 분리해 누적 관리합니다. Active 데이터는 가볍게 유지되고, 아카이브에서 과거 데이터를 언제든 검색할 수 있어요.
@@ -537,12 +544,17 @@ textarea.form-input { resize: vertical; }
 <div class="modal-overlay" id="role-modal" onclick="closeRoleModal(event)">
   <div class="role-modal">
     <div style="font-size:20px;font-weight:700;margin-bottom:8px">역할을 선택하세요</div>
-    <div style="font-size:13px;color:var(--muted)">역할에 따라 접근 가능한 메뉴가 달라집니다</div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:4px">역할에 따라 접근 가능한 메뉴가 달라집니다</div>
     <div class="role-grid">
       <button class="role-btn" onclick="setRole('hr')"><span class="role-icon">🏢</span><span class="role-name">HR 담당자</span><span class="role-desc">전체 접근 가능</span></button>
-      <button class="role-btn" onclick="setRole('head')"><span class="role-icon">👔</span><span class="role-name">부서장</span><span class="role-desc">면접 평가서만</span></button>
-      <button class="role-btn" onclick="setRole('interviewer')"><span class="role-icon">🗣</span><span class="role-name">면접관</span><span class="role-desc">면접 평가서만</span></button>
+      <button class="role-btn" onclick="showDeptSelect('head')"><span class="role-icon">👔</span><span class="role-name">부서장</span><span class="role-desc">내 부서 평가서만</span></button>
+      <button class="role-btn" onclick="showDeptSelect('interviewer')"><span class="role-icon">🗣</span><span class="role-name">면접관</span><span class="role-desc">내 부서 평가서만</span></button>
       <button class="role-btn" onclick="setRole('executive')"><span class="role-icon">📊</span><span class="role-name">임원</span><span class="role-desc">대시보드 + 리포트</span></button>
+    </div>
+    <div id="dept-select-wrap" style="display:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
+      <div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:8px">소속 부서 선택</div>
+      <select class="form-input" id="role-dept-select" style="width:100%;margin-bottom:12px"></select>
+      <button class="btn-submit" style="width:100%" onclick="confirmDeptRole()">확인</button>
     </div>
   </div>
 </div>
@@ -598,11 +610,13 @@ let currentReviewApplicant = null;
 let evalState = {};
 let reviewState = {};
 let activeDeptFilter = '전체';
-let currentRole = localStorage.getItem('hso_role') || 'hr';
+let activeInterviewFilter = 'all';
+let pendingRoleForDept = null;
+let currentRoleDept = localStorage.getItem('hso_role_dept') || '';
 
 // ── ROLE MANAGEMENT ──
 const ROLES = {
-  hr:          { name:'HR 담당자', icon:'🏢', tabs: ['dashboard','hiring','kanban','table','schedule','evaluation','review','report','archive'], canAdd: true },
+  hr:          { name:'HR 담당자', icon:'🏢', tabs: ['dashboard','hiring','kanban','table','evaluation','review','report','archive'], canAdd: true },
   head:        { name:'부서장',    icon:'👔', tabs: ['evaluation'], canAdd: false },
   interviewer: { name:'면접관',    icon:'🗣', tabs: ['evaluation'], canAdd: false },
   executive:   { name:'임원',      icon:'📊', tabs: ['dashboard','hiring','report'], canAdd: false },
@@ -612,16 +626,35 @@ function applyRole(role) {
   currentRole = role;
   localStorage.setItem('hso_role', role);
   const r = ROLES[role] || ROLES.hr;
-  document.getElementById('role-indicator').textContent = `${r.icon} ${r.name}`;
+  const deptLabel = currentRoleDept && role !== 'hr' && role !== 'executive' ? ` (${currentRoleDept})` : '';
+  document.getElementById('role-indicator').textContent = `${r.icon} ${r.name}${deptLabel}`;
   document.getElementById('btn-add-top').style.display = r.canAdd ? '' : 'none';
   document.querySelectorAll('.nav-btn').forEach(btn => {
-    const view = btn.getAttribute('onclick')?.match(/'(\w+)'/)?.[1];
+    const match = btn.getAttribute('onclick')?.match(/'(\w+)'/);
+    const view = match?.[1];
     if (!view) return;
-    btn.style.display = r.tabs.includes(view) ? '' : 'none';
+    btn.style.display = (!view || r.tabs.includes(view)) ? '' : 'none';
   });
-  // Show first allowed tab
+  // 부서장/면접관이면 평가서 사이드바 부서 필터 적용
+  buildEvalSidebar();
   const firstTab = document.querySelector('.nav-btn:not([style*="none"])');
   if (firstTab) firstTab.click();
+}
+
+function showDeptSelect(role) {
+  pendingRoleForDept = role;
+  const depts = [...new Set(applicants.map(a => a.dept).filter(Boolean))];
+  const sel = document.getElementById('role-dept-select');
+  sel.innerHTML = depts.map(d => `<option value="${d}">${d}</option>`).join('');
+  if (currentRoleDept) sel.value = currentRoleDept;
+  document.getElementById('dept-select-wrap').style.display = 'block';
+}
+
+function confirmDeptRole() {
+  currentRoleDept = document.getElementById('role-dept-select').value;
+  localStorage.setItem('hso_role_dept', currentRoleDept);
+  document.getElementById('dept-select-wrap').style.display = 'none';
+  setRole(pendingRoleForDept);
 }
 
 function setRole(role) {
@@ -629,7 +662,10 @@ function setRole(role) {
   document.getElementById('role-modal').classList.remove('open');
 }
 
-function openRoleModal() { document.getElementById('role-modal').classList.add('open'); }
+function openRoleModal() {
+  document.getElementById('dept-select-wrap').style.display = 'none';
+  document.getElementById('role-modal').classList.add('open');
+}
 function closeRoleModal(e) { if (e.target === document.getElementById('role-modal')) document.getElementById('role-modal').classList.remove('open'); }
 
 const POSITIONS = [
@@ -692,16 +728,48 @@ function buildDashboard() {
     </div>`;
   }).join('');
 
+  // 포지션별 4단계 세분화 — Job Openings 기준으로 포지션 목록 사용
+  const positionList = jobOpenings.length
+    ? jobOpenings.map(j => ({ pos: j.position, dept: j.dept }))
+    : [...new Set(applicants.map(a => a.position).filter(Boolean))].map(p => ({ pos: p, dept: '' }));
+
   document.getElementById('dash-positions').innerHTML = `
-    <div class="dash-position-row header">
-      <div>포지션</div><div style="text-align:center">지원자</div><div style="text-align:center">면접자</div>
+    <div style="display:grid;grid-template-columns:160px repeat(4,1fr);gap:0;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;padding:8px 12px;border-bottom:2px solid var(--border);letter-spacing:0.5px">
+      <div>포지션</div>
+      <div style="text-align:center">지원자</div>
+      <div style="text-align:center;color:var(--yellow)">서류합격</div>
+      <div style="text-align:center;color:var(--accent2)">면접자</div>
+      <div style="text-align:center;color:var(--green)">최종합격</div>
     </div>
-    ${POSITIONS.map(pos => {
-      const posApplicants = applicants.filter(a => a.position === pos || a.position.includes(pos.replace(' ','').substring(0,4)));
-      const cnt = posApplicants.length;
-      const interviewCnt = posApplicants.filter(a => stageMatch(a,'1차면접')||stageMatch(a,'2차면접')||stageMatch(a,'최종합격')).length;
-      if (!cnt && !interviewCnt) return `<div class="dash-position-row"><div>${pos}</div><div style="text-align:center;color:var(--muted)">0</div><div style="text-align:center;color:var(--muted)">0</div></div>`;
-      return `<div class="dash-position-row"><div style="font-weight:600">${pos}</div><div style="text-align:center;font-family:'DM Mono',monospace;font-weight:700;color:var(--accent2)">${cnt}</div><div style="text-align:center;font-family:'DM Mono',monospace;font-weight:700;color:var(--green)">${interviewCnt}</div></div>`;
+    ${positionList.map(({pos, dept}) => {
+      const posApps = applicants.filter(a => a.position === pos);
+      const total      = posApps.length;
+      const screened   = posApps.filter(a => stageMatch(a,'1차면접')||stageMatch(a,'2차면접')||stageMatch(a,'최종합격')).length;
+      const interviewed= posApps.filter(a => stageMatch(a,'1차면접')||stageMatch(a,'2차면접')||stageMatch(a,'최종합격')).length;
+      const finalHired = posApps.filter(a => stageMatch(a,'최종합격')).length;
+      const maxVal = Math.max(total, 1);
+      return `<div style="display:grid;grid-template-columns:160px repeat(4,1fr);align-items:center;gap:0;padding:10px 12px;border-bottom:1px solid var(--border)">
+        <div>
+          <div style="font-size:13px;font-weight:700">${pos}</div>
+          ${dept ? `<div style="font-size:10px;color:var(--muted)">${dept}</div>` : ''}
+        </div>
+        <div style="text-align:center">
+          <div style="font-family:'DM Mono',monospace;font-weight:700;font-size:16px">${total}</div>
+          <div style="height:4px;background:var(--border);border-radius:2px;margin-top:4px"><div style="height:4px;width:${(total/maxVal*100)}%;background:var(--text);border-radius:2px"></div></div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-family:'DM Mono',monospace;font-weight:700;font-size:16px;color:var(--yellow)">${screened||'—'}</div>
+          <div style="height:4px;background:var(--border);border-radius:2px;margin-top:4px"><div style="height:4px;width:${(screened/maxVal*100)}%;background:var(--yellow);border-radius:2px"></div></div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-family:'DM Mono',monospace;font-weight:700;font-size:16px;color:var(--accent2)">${interviewed||'—'}</div>
+          <div style="height:4px;background:var(--border);border-radius:2px;margin-top:4px"><div style="height:4px;width:${(interviewed/maxVal*100)}%;background:var(--accent2);border-radius:2px"></div></div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-family:'DM Mono',monospace;font-weight:700;font-size:16px;color:var(--green)">${finalHired||'—'}</div>
+          <div style="height:4px;background:var(--border);border-radius:2px;margin-top:4px"><div style="height:4px;width:${(finalHired/maxVal*100)}%;background:var(--green);border-radius:2px"></div></div>
+        </div>
+      </div>`;
     }).join('')}
   `;
 }
@@ -789,11 +857,31 @@ function buildDeptFilterBtns() {
   ).join('');
 }
 
-function setDeptFilter(dept, btn) {
-  activeDeptFilter = dept;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
+function setInterviewFilter(filter, btn) {
+  activeInterviewFilter = activeInterviewFilter === filter ? 'all' : filter;
+  document.querySelectorAll('[id^="kf-"]').forEach(b => b.classList.remove('active'));
+  if (activeInterviewFilter !== 'all' && btn) btn.classList.add('active');
   buildKanban();
+}
+
+function matchInterviewFilter(a) {
+  if (activeInterviewFilter === 'all') return true;
+  const iv = a.interview || '';
+  if (activeInterviewFilter === 'hasdate') return iv.length > 0;
+  if (activeInterviewFilter === 'nodate') return iv.length === 0;
+  const today = new Date();
+  const todayStr = `${today.getMonth()+1}.${today.getDate()}`;
+  if (activeInterviewFilter === 'today') return iv.includes(todayStr);
+  if (activeInterviewFilter === 'week') {
+    // 이번주: 간단히 7일내 포함된 날짜 체크 (날짜 텍스트 기반)
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(today); d.setDate(today.getDate() + i);
+      const ds = `${d.getMonth()+1}.${d.getDate()}`;
+      if (iv.includes(ds)) return true;
+    }
+    return false;
+  }
+  return true;
 }
 
 const FIELDS = {
@@ -1166,9 +1254,43 @@ async function archiveCompleted() {
   buildArchiveTable();
 }
 
+function downloadArchiveCSV() {
+  const archived = applicants.filter(a => stageMatch(a,'최종합격') || stageMatch(a,'불합격'));
+  if (!archived.length) { showToast('다운로드할 데이터가 없어요'); return; }
+
+  const headers = ['이름','부서','포지션','플랫폼','최종단계','면접일','연락처','면접평가','3개월평가','상태'];
+  const rows = archived.map(a => {
+    const hasFb = hasFeedback(a.name);
+    const hasReview = feedbacks.some(f => f.applicantName === a.name && f.interviewNotes?.includes('3개월'));
+    const isHired = stageMatch(a,'최종합격');
+    return [
+      a.name, a.dept, a.position, a.platform, a.stage, a.interview, a.contact,
+      hasFb ? '완료' : '미완료',
+      isHired ? (hasReview ? '완료' : '대기') : '—',
+      isHired ? '입사' : '불합격'
+    ].map(v => `"${(v||'').toString().replace(/"/g,'""')}"`);
+  });
+
+  const csv = [headers, ...rows].map(r => r.join(',')).join('\n');
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `HSO_채용_아카이브_${new Date().toLocaleDateString('ko-KR').replace(/\. /g,'-').replace('.','')}.csv`;
+  a.click(); URL.revokeObjectURL(url);
+  showToast('✅ CSV 다운로드 완료');
+}
+
 function hasFeedback(name) {
   return feedbacks.some(f => f.applicantName === name);
 }
+
+const STAGES = [
+  { key:'서류검토', label:'서류 검토', color:'#c8a02a' },
+  { key:'1차면접', label:'1차 면접', color:'#2a6ec8' },
+  { key:'2차면접', label:'2차 면접', color:'#c8502a' },
+  { key:'최종합격', label:'최종 합격', color:'#2a8c5a' },
+  { key:'불합격',  label:'불합격',    color:'#aaa' },
+];
 
 function buildKanban() {
   const sortVal = document.getElementById('kanban-sort')?.value || 'default';
@@ -1177,6 +1299,7 @@ function buildKanban() {
   STAGES.forEach(stage => {
     let cards = applicants.filter(a => stageMatch(a, stage.key));
     if (activeDeptFilter !== '전체') cards = cards.filter(a => a.dept === activeDeptFilter);
+    cards = cards.filter(a => matchInterviewFilter(a));
     if (sortVal === 'date') {
       cards = cards.sort((a, b) => {
         if (!a.interview) return 1;
@@ -1273,9 +1396,13 @@ function buildSchedule() {
 // ── EVALUATION SIDEBAR ──
 function buildEvalSidebar() {
   const list = document.getElementById('eval-applicant-list');
-  const interviewees = applicants.filter(a => stageMatch(a,'1차면접') || stageMatch(a,'2차면접') || stageMatch(a,'최종합격'));
+  let interviewees = applicants.filter(a => stageMatch(a,'1차면접') || stageMatch(a,'2차면접') || stageMatch(a,'최종합격'));
+  // 부서장/면접관은 본인 부서만
+  if ((currentRole === 'head' || currentRole === 'interviewer') && currentRoleDept) {
+    interviewees = interviewees.filter(a => a.dept === currentRoleDept);
+  }
   if (!interviewees.length) {
-    list.innerHTML = '<div style="padding:20px;color:var(--muted);font-size:12px;text-align:center">면접 대상자 없음</div>';
+    list.innerHTML = `<div style="padding:20px;color:var(--muted);font-size:12px;text-align:center">${currentRoleDept ? currentRoleDept + ' ' : ''}면접 대상자 없음</div>`;
     return;
   }
   list.innerHTML = interviewees.map(a => {
