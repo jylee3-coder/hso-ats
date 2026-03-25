@@ -1173,19 +1173,27 @@ function stageMatch(a, key) {
 // ── REPORT ──
 function buildReport() {
   const total = applicants.length;
-  const interviewed = applicants.filter(a => stageMatch(a,'1차면접')||stageMatch(a,'2차면접')||stageMatch(a,'최종합격')).length;
-  const passed = applicants.filter(a => stageMatch(a,'최종합격')).length;
+  // 면접을 거친 전체 인원 = 현재 1차/2차면접 + 이미 최종합격/불합격/보류된 사람 중 면접 경험자
+  // → 실질적으로 서류검토가 아닌 모든 단계
+  const interviewed = applicants.filter(a =>
+    stageMatch(a,'1차면접') || stageMatch(a,'2차면접') ||
+    stageMatch(a,'최종합격') || stageMatch(a,'불합격') || stageMatch(a,'보류')
+  ).length;
+  const passed   = applicants.filter(a => stageMatch(a,'최종합격')).length;
   const rejected = applicants.filter(a => stageMatch(a,'불합격')).length;
-  const screened = applicants.filter(a => !stageMatch(a,'서류검토')||stageMatch(a,'1차면접')).length;
 
-  const docRate  = total     ? ((interviewed/total)*100).toFixed(1) : '0.0';
+  const docRate  = total      ? ((interviewed/total)*100).toFixed(1) : '0.0';
   const intRate  = interviewed ? ((passed/interviewed)*100).toFixed(1) : '0.0';
   const fillRate = jobOpenings.length ? ((passed / jobOpenings.reduce((s,j)=>s+Number(j.numHires||1),0))*100).toFixed(0) : '0';
-  const evalDone = feedbacks.filter(f => f.recommendation).length;
+
+  // 평가서 완료율 — 지원자 기준 중복 제거 (한 명당 1건만 카운트)
+  const evalDoneNames = new Set(feedbacks.filter(f => f.recommendation).map(f => f.applicantName));
+  const evalDone = evalDoneNames.size;
   const evalRate = interviewed ? ((evalDone/interviewed)*100).toFixed(0) : '0';
 
   // 3개월 평가 완료 수
-  const reviewDone = feedbacks.filter(f => f.interviewNotes && f.interviewNotes.includes('3개월 평가')).length;
+  const reviewDoneNames = new Set(feedbacks.filter(f => f.notes?.includes('3개월')).map(f => f.applicantName));
+  const reviewDone = reviewDoneNames.size;
 
   document.getElementById('report-kpis').innerHTML = `
     <div class="report-kpi kpi-c1"><div class="report-kpi-label">서류 → 면접 전환율</div><div class="report-kpi-value" style="color:var(--accent2)">${docRate}%</div><div class="report-kpi-sub">전체 ${total}명 중 면접 ${interviewed}명</div></div>
@@ -1197,11 +1205,12 @@ function buildReport() {
   `;
 
   // Funnel
+  const screenedCnt = applicants.filter(a => !stageMatch(a,'서류검토')).length;
   const funnelSteps = [
-    { name: '전체 지원', cnt: total, color: '#2a6ec8' },
-    { name: '서류 통과', cnt: interviewed + passed, color: '#c8a02a' },
-    { name: '면접 진행', cnt: interviewed, color: '#c8502a' },
-    { name: '최종 합격', cnt: passed, color: '#2a8c5a' },
+    { name: '전체 지원', cnt: total,       color: '#2a6ec8' },
+    { name: '서류 통과', cnt: screenedCnt, color: '#c8a02a' },
+    { name: '면접 진행', cnt: interviewed,  color: '#c8502a' },
+    { name: '최종 합격', cnt: passed,       color: '#2a8c5a' },
   ];
   document.getElementById('report-funnel').innerHTML = funnelSteps.map(s => {
     const pct = total ? Math.round((s.cnt/total)*100) : 0;
