@@ -946,17 +946,17 @@ const FIELDS = {
 };
 
 const FB_FIELDS = {
-  interviewName:    'Interview name',
-  applicant:        'Applicant name',
-  interviewDate:    'interview date',
+  interviewName:    'Interviewer Name',
+  applicant:        'Interviewer Name',
+  interviewDate:    'Interview Date',
   feedbackSummary:  'Feedback Summary',
   evaluationScore:  'Evaluation Score',
   strengths:        'Strengths',
-  areasFor:         'Areas for Recommendation',
-  interviewNotes:   'interview notes',
+  areasFor:         'Areas for Improvement',
+  interviewNotes:   'Interview Notes',
   recommendation:   'Recommendation',
-  isStrong:         'is strong',
-  hiringStages:     'Hiring stages',
+  isStrong:         'Is Strong Recommendation',
+  hiringStages:     'Hiring Stages',
 };
 
 // Dept → question pool mapping
@@ -1101,14 +1101,14 @@ async function loadData() {
     }));
     feedbacks = (fbData.records || []).map(r => ({
       id:             r.id,
-      applicantName:  r.fields[FB_FIELDS.applicant]       || '',
-      score:          r.fields[FB_FIELDS.evaluationScore] || 0,
-      recommendation: r.fields[FB_FIELDS.recommendation]  || '',
-      strengths:      r.fields[FB_FIELDS.strengths]        || '',
-      areasFor:       r.fields[FB_FIELDS.areasFor]         || '',
-      summary:        r.fields[FB_FIELDS.feedbackSummary]  || '',
-      notes:          r.fields[FB_FIELDS.interviewNotes]   || '',
-      isStrong:       r.fields[FB_FIELDS.isStrong]         || false,
+      applicantName:  r.fields['Interviewer Name']              || '',
+      score:          r.fields[FB_FIELDS.evaluationScore]       || 0,
+      recommendation: r.fields[FB_FIELDS.recommendation]        || '',
+      strengths:      r.fields[FB_FIELDS.strengths]             || '',
+      areasFor:       r.fields[FB_FIELDS.areasFor]              || '',
+      summary:        r.fields[FB_FIELDS.feedbackSummary]       || '',
+      notes:          r.fields[FB_FIELDS.interviewNotes]        || '',
+      isStrong:       r.fields[FB_FIELDS.isStrong]              || false,
     }));
     jobOpenings = (jobData.records || []).map(r => {
       // 디버그: 첫 번째 레코드 필드명 콘솔 출력
@@ -1806,8 +1806,7 @@ async function saveEvaluation() {
   const fullNotes = [notes, headComment ? `[부서장] ${headComment}` : '', pracComment ? `[실무자] ${pracComment}` : '', redFlagText ? `[Red Flag] ${redFlagText}` : ''].filter(Boolean).join('\n\n');
 
   const fields = {
-    [FB_FIELDS.interviewName]:   `${currentEvalApplicant.name} 면접평가`,
-    [FB_FIELDS.applicant]:       currentEvalApplicant.name,
+    [FB_FIELDS.interviewName]:   currentEvalApplicant.name,
     [FB_FIELDS.interviewDate]:   currentEvalApplicant.interview || '',
     [FB_FIELDS.evaluationScore]: score,
     [FB_FIELDS.recommendation]:  evalState.verdict,
@@ -1960,8 +1959,7 @@ async function saveReview() {
   ].join('\n');
 
   const fields = {
-    [FB_FIELDS.interviewName]:   `${currentReviewApplicant.name} 3개월평가`,
-    [FB_FIELDS.applicant]:       currentReviewApplicant.name,
+    [FB_FIELDS.interviewName]:   currentReviewApplicant.name,
     [FB_FIELDS.feedbackSummary]: summary,
     [FB_FIELDS.interviewNotes]:  `[3개월 평가]\n${summary}`,
     [FB_FIELDS.hiringStages]:    '최종합격',
