@@ -1103,7 +1103,9 @@ function updateStats() {
   document.getElementById('st-rejected').textContent  = applicants.filter(a => stageMatch(a,'불합격')).length;
 }
 
-// ── KANBAN ──(a, key) {
+// ── KANBAN ──
+
+function stageMatch(a, key) {
   const s = (a.stage || '').trim();
   if (key === '서류검토') return s.includes('서류') || s.includes('검토') || s === '';
   if (key === '1차면접')  return s.includes('1차');
