@@ -749,47 +749,44 @@ function buildDashboard() {
     </div>`;
   }).join('');
 
-  // 포지션별 4단계 세분화 — Job Openings 기준으로 포지션 목록 사용
+  // 포지션별 5단계 — Job Openings 기준으로 포지션 목록 사용
   const positionList = jobOpenings.length
     ? jobOpenings.map(j => ({ pos: j.position, dept: j.dept }))
     : [...new Set(applicants.map(a => a.position).filter(Boolean))].map(p => ({ pos: p, dept: '' }));
 
   document.getElementById('dash-positions').innerHTML = `
-    <div style="display:grid;grid-template-columns:160px repeat(4,1fr);gap:0;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;padding:8px 12px;border-bottom:2px solid var(--border);letter-spacing:0.5px">
+    <div style="display:grid;grid-template-columns:160px repeat(5,1fr);gap:0;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;padding:8px 12px;border-bottom:2px solid var(--border);letter-spacing:0.5px">
       <div>포지션</div>
       <div style="text-align:center">지원자</div>
       <div style="text-align:center;color:var(--yellow)">서류합격</div>
       <div style="text-align:center;color:var(--accent2)">면접자</div>
       <div style="text-align:center;color:var(--green)">최종합격</div>
+      <div style="text-align:center;color:#888">탈락</div>
     </div>
     ${positionList.map(({pos, dept}) => {
-      const posApps = applicants.filter(a => a.position === pos);
-      const total      = posApps.length;
-      const screened   = posApps.filter(a => stageMatch(a,'1차면접')||stageMatch(a,'2차면접')||stageMatch(a,'최종합격')).length;
-      const interviewed= posApps.filter(a => stageMatch(a,'1차면접')||stageMatch(a,'2차면접')||stageMatch(a,'최종합격')).length;
-      const finalHired = posApps.filter(a => stageMatch(a,'최종합격')).length;
-      const maxVal = Math.max(total, 1);
-      return `<div style="display:grid;grid-template-columns:160px repeat(4,1fr);align-items:center;gap:0;padding:10px 12px;border-bottom:1px solid var(--border)">
+      const posApps    = applicants.filter(a => a.position === pos);
+      // 지원자 = Job Openings 합계 (잡코리아+사람인 등), 없으면 Applicants 수
+      const jobRow     = jobOpenings.find(j => j.position === pos);
+      const totalApplied = jobRow ? (Number(jobRow.jobkorea)||0)+(Number(jobRow.saramin)||0)+(Number(jobRow.wanted)||0)+(Number(jobRow.jobplanet)||0)+(Number(jobRow.groupby)||0) : posApps.length;
+      const screened   = posApps.length;                                                // 서류합격 = Applicants 등록 전원
+      const interviewed= posApps.filter(a => stageMatch(a,'1차면접')||stageMatch(a,'최종합격')||stageMatch(a,'입사확정')).length;
+      const finalHired = posApps.filter(a => stageMatch(a,'최종합격')||stageMatch(a,'입사확정')).length;
+      const rejected   = posApps.filter(a => stageMatch(a,'불합격')).length;
+      const maxVal = Math.max(totalApplied, 1);
+      const col = (val, color) => `<div style="text-align:center">
+        <div style="font-family:'DM Mono',monospace;font-weight:700;font-size:16px;color:${color}">${val||'—'}</div>
+        <div style="height:4px;background:var(--border);border-radius:2px;margin-top:4px"><div style="height:4px;width:${(val/maxVal*100)}%;background:${color};border-radius:2px"></div></div>
+      </div>`;
+      return `<div style="display:grid;grid-template-columns:160px repeat(5,1fr);align-items:center;gap:0;padding:10px 12px;border-bottom:1px solid var(--border)">
         <div>
           <div style="font-size:13px;font-weight:700">${pos}</div>
           ${dept ? `<div style="font-size:10px;color:var(--muted)">${dept}</div>` : ''}
         </div>
-        <div style="text-align:center">
-          <div style="font-family:'DM Mono',monospace;font-weight:700;font-size:16px">${total}</div>
-          <div style="height:4px;background:var(--border);border-radius:2px;margin-top:4px"><div style="height:4px;width:${(total/maxVal*100)}%;background:var(--text);border-radius:2px"></div></div>
-        </div>
-        <div style="text-align:center">
-          <div style="font-family:'DM Mono',monospace;font-weight:700;font-size:16px;color:var(--yellow)">${screened||'—'}</div>
-          <div style="height:4px;background:var(--border);border-radius:2px;margin-top:4px"><div style="height:4px;width:${(screened/maxVal*100)}%;background:var(--yellow);border-radius:2px"></div></div>
-        </div>
-        <div style="text-align:center">
-          <div style="font-family:'DM Mono',monospace;font-weight:700;font-size:16px;color:var(--accent2)">${interviewed||'—'}</div>
-          <div style="height:4px;background:var(--border);border-radius:2px;margin-top:4px"><div style="height:4px;width:${(interviewed/maxVal*100)}%;background:var(--accent2);border-radius:2px"></div></div>
-        </div>
-        <div style="text-align:center">
-          <div style="font-family:'DM Mono',monospace;font-weight:700;font-size:16px;color:var(--green)">${finalHired||'—'}</div>
-          <div style="height:4px;background:var(--border);border-radius:2px;margin-top:4px"><div style="height:4px;width:${(finalHired/maxVal*100)}%;background:var(--green);border-radius:2px"></div></div>
-        </div>
+        ${col(totalApplied, 'var(--text)')}
+        ${col(screened, 'var(--yellow)')}
+        ${col(interviewed, 'var(--accent2)')}
+        ${col(finalHired, 'var(--green)')}
+        ${col(rejected, '#aaa')}
       </div>`;
     }).join('')}
   `;
