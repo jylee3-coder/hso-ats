@@ -444,7 +444,7 @@ textarea.form-input { resize: vertical; }
   <div id="view-evaluation" class="view">
     <div class="section-header">
       <span class="section-title">면접 평가서</span>
-      <span style="font-size:12px;color:var(--muted)">지원자 선택 후 평가를 작성하세요</span>
+      <button class="btn-submit" style="font-size:12px;padding:6px 14px;background:var(--green)" onclick="downloadEvalCSV()">⬇ 전체 평가 CSV</button>
     </div>
     <div class="eval-layout">
       <div class="eval-sidebar">
@@ -1254,7 +1254,41 @@ async function archiveCompleted() {
   buildArchiveTable();
 }
 
-function downloadArchiveCSV() {
+function downloadEvalCSV() {
+  if (!feedbacks.length) { showToast('저장된 평가 데이터가 없어요'); return; }
+
+  const headers = [
+    '지원자명', '부서', '포지션', '면접일', '채용단계',
+    '평가점수', '최종판정', '강점', '개선필요영역', '면접메모', 'Strong Hire 여부'
+  ];
+
+  const rows = feedbacks.map(fb => {
+    const applicant = applicants.find(a => a.name === fb.applicantName) || {};
+    return [
+      fb.applicantName,
+      applicant.dept || '',
+      applicant.position || '',
+      applicant.interview || '',
+      applicant.stage || '',
+      fb.score || '',
+      fb.recommendation || '',
+      fb.strengths || '',
+      fb.areasFor || '',
+      (fb.notes || '').replace(/\n/g, ' '),
+      fb.isStrong ? 'Yes' : 'No',
+    ].map(v => `"${(v||'').toString().replace(/"/g, '""')}"`);
+  });
+
+  const csv = [headers, ...rows].map(r => r.join(',')).join('\n');
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `HSO_면접평가_${new Date().toLocaleDateString('ko-KR').replace(/\. /g,'-').replace('.','')}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('✅ 면접 평가 CSV 다운로드 완료');
+}
   const archived = applicants.filter(a => stageMatch(a,'최종합격') || stageMatch(a,'불합격'));
   if (!archived.length) { showToast('다운로드할 데이터가 없어요'); return; }
 
