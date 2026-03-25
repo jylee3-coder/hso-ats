@@ -1103,16 +1103,7 @@ function updateStats() {
   document.getElementById('st-rejected').textContent  = applicants.filter(a => stageMatch(a,'불합격')).length;
 }
 
-// ── KANBAN ──
-const STAGES = [
-  { key:'서류검토', label:'서류 검토', color:'#c8a02a' },
-  { key:'1차면접', label:'1차 면접', color:'#2a6ec8' },
-  { key:'2차면접', label:'2차 면접', color:'#c8502a' },
-  { key:'최종합격', label:'최종 합격', color:'#2a8c5a' },
-  { key:'불합격',  label:'불합격',    color:'#aaa' },
-];
-
-function stageMatch(a, key) {
+// ── KANBAN ──(a, key) {
   const s = (a.stage || '').trim();
   if (key === '서류검토') return s.includes('서류') || s.includes('검토') || s === '';
   if (key === '1차면접')  return s.includes('1차');
