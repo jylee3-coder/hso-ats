@@ -795,7 +795,7 @@ function buildHiringStatus() {
     const n = (v) => Number(v) || 0;
 
     // Airtable Job Openings 기반
-    const numHires   = n(row.numHires) || 1;
+    const numHires   = n(row.numHires) > 0 ? n(row.numHires) : 1;
     const jobkorea   = n(row.jobkorea);
     const saramin    = n(row.saramin);
     const wanted     = n(row.wanted);
@@ -1070,21 +1070,21 @@ async function loadData() {
       notes:          r.fields[FB_FIELDS.interviewNotes]   || '',
       isStrong:       r.fields[FB_FIELDS.isStrong]         || false,
     }));
-    jobOpenings = (jobData.records || []).map(r => ({
+    jobOpenings = (jobData.records || []).map(r => {
+      // 디버그: 첫 번째 레코드 필드명 콘솔 출력
+      if (!jobOpenings.length) console.log('Job Openings fields:', Object.keys(r.fields), r.fields);
+      return {
       id:          r.id,
       dept:        r.fields['Department']            || '',
       position:    r.fields['Position']              || r.fields['position'] || '',
-      numHires:    r.fields['Number of Hires']       || 1,
-      jobkorea:    r.fields['Jobkorea applicants']   || 0,
-      saramin:     r.fields['Saramin Applicants']    || 0,
-      wanted:      r.fields['Wanted Applicants']     || 0,
-      jobplanet:   r.fields['Jobplanet Applicants']  || 0,
-      groupby:     r.fields['GroupBy Applicants']    || 0,
+      numHires:    r.fields['Number of Hires']        || 0,
+      jobkorea:    r.fields['JobKorea Applicants']    || 0,
+      saramin:     r.fields['Saramin Applicants']     || 0,
+      wanted:      r.fields['Wanted Applicants']      || 0,
+      jobplanet:   r.fields['JobPlanet Applicants']   || 0,
+      groupby:     r.fields['GroupBy Applicants']     || 0,
       total:       r.fields['Total Applicants']      || 0,
-      screened:    r.fields['Screened Applicants']   || r.fields['A screened Applicants'] || 0,
-      interviewed: r.fields['Interviewed Applicants']|| r.fields['A inteviewed  Applicants'] || 0,
-      finalHires:  r.fields['Final Hires']           || r.fields['A final hires'] || 0,
-    }));
+    };});
     updateStats();
     buildDashboard();
     buildHiringStatus();
