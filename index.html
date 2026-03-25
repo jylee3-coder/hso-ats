@@ -550,7 +550,7 @@ function buildDashboard() {
   `;
 }
 
-// ── HIRING STATUS (from Job Openings table) ──
+// ── HIRING STATUS (from Job Openings table + auto-calc from Applicants) ──
 function buildHiringStatus() {
   const tbody = document.getElementById('hiring-body');
   if (!jobOpenings.length) {
@@ -561,42 +561,51 @@ function buildHiringStatus() {
   const totals = { numHires:0, jobkorea:0, saramin:0, wanted:0, jobplanet:0, groupby:0, total:0, screened:0, interviewed:0, finalHires:0 };
 
   tbody.innerHTML = jobOpenings.map(row => {
-    totals.numHires    += Number(row.numHires)    || 0;
-    totals.jobkorea    += Number(row.jobkorea)    || 0;
-    totals.saramin     += Number(row.saramin)     || 0;
-    totals.wanted      += Number(row.wanted)      || 0;
-    totals.jobplanet   += Number(row.jobplanet)   || 0;
-    totals.groupby     += Number(row.groupby)     || 0;
-    totals.total       += Number(row.total)       || 0;
-    totals.screened    += Number(row.screened)    || 0;
-    totals.interviewed += Number(row.interviewed) || 0;
-    totals.finalHires  += Number(row.finalHires)  || 0;
+    // 서류합격/면접자/최종합격 → Applicants에서 자동 계산
+    const posApplicants = applicants.filter(a =>
+      a.dept === row.dept && a.position === row.position
+    );
+    const screenedCnt    = posApplicants.filter(a => stageMatch(a,'서류검토') || stageMatch(a,'1차면접') || stageMatch(a,'2차면접') || stageMatch(a,'최종합격')).length;
+    const interviewedCnt = posApplicants.filter(a => stageMatch(a,'1차면접') || stageMatch(a,'2차면접') || stageMatch(a,'최종합격')).length;
+    const finalCnt       = posApplicants.filter(a => stageMatch(a,'최종합격')).length;
 
     const n = (v) => Number(v) || 0;
-    const cell = (v, colored) => v ? `<td class="num-cell ${colored?'highlight':''}">${v}</td>` : `<td class="ing-cell">—</td>`;
+
+    totals.numHires    += n(row.numHires);
+    totals.jobkorea    += n(row.jobkorea);
+    totals.saramin     += n(row.saramin);
+    totals.wanted      += n(row.wanted);
+    totals.jobplanet   += n(row.jobplanet);
+    totals.groupby     += n(row.groupby);
+    totals.total       += n(row.total);
+    totals.screened    += screenedCnt;
+    totals.interviewed += interviewedCnt;
+    totals.finalHires  += finalCnt;
+
+    const numCell = (v, colored) => v ? `<td class="num-cell ${colored?'highlight':''}">${v}</td>` : `<td class="ing-cell">—</td>`;
 
     return `<tr>
       <td class="dept-cell">${row.dept}</td>
       <td class="pos-cell">${row.position}</td>
       <td class="num-cell">${n(row.numHires)}</td>
-      ${cell(n(row.jobkorea), true)}
-      ${cell(n(row.saramin), true)}
-      ${cell(n(row.wanted), true)}
-      ${cell(n(row.jobplanet), true)}
-      ${cell(n(row.groupby), true)}
+      ${numCell(n(row.jobkorea), true)}
+      ${numCell(n(row.saramin), true)}
+      ${numCell(n(row.wanted), true)}
+      ${numCell(n(row.jobplanet), true)}
+      ${numCell(n(row.groupby), true)}
       <td class="num-cell" style="font-weight:700">${n(row.total)}</td>
-      <td class="num-cell ${row.screened?'highlight':''}">${n(row.screened)||'—'}</td>
-      <td class="num-cell ${row.interviewed?'highlight':''}">${n(row.interviewed)||'—'}</td>
-      <td class="num-cell" style="color:var(--green)">${n(row.finalHires)||'—'}</td>
+      <td class="num-cell ${screenedCnt?'highlight':''}">${screenedCnt||'—'}</td>
+      <td class="num-cell ${interviewedCnt?'highlight':''}">${interviewedCnt||'—'}</td>
+      <td class="num-cell" style="color:var(--green)">${finalCnt||'—'}</td>
     </tr>`;
   }).join('') + `<tr class="total-row">
     <td colspan="2" style="font-weight:700;text-align:center">합 계</td>
     <td class="num-cell">${totals.numHires}</td>
-    <td class="num-cell highlight">${totals.jobkorea}</td>
-    <td class="num-cell highlight">${totals.saramin}</td>
-    <td class="num-cell highlight">${totals.wanted}</td>
-    <td class="num-cell highlight">${totals.jobplanet}</td>
-    <td class="num-cell highlight">${totals.groupby}</td>
+    <td class="num-cell highlight">${totals.jobkorea||'—'}</td>
+    <td class="num-cell highlight">${totals.saramin||'—'}</td>
+    <td class="num-cell highlight">${totals.wanted||'—'}</td>
+    <td class="num-cell highlight">${totals.jobplanet||'—'}</td>
+    <td class="num-cell highlight">${totals.groupby||'—'}</td>
     <td class="num-cell" style="font-weight:700">${totals.total}</td>
     <td class="num-cell highlight">${totals.screened}</td>
     <td class="num-cell highlight">${totals.interviewed}</td>
