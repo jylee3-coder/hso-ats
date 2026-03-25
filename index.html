@@ -468,6 +468,7 @@ textarea.form-input { resize: vertical; }
 <script>
 let applicants = [];
 let feedbacks = [];
+let jobOpenings = [];
 let editingId = null;
 let currentEvalApplicant = null;
 let currentReviewApplicant = null;
@@ -549,58 +550,57 @@ function buildDashboard() {
   `;
 }
 
-// ── HIRING STATUS ──
+// ── HIRING STATUS (from Job Openings table) ──
 function buildHiringStatus() {
-  const deptPositions = {};
-  applicants.forEach(a => {
-    const key = `${a.dept}||${a.position}`;
-    if (!deptPositions[key]) deptPositions[key] = { dept: a.dept, position: a.position, list: [] };
-    deptPositions[key].list.push(a);
-  });
-
-  const rows = Object.values(deptPositions);
-  const totals = { 잡코리아:0, 사람인:0, 원티드:0, 잡플래닛:0, 그룹바이:0, 기타:0, total:0, interview:0, passed:0 };
-
   const tbody = document.getElementById('hiring-body');
-  tbody.innerHTML = rows.map(row => {
-    const platformCounts = {};
-    PLATFORMS.forEach(p => platformCounts[p] = 0);
-    platformCounts['기타'] = 0;
-    row.list.forEach(a => {
-      if (PLATFORMS.includes(a.platform)) platformCounts[a.platform]++;
-      else platformCounts['기타']++;
-    });
-    const total = row.list.length;
-    const interviewCnt = row.list.filter(a => stageMatch(a,'1차면접')||stageMatch(a,'2차면접')||stageMatch(a,'최종합격')).length;
-    const passedCnt = row.list.filter(a => stageMatch(a,'최종합격')).length;
-    const reviewCnt = row.list.filter(a => stageMatch(a,'서류검토')).length;
+  if (!jobOpenings.length) {
+    tbody.innerHTML = `<tr><td colspan="13" style="text-align:center;color:var(--muted);padding:32px">Job Openings 데이터 없음</td></tr>`;
+    return;
+  }
 
-    PLATFORMS.forEach(p => totals[p] = (totals[p]||0) + (platformCounts[p]||0));
-    totals['기타'] = (totals['기타']||0) + (platformCounts['기타']||0);
-    totals.total += total;
-    totals.interview += interviewCnt;
-    totals.passed += passedCnt;
+  const totals = { numHires:0, jobkorea:0, saramin:0, wanted:0, jobplanet:0, groupby:0, total:0, screened:0, interviewed:0, finalHires:0 };
+
+  tbody.innerHTML = jobOpenings.map(row => {
+    totals.numHires    += Number(row.numHires)    || 0;
+    totals.jobkorea    += Number(row.jobkorea)    || 0;
+    totals.saramin     += Number(row.saramin)     || 0;
+    totals.wanted      += Number(row.wanted)      || 0;
+    totals.jobplanet   += Number(row.jobplanet)   || 0;
+    totals.groupby     += Number(row.groupby)     || 0;
+    totals.total       += Number(row.total)       || 0;
+    totals.screened    += Number(row.screened)    || 0;
+    totals.interviewed += Number(row.interviewed) || 0;
+    totals.finalHires  += Number(row.finalHires)  || 0;
+
+    const n = (v) => Number(v) || 0;
+    const cell = (v, colored) => v ? `<td class="num-cell ${colored?'highlight':''}">${v}</td>` : `<td class="ing-cell">—</td>`;
 
     return `<tr>
       <td class="dept-cell">${row.dept}</td>
       <td class="pos-cell">${row.position}</td>
-      <td class="num-cell">1</td>
-      ${PLATFORMS.map(p => `<td class="num-cell ${platformCounts[p]?'highlight':''}">${platformCounts[p]||0}</td>`).join('')}
-      <td class="num-cell" style="color:#888">${platformCounts['기타']||0}</td>
-      <td class="num-cell" style="font-weight:700">${total}</td>
-      <td class="ing-cell">${reviewCnt > 0 ? `<span style="color:var(--accent2);font-weight:600">${reviewCnt}</span>` : '—'}</td>
-      <td class="num-cell ${interviewCnt?'highlight':''}">${interviewCnt||'—'}</td>
-      <td class="num-cell" style="color:var(--green)">${passedCnt||'—'}</td>
+      <td class="num-cell">${n(row.numHires)}</td>
+      ${cell(n(row.jobkorea), true)}
+      ${cell(n(row.saramin), true)}
+      ${cell(n(row.wanted), true)}
+      ${cell(n(row.jobplanet), true)}
+      ${cell(n(row.groupby), true)}
+      <td class="num-cell" style="font-weight:700">${n(row.total)}</td>
+      <td class="num-cell ${row.screened?'highlight':''}">${n(row.screened)||'—'}</td>
+      <td class="num-cell ${row.interviewed?'highlight':''}">${n(row.interviewed)||'—'}</td>
+      <td class="num-cell" style="color:var(--green)">${n(row.finalHires)||'—'}</td>
     </tr>`;
   }).join('') + `<tr class="total-row">
     <td colspan="2" style="font-weight:700;text-align:center">합 계</td>
-    <td class="num-cell">${rows.length}</td>
-    ${PLATFORMS.map(p => `<td class="num-cell highlight">${totals[p]||0}</td>`).join('')}
-    <td class="num-cell">${totals['기타']||0}</td>
+    <td class="num-cell">${totals.numHires}</td>
+    <td class="num-cell highlight">${totals.jobkorea}</td>
+    <td class="num-cell highlight">${totals.saramin}</td>
+    <td class="num-cell highlight">${totals.wanted}</td>
+    <td class="num-cell highlight">${totals.jobplanet}</td>
+    <td class="num-cell highlight">${totals.groupby}</td>
     <td class="num-cell" style="font-weight:700">${totals.total}</td>
-    <td class="num-cell highlight">${totals.interview}</td>
-    <td class="num-cell highlight">${totals.interview}</td>
-    <td class="num-cell" style="color:var(--green)">${totals.passed}</td>
+    <td class="num-cell highlight">${totals.screened}</td>
+    <td class="num-cell highlight">${totals.interviewed}</td>
+    <td class="num-cell" style="color:var(--green)">${totals.finalHires}</td>
   </tr>`;
 }
 
@@ -768,9 +768,10 @@ async function api(method, params = {}, body = null) {
 async function loadData() {
   document.getElementById('loading').style.display = 'flex';
   try {
-    const [appData, fbData] = await Promise.all([
+    const [appData, fbData, jobData] = await Promise.all([
       api('GET', { table: 'Applicants' }),
       api('GET', { table: 'Interview Feedback' }).catch(() => ({ records: [] })),
+      api('GET', { table: 'Job Openings' }).catch(() => ({ records: [] })),
     ]);
     applicants = (appData.records || []).map(r => ({
       id:        r.id,
@@ -794,6 +795,21 @@ async function loadData() {
       summary:        r.fields[FB_FIELDS.feedbackSummary]  || '',
       notes:          r.fields[FB_FIELDS.interviewNotes]   || '',
       isStrong:       r.fields[FB_FIELDS.isStrong]         || false,
+    }));
+    jobOpenings = (jobData.records || []).map(r => ({
+      id:          r.id,
+      dept:        r.fields['Department']            || '',
+      position:    r.fields['Position']              || r.fields['position'] || '',
+      numHires:    r.fields['Number of Hires']       || 1,
+      jobkorea:    r.fields['Jobkorea applicants']   || 0,
+      saramin:     r.fields['Saramin Applicants']    || 0,
+      wanted:      r.fields['Wanted Applicants']     || 0,
+      jobplanet:   r.fields['Jobplanet Applicants']  || 0,
+      groupby:     r.fields['GroupBy Applicants']    || 0,
+      total:       r.fields['Total Applicants']      || 0,
+      screened:    r.fields['Screened Applicants']   || r.fields['A screened Applicants'] || 0,
+      interviewed: r.fields['Interviewed Applicants']|| r.fields['A inteviewed  Applicants'] || 0,
+      finalHires:  r.fields['Final Hires']           || r.fields['A final hires'] || 0,
     }));
     updateStats();
     buildDashboard();
