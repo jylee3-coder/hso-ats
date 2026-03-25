@@ -425,7 +425,18 @@ textarea.form-input { resize: vertical; }
 
   <!-- TABLE -->
   <div id="view-table" class="view">
-    <div class="section-header"><span class="section-title">지원자 전체 목록</span></div>
+    <div class="section-header">
+      <span class="section-title">지원자 전체 목록</span>
+      <div style="display:flex;gap:8px;align-items:center">
+        <span class="filter-label">정렬</span>
+        <select class="sort-select" id="table-sort" onchange="buildTable()">
+          <option value="stage">채용단계순</option>
+          <option value="date-desc">면접일 최신순</option>
+          <option value="date-asc">면접일 오래된순</option>
+          <option value="name">이름순</option>
+        </select>
+      </div>
+    </div>
     <div class="table-wrap">
       <table>
         <thead><tr><th>이름</th><th>부서</th><th>포지션</th><th>플랫폼</th><th>채용단계</th><th>면접일</th><th>이력서</th><th>수정</th></tr></thead>
@@ -1397,7 +1408,39 @@ function buildTable() {
     tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:32px">지원자가 없습니다</td></tr>`;
     return;
   }
-  tbody.innerHTML = applicants.map(a => {
+
+  const sortVal = document.getElementById('table-sort')?.value || 'stage';
+  const STAGE_ORDER = { '서류검토': 1, '1차면접': 2, '2차면접': 3, '최종합격': 4, '불합격': 5 };
+
+  const getStageOrder = (a) => {
+    if (stageMatch(a,'서류검토')) return 1;
+    if (stageMatch(a,'1차면접'))  return 2;
+    if (stageMatch(a,'2차면접'))  return 3;
+    if (stageMatch(a,'최종합격')) return 4;
+    if (stageMatch(a,'불합격'))   return 5;
+    return 9;
+  };
+
+  let sorted = [...applicants];
+  if (sortVal === 'stage') {
+    sorted.sort((a, b) => getStageOrder(a) - getStageOrder(b));
+  } else if (sortVal === 'date-desc') {
+    sorted.sort((a, b) => {
+      if (!a.interview) return 1;
+      if (!b.interview) return -1;
+      return b.interview.localeCompare(a.interview);
+    });
+  } else if (sortVal === 'date-asc') {
+    sorted.sort((a, b) => {
+      if (!a.interview) return 1;
+      if (!b.interview) return -1;
+      return a.interview.localeCompare(b.interview);
+    });
+  } else if (sortVal === 'name') {
+    sorted.sort((a, b) => a.name.localeCompare(b.name, 'ko'));
+  }
+
+  tbody.innerHTML = sorted.map(a => {
     const sc = stageClass(a.stage);
     const resumeCell = a.resume
       ? `<a href="${a.resume}" target="_blank" style="color:var(--accent2);font-size:12px;font-weight:600;text-decoration:none">📄 보기</a>`
