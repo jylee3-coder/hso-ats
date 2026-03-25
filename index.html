@@ -2139,8 +2139,10 @@ async function deleteApplicant() {
 // ── PASSWORD PROTECTION ──
 // 비밀번호 설정 (여기서 변경하세요)
 const PASSWORDS = {
-  evaluation: 'hso2025',   // 면접 평가서 비밀번호
-  review:     'hso3month', // 3개월 평가 비밀번호
+  evaluation: '0691',   // 면접 평가서 비밀번호
+  review:     '0691', // 3개월 평가 비밀번호
+  report:     '0691',   // 분기 리포트 비밀번호
+  archive:    '0691',   // 아카이브 비밀번호
 };
 const unlockedTabs = new Set(); // 세션 중 한번 입력하면 유지
 let pendingView = null;
@@ -2148,7 +2150,7 @@ let pendingBtn  = null;
 
 function showView(name, btn) {
   // 보호된 탭 체크
-  if ((name === 'evaluation' || name === 'review') && !unlockedTabs.has(name)) {
+  if (['evaluation','review','report','archive'].includes(name) && !unlockedTabs.has(name)) {
     pendingView = name;
     pendingBtn  = btn;
     openPasswordPrompt(name);
@@ -2166,6 +2168,8 @@ function openPasswordPrompt(tab) {
   const labels = {
     evaluation: { icon:'📋', title:'면접 평가서', desc:'HR/면접관 전용 메뉴입니다\n비밀번호를 입력하세요' },
     review:     { icon:'🌱', title:'3개월 평가',  desc:'HR 전용 메뉴입니다\n비밀번호를 입력하세요' },
+    report:     { icon:'📊', title:'분기 리포트', desc:'HR/임원 전용 메뉴입니다\n비밀번호를 입력하세요' },
+    archive:    { icon:'🗂', title:'아카이브',    desc:'HR 전용 메뉴입니다\n비밀번호를 입력하세요' },
   };
   const l = labels[tab];
   document.getElementById('pwd-icon').textContent  = l.icon;
