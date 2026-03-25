@@ -88,6 +88,7 @@ tr:hover td { background: #faf9f7; }
 .s-1차면접 { background: #eef2ff; color: #3545b0; }
 .s-2차면접 { background: #fff0ee; color: #c8502a; }
 .s-최종합격 { background: #f0fdf4; color: #1a7a45; }
+.s-보류 { background: #f5f0ff; color: #7c3aed; }
 .s-불합격 { background: #f5f5f5; color: #888; }
 
 /* SCHEDULE */
@@ -595,7 +596,7 @@ textarea.form-input { resize: vertical; }
         </div>
         <div class="form-group"><label class="form-label">채용 단계</label>
           <select class="form-input" id="f-stage">
-            <option>서류검토</option><option>1차면접</option><option>2차면접</option><option>최종합격</option><option>불합격</option>
+            <option>서류검토</option><option>1차면접</option><option>2차면접</option><option>최종합격</option><option>보류</option><option>불합격</option>
           </select>
         </div>
         <div class="form-group"><label class="form-label">면접일</label><input class="form-input" id="f-interview" placeholder="수요일 오전 10:00"></div>
@@ -1160,6 +1161,7 @@ function stageMatch(a, key) {
   if (key === '1차면접')  return s.includes('1차');
   if (key === '2차면접')  return s.includes('2차');
   if (key === '최종합격') return s === '최종합격' || s === '최 종합격' || (s.replace(/\s/g,'').includes('최종합격') && !s.includes('불') && !s.includes('서류'));
+  if (key === '보류')     return s === '보류';
   if (key === '불합격')   return s.includes('불합격');
   return false;
 }
@@ -1367,6 +1369,7 @@ const STAGES = [
   { key:'1차면접', label:'1차 면접', color:'#2a6ec8' },
   { key:'2차면접', label:'2차 면접', color:'#c8502a' },
   { key:'최종합격', label:'최종 합격', color:'#2a8c5a' },
+  { key:'보류',    label:'보류',      color:'#9b59b6' },
   { key:'불합격',  label:'불합격',    color:'#aaa' },
 ];
 
@@ -1493,6 +1496,7 @@ function stageClass(s) {
   if (s.includes('1차')) return 's-1차면접';
   if (s.includes('2차')) return 's-2차면접';
   if (s.includes('합격') && !s.includes('불')) return 's-최종합격';
+  if (s === '보류') return 's-보류';
   if (s.includes('불합격')) return 's-불합격';
   return 's-서류검토';
 }
