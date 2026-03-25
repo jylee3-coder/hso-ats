@@ -714,12 +714,12 @@ function buildDashboard() {
   `;
 
   const stageData = [
-    { name:'서류접수', key:'서류검토', color:'#c8a02a', subkey: s => s === '서류접수' },
-    { name:'서류검토', key:'서류검토', color:'#e0a030', subkey: null },
-    { name:'1차면접', key:'1차면접', color:'#2a6ec8' },
-    { name:'2차면접', key:'2차면접', color:'#c8502a' },
+    { name:'서류검토', key:'서류검토', color:'#c8a02a' },
+    { name:'면접',    key:'1차면접',  color:'#2a6ec8' },
     { name:'최종합격', key:'최종합격', color:'#2a8c5a' },
-    { name:'불합격',  key:'불합격',  color:'#aaa' },
+    { name:'입사확정', key:'입사확정', color:'#0ea5e9' },
+    { name:'보류',    key:'보류',     color:'#9b59b6' },
+    { name:'불합격',  key:'불합격',   color:'#aaa' },
   ];
   document.getElementById('dash-stages').innerHTML = stageData.map(s => {
     const cnt = applicants.filter(a => stageMatch(a, s.key)).length;
