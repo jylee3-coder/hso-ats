@@ -869,6 +869,13 @@ function buildDeptFilterBtns() {
   ).join('');
 }
 
+function setDeptFilter(dept, btn) {
+  activeDeptFilter = dept;
+  document.querySelectorAll('.filter-btn:not([id^="kf-"])').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  buildKanban();
+}
+
 function setInterviewFilter(filter, btn) {
   activeInterviewFilter = activeInterviewFilter === filter ? 'all' : filter;
   document.querySelectorAll('[id^="kf-"]').forEach(b => b.classList.remove('active'));
