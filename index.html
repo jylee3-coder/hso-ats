@@ -18,6 +18,7 @@
   --accent2: #2a6ec8;
   --green: #2a8c5a;
   --yellow: #c8a02a;
+  --purple: #7c3aed;
   --shadow: 0 2px 8px rgba(0,0,0,0.08);
   --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
 }
@@ -28,10 +29,10 @@ header { background: var(--text); color: #f5f3ee; padding: 0 40px; display: flex
 .logo-tag { background: var(--accent); color: #fff; font-size: 10px; padding: 2px 7px; border-radius: 3px; letter-spacing: 1px; }
 .header-right { display: flex; align-items: center; gap: 12px; }
 .header-nav { display: flex; gap: 4px; }
-.nav-btn { padding: 6px 16px; background: transparent; color: rgba(245,243,238,0.6); border: 1px solid transparent; border-radius: 4px; font-size: 13px; font-family: inherit; cursor: pointer; transition: all 0.15s; }
+.nav-btn { padding: 6px 16px; background: transparent; color: rgba(245,243,238,0.6); border: 1px solid transparent; border-radius: 4px; font-size: 13px; font-family: inherit; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
 .nav-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 .nav-btn:hover:not(.active) { background: rgba(255,255,255,0.1); color: #f5f3ee; }
-.btn-add-top { padding: 7px 16px; background: var(--green); color: #fff; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; }
+.btn-add-top { padding: 7px 16px; background: var(--green); color: #fff; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; white-space: nowrap; }
 .btn-refresh { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); color: #f5f3ee; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-family: inherit; cursor: pointer; }
 
 .loading-screen { position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 500; gap: 16px; }
@@ -52,6 +53,7 @@ main { padding: 28px 40px; }
 .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
 .section-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
 
+/* KANBAN */
 .kanban-board { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 20px; }
 .kanban-col { flex-shrink: 0; width: 270px; }
 .kanban-col-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-radius: 8px 8px 0 0; border: 1px solid var(--border); border-bottom: none; background: var(--surface2); }
@@ -68,10 +70,12 @@ main { padding: 28px 40px; }
 .tag { font-size: 10px; padding: 2px 8px; border-radius: 3px; font-weight: 600; }
 .tag-dept { background: #eef2ff; color: #3545b0; }
 .tag-platform { background: #fef3ee; color: var(--accent); }
+.tag-eval { background: #f0fdf4; color: var(--green); }
 .card-interview { font-size: 11px; color: var(--accent2); font-weight: 500; margin-bottom: 8px; }
 .card-resume { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--accent2); text-decoration: none; font-weight: 500; padding: 5px 8px; background: #eef5ff; border-radius: 4px; }
 .card-resume-empty { font-size: 11px; color: #bbb; padding: 5px 8px; background: var(--bg); border-radius: 4px; border: 1px dashed #ccc; }
 
+/* TABLE */
 .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
 thead { background: var(--text); color: #f5f3ee; }
@@ -86,12 +90,101 @@ tr:hover td { background: #faf9f7; }
 .s-최종합격 { background: #f0fdf4; color: #1a7a45; }
 .s-불합격 { background: #f5f5f5; color: #888; }
 
+/* SCHEDULE */
 .schedule-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
 .schedule-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; border-left: 4px solid var(--accent2); }
 .schedule-time { font-family: 'DM Mono', monospace; font-size: 15px; color: var(--accent2); margin-bottom: 6px; }
 .schedule-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
 .schedule-meta { font-size: 12px; color: var(--muted); }
 
+/* EVALUATION VIEW */
+.eval-layout { display: grid; grid-template-columns: 280px 1fr; gap: 20px; }
+.eval-sidebar { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.eval-sidebar-title { padding: 14px 16px; background: var(--text); color: #f5f3ee; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+.eval-applicant-list { overflow-y: auto; max-height: calc(100vh - 280px); }
+.eval-applicant-item { padding: 12px 16px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.12s; }
+.eval-applicant-item:hover { background: var(--surface2); }
+.eval-applicant-item.active { background: #eef5ff; border-left: 3px solid var(--accent2); }
+.eval-applicant-name { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+.eval-applicant-meta { font-size: 11px; color: var(--muted); }
+.eval-applicant-badge { font-size: 10px; padding: 1px 6px; border-radius: 3px; font-weight: 600; margin-top: 4px; display: inline-block; }
+.eval-done { background: #f0fdf4; color: var(--green); }
+.eval-pending { background: #fff8e6; color: var(--yellow); }
+
+.eval-main { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 28px; }
+.eval-main-empty { display: flex; align-items: center; justify-content: center; height: 300px; flex-direction: column; gap: 12px; color: var(--muted); }
+.eval-main-empty-icon { font-size: 40px; }
+
+.eval-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+.eval-header-left h2 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+.eval-header-left p { font-size: 13px; color: var(--muted); }
+.eval-dept-badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; background: #eef2ff; color: #3545b0; }
+
+.eval-section { margin-bottom: 24px; }
+.eval-section-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+
+/* Score grid */
+.score-grid { display: grid; gap: 12px; }
+.score-item { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 16px; padding: 14px; background: var(--bg); border-radius: 8px; border: 1px solid var(--border); }
+.score-item-left { }
+.score-item-name { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+.score-item-desc { font-size: 11px; color: var(--muted); }
+.score-stars { display: flex; gap: 4px; }
+.score-star { width: 32px; height: 32px; border: 2px solid var(--border); border-radius: 6px; background: var(--surface); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: all 0.12s; font-family: 'DM Mono', monospace; font-weight: 700; color: var(--muted); }
+.score-star:hover { border-color: var(--yellow); background: #fff8e6; }
+.score-star.selected { border-color: var(--yellow); background: var(--yellow); color: #fff; }
+
+/* Question pool */
+.question-pool { display: grid; gap: 8px; }
+.question-item { display: flex; align-items: flex-start; gap: 10px; padding: 12px; background: var(--bg); border-radius: 8px; border: 1px solid var(--border); cursor: pointer; transition: all 0.12s; }
+.question-item.selected { background: #eef5ff; border-color: var(--accent2); }
+.question-checkbox { width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; font-size: 11px; transition: all 0.12s; }
+.question-item.selected .question-checkbox { background: var(--accent2); border-color: var(--accent2); color: #fff; }
+.question-text { font-size: 12px; line-height: 1.5; }
+.question-type { font-size: 10px; color: var(--muted); font-weight: 600; margin-bottom: 2px; }
+
+/* Red flags */
+.redflag-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.redflag-item { display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: var(--bg); border-radius: 6px; border: 1px solid var(--border); cursor: pointer; transition: all 0.12s; font-size: 12px; }
+.redflag-item.flagged { background: #fff0ee; border-color: var(--accent); color: var(--accent); }
+.redflag-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); flex-shrink: 0; }
+.redflag-item.flagged .redflag-dot { background: var(--accent); }
+
+/* Verdict */
+.verdict-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.verdict-btn { padding: 12px 8px; border: 2px solid var(--border); border-radius: 8px; background: var(--surface); cursor: pointer; text-align: center; transition: all 0.15s; font-family: inherit; }
+.verdict-btn .verdict-icon { font-size: 20px; display: block; margin-bottom: 4px; }
+.verdict-btn .verdict-label { font-size: 11px; font-weight: 700; display: block; }
+.verdict-btn .verdict-score { font-size: 10px; color: var(--muted); display: block; margin-top: 2px; }
+.verdict-btn.v-strong.selected { border-color: var(--green); background: #f0fdf4; }
+.verdict-btn.v-hire.selected { border-color: var(--accent2); background: #eef5ff; }
+.verdict-btn.v-hold.selected { border-color: var(--yellow); background: #fff8e6; }
+.verdict-btn.v-no.selected { border-color: var(--accent); background: #fff0ee; }
+
+/* Weighted score display */
+.weighted-score-box { background: var(--text); color: #f5f3ee; border-radius: 10px; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.ws-label { font-size: 12px; color: rgba(245,243,238,0.6); margin-bottom: 4px; }
+.ws-value { font-family: 'DM Mono', monospace; font-size: 36px; font-weight: 700; }
+.ws-breakdown { display: flex; gap: 16px; }
+.ws-part { text-align: center; }
+.ws-part-label { font-size: 10px; color: rgba(245,243,238,0.5); }
+.ws-part-value { font-family: 'DM Mono', monospace; font-size: 16px; font-weight: 700; }
+
+/* 3-month review */
+.review-layout { display: grid; grid-template-columns: 280px 1fr; gap: 20px; }
+.review-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+.review-tab { padding: 8px 16px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); cursor: pointer; font-size: 12px; font-weight: 600; font-family: inherit; transition: all 0.12s; }
+.review-tab.active { background: var(--purple); color: #fff; border-color: var(--purple); }
+
+.review-scale-grid { display: grid; gap: 10px; }
+.review-scale-item { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 12px; padding: 12px 14px; background: var(--bg); border-radius: 8px; border: 1px solid var(--border); }
+.review-scale-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+.review-scale-desc { font-size: 11px; color: var(--muted); }
+.review-scale-btns { display: flex; gap: 3px; }
+.rs-btn { width: 28px; height: 28px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); cursor: pointer; font-size: 11px; font-weight: 700; font-family: 'DM Mono', monospace; color: var(--muted); display: flex; align-items: center; justify-content: center; transition: all 0.12s; }
+.rs-btn.sel { background: var(--purple); border-color: var(--purple); color: #fff; }
+
+/* MODAL */
 .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
 .modal-overlay.open { display: flex; }
 .modal { background: var(--surface); border-radius: 14px; width: 520px; max-width: 95vw; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-lg); animation: slideUp 0.2s ease; }
@@ -112,11 +205,14 @@ select.form-input { cursor: pointer; }
 .btn-cancel { padding: 9px 18px; background: var(--surface2); color: var(--text); border: 1px solid var(--border); border-radius: 6px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; }
 .btn-submit { padding: 9px 20px; background: var(--accent2); color: #fff; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; }
 .btn-delete { padding: 9px 18px; background: #fff0ee; color: var(--accent); border: 1px solid #fad4c8; border-radius: 6px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; }
+.btn-purple { padding: 9px 20px; background: var(--purple); color: #fff; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; }
 .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
 
 .toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(10px); background: var(--text); color: #f5f3ee; padding: 10px 20px; border-radius: 8px; font-size: 13px; opacity: 0; transition: all 0.3s; pointer-events: none; z-index: 9999; }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 .empty-col { text-align: center; color: #ccc; font-size: 12px; padding: 24px 0; }
+
+textarea.form-input { resize: vertical; }
 </style>
 </head>
 <body>
@@ -132,6 +228,8 @@ select.form-input { cursor: pointer; }
     <button class="nav-btn active" onclick="showView('kanban',this)">칸반보드</button>
     <button class="nav-btn" onclick="showView('table',this)">지원자 목록</button>
     <button class="nav-btn" onclick="showView('schedule',this)">면접 일정</button>
+    <button class="nav-btn" onclick="showView('evaluation',this)">면접 평가서</button>
+    <button class="nav-btn" onclick="showView('review',this)">3개월 평가</button>
   </nav>
   <div class="header-right">
     <button class="btn-refresh" onclick="loadData()">↻ 새로고침</button>
@@ -148,11 +246,13 @@ select.form-input { cursor: pointer; }
     <div class="stat-card s5"><div class="stat-label">불합격</div><div class="stat-value" id="st-rejected">—</div></div>
   </div>
 
+  <!-- KANBAN -->
   <div id="view-kanban" class="view active">
     <div class="section-header"><span class="section-title">전형 단계별 현황</span></div>
     <div class="kanban-board" id="kanban-board"></div>
   </div>
 
+  <!-- TABLE -->
   <div id="view-table" class="view">
     <div class="section-header"><span class="section-title">지원자 전체 목록</span></div>
     <div class="table-wrap">
@@ -163,13 +263,56 @@ select.form-input { cursor: pointer; }
     </div>
   </div>
 
+  <!-- SCHEDULE -->
   <div id="view-schedule" class="view">
     <div class="section-header"><span class="section-title">면접 일정</span></div>
     <div class="schedule-grid" id="schedule-grid"></div>
   </div>
+
+  <!-- EVALUATION -->
+  <div id="view-evaluation" class="view">
+    <div class="section-header">
+      <span class="section-title">면접 평가서</span>
+      <span style="font-size:12px;color:var(--muted)">지원자 선택 후 평가를 작성하세요</span>
+    </div>
+    <div class="eval-layout">
+      <div class="eval-sidebar">
+        <div class="eval-sidebar-title">지원자 목록</div>
+        <div class="eval-applicant-list" id="eval-applicant-list"></div>
+      </div>
+      <div class="eval-main" id="eval-main">
+        <div class="eval-main-empty">
+          <div class="eval-main-empty-icon">📋</div>
+          <div style="font-weight:700">지원자를 선택하세요</div>
+          <div style="font-size:12px">왼쪽 목록에서 평가할 지원자를 클릭하세요</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3-MONTH REVIEW -->
+  <div id="view-review" class="view">
+    <div class="section-header">
+      <span class="section-title">채용 후 3개월 평가</span>
+      <span style="font-size:12px;color:var(--muted)">최종 합격자의 온보딩 & 적응 평가</span>
+    </div>
+    <div class="review-layout">
+      <div class="eval-sidebar">
+        <div class="eval-sidebar-title">입사자 목록</div>
+        <div class="eval-applicant-list" id="review-applicant-list"></div>
+      </div>
+      <div class="eval-main" id="review-main">
+        <div class="eval-main-empty">
+          <div class="eval-main-empty-icon">🌱</div>
+          <div style="font-weight:700">입사자를 선택하세요</div>
+          <div style="font-size:12px">최종 합격자 중 평가할 인원을 선택하세요</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
 
-<!-- MODAL -->
+<!-- APPLICANT MODAL -->
 <div class="modal-overlay" id="modal" onclick="closeModal(event)">
   <div class="modal">
     <div class="modal-header">
@@ -212,9 +355,13 @@ select.form-input { cursor: pointer; }
 
 <script>
 let applicants = [];
+let feedbacks = [];
 let editingId = null;
+let currentEvalApplicant = null;
+let currentReviewApplicant = null;
+let evalState = {};
+let reviewState = {};
 
-// ── Airtable 컬럼명 매핑 (실제 Airtable 컬럼명 기준)
 const FIELDS = {
   name:      'Name',
   dept:      'Department',
@@ -223,9 +370,130 @@ const FIELDS = {
   stage:     'Hiring Stage',
   interview: 'Interview Date',
   resume:    'Resume Link',
-  contact:   'Contact Information',  // ✅ Airtable 실제 컬럼명
+  contact:   'Contact Information',
   memo:      'Notes',
 };
+
+const FB_FIELDS = {
+  interviewName:    'Interview name',
+  applicant:        'Applicant name',
+  interviewDate:    'interview date',
+  feedbackSummary:  'Feedback Summary',
+  evaluationScore:  'Evaluation Score',
+  strengths:        'Strengths',
+  areasFor:         'Areas for Recommendation',
+  interviewNotes:   'interview notes',
+  recommendation:   'Recommendation',
+  isStrong:         'is strong',
+  hiringStages:     'Hiring stages',
+};
+
+// Dept → question pool mapping
+const DEPT_QUESTIONS = {
+  '인사': [
+    { id:'D1', type:'채용', q:'채용 전형을 설계하거나 개선한 경험이 있는가? 프로세스와 결과를 설명하라.' },
+    { id:'D2', type:'노무', q:'근로기준법 또는 취업규칙 관련 이슈를 처리한 경험이 있는가?' },
+    { id:'D3', type:'교육/OD', q:'구성원 역량 개발을 위해 설계·운영한 프로그램이 있는가?' },
+    { id:'D4', type:'HRBP', q:'현업 부서와 협업하여 HR 이슈를 해결한 경험을 설명하라.' },
+    { id:'D5', type:'평가/보상', q:'성과평가 또는 보상 체계를 설계·운영한 경험이 있는가?' },
+    { id:'D6', type:'데이터', q:'HR 데이터를 분석하여 의사결정에 활용한 경험이 있는가?' },
+  ],
+  '경영지원본부': [
+    { id:'D1', type:'재무', q:'예산 수립 또는 원가 관리 경험이 있는가? 구체적 성과를 설명하라.' },
+    { id:'D2', type:'법무/계약', q:'계약서 검토 또는 법적 리스크를 관리한 경험이 있는가?' },
+    { id:'D3', type:'총무', q:'다수 부서를 지원하는 총무 업무를 효율화한 경험이 있는가?' },
+    { id:'D4', type:'기획', q:'경영 현황 보고서 또는 전략 기획 문서를 작성한 경험이 있는가?' },
+    { id:'D5', type:'IT/시스템', q:'사내 시스템 도입 또는 프로세스 디지털화를 주도한 경험이 있는가?' },
+    { id:'D6', type:'협력사', q:'외부 협력사와의 계약·관계를 관리한 경험과 성과를 설명하라.' },
+  ],
+  '운영지원': [
+    { id:'D1', type:'운영관리', q:'다수 현장을 동시에 지원·관리한 경험이 있는가?' },
+    { id:'D2', type:'SOP', q:'업무 표준화(SOP) 문서를 작성하거나 적용한 경험이 있는가?' },
+    { id:'D3', type:'문제해결', q:'현장 돌발 상황을 빠르게 해결한 구체적 사례를 설명하라.' },
+    { id:'D4', type:'CS', q:'고객 불만을 체계적으로 처리하고 재발을 방지한 경험이 있는가?' },
+    { id:'D5', type:'데이터', q:'운영 KPI를 설정하고 모니터링하여 개선한 경험이 있는가?' },
+    { id:'D6', type:'협업', q:'본사-현장 간 커뮤니케이션 문제를 해결한 경험을 설명하라.' },
+  ],
+  '홍보전략': [
+    { id:'D1', type:'PR/홍보', q:'브랜드 인지도를 높이기 위해 실행한 캠페인과 성과를 설명하라.' },
+    { id:'D2', type:'콘텐츠', q:'SNS/블로그/영상 등 채널별 콘텐츠를 기획·제작한 경험이 있는가?' },
+    { id:'D3', type:'위기관리', q:'부정적 이슈 또는 미디어 위기를 관리한 경험이 있는가?' },
+    { id:'D4', type:'전략기획', q:'홍보 전략을 수립하고 ROI를 측정한 경험을 설명하라.' },
+    { id:'D5', type:'B2B/B2C', q:'B2B와 B2C 타깃에 따라 메시지를 다르게 설계한 경험이 있는가?' },
+    { id:'D6', type:'파트너', q:'언론사·인플루언서·에이전시와 협업한 경험과 성과를 설명하라.' },
+  ],
+  '플랫폼사업팀': [
+    { id:'D1', type:'OTA운영', q:'야놀자·여기어때·에어비앤비 등 OTA 플랫폼을 직접 운영한 경험은?' },
+    { id:'D2', type:'가격전략', q:'객실 요금 전략(Revenue Management)을 설계·적용한 경험이 있는가?' },
+    { id:'D3', type:'리뷰관리', q:'OTA 리뷰 점수를 높이기 위해 실행한 전략과 성과를 설명하라.' },
+    { id:'D4', type:'데이터분석', q:'플랫폼 데이터를 분석하여 전환율 또는 매출을 개선한 경험은?' },
+    { id:'D5', type:'채널믹스', q:'다양한 판매 채널을 조합하여 최적화한 경험과 결과를 설명하라.' },
+    { id:'D6', type:'신규입점', q:'신규 업장 OTA 입점 프로세스를 처음부터 진행한 경험이 있는가?' },
+  ],
+  '호텔사업부': [
+    { id:'D1', type:'사업개발', q:'신규 위탁 계약을 수주하거나 사업을 확장한 경험을 설명하라.' },
+    { id:'D2', type:'수익분석', q:'숙박 업장의 수익성 분석(P&L)을 직접 수행한 경험이 있는가?' },
+    { id:'D3', type:'오너관계', q:'건물주·사업주 등 파트너와의 관계를 관리한 경험을 설명하라.' },
+    { id:'D4', type:'시장조사', q:'특정 지역 숙박 시장 조사를 수행하고 사업 가능성을 평가한 경험은?' },
+    { id:'D5', type:'운영개선', q:'담당 업장의 운영 KPI를 개선한 구체적 사례를 설명하라.' },
+    { id:'D6', type:'브랜딩', q:'개별 업장의 컨셉·브랜드 아이덴티티를 수립한 경험이 있는가?' },
+  ],
+};
+
+const RED_FLAGS = [
+  '잦은 이직 (3년 내 2회 이상)',
+  '이전 회사 과도한 비판',
+  '지각/무단결석 경력',
+  '급여 외 과도한 조건 요구',
+  '구체적 경험 답변 불가',
+  '조직 적응 어려움 징후',
+];
+
+const HEAD_ITEMS = [
+  { name: '리더십 & 성장 가능성', desc: '조직 내 리더 역할 경험/의지, 학습 민첩성이 있는가?' },
+  { name: '전략적 사고 & 문제해결', desc: '복잡한 상황에서 우선순위를 정하고 해결책을 도출했는가?' },
+  { name: '조직 적합성 & 협업', desc: '다양한 이해관계자와 협력하여 성과를 낸 경험이 있는가?' },
+  { name: '실행력 & 책임감', desc: '목표 달성을 위해 자율적으로 행동하고 결과에 책임지는가?' },
+  { name: 'HS 사업 이해도', desc: '숙박업 위탁운영 비즈니스의 맥락과 성장 방향을 이해하는가?' },
+];
+
+const PRAC_ITEMS = [
+  { name: '직무 핵심역량', desc: '해당 직무 핵심 역량을 본인 경험과 연결하여 설명하는가?' },
+  { name: '업무 우선순위 & 실행', desc: '동시 다발적 업무 상황에서 어떻게 판단하고 처리했는가?' },
+  { name: '실패 & 학습 경험', desc: '실패 경험에서 무엇을 배웠는가? (STAR 기법 답변 유도)' },
+];
+
+const HR_ITEMS = [
+  { name: '컬처핏', desc: 'HS 조직 문화와의 적합성' },
+  { name: '커뮤니케이션', desc: '의사소통 방식과 명확성' },
+  { name: '성장 가능성', desc: '장기적 성장 잠재력' },
+  { name: '이직 가능성 (역)', desc: '낮을수록 높은 점수 부여' },
+];
+
+const REVIEW_ITEMS_MANAGER = [
+  { name: '업무 이해도', desc: '담당 업무를 얼마나 빠르게 파악했는가?' },
+  { name: '실행력', desc: '주어진 과제를 스스로 완수하는가?' },
+  { name: '협업 능력', desc: '팀원 및 타 부서와의 관계는 원활한가?' },
+  { name: '커뮤니케이션', desc: '보고 및 소통 방식이 적절한가?' },
+  { name: '성과 달성도', desc: '3개월 내 목표 대비 실적은 어떠한가?' },
+  { name: '조직 적응도', desc: '조직 문화에 적응하고 있는가?' },
+];
+
+const REVIEW_ITEMS_HR = [
+  { name: '출퇴근 성실도', desc: '출결 및 근태 현황' },
+  { name: '규정 준수', desc: '사내 규정 및 정책 이해·준수' },
+  { name: '온보딩 참여도', desc: '온보딩 프로그램 참여 및 활용' },
+  { name: '조직 몰입도', desc: '회사에 대한 소속감과 몰입 정도' },
+  { name: '이탈 리스크', desc: '조기 이직 가능성 (역: 낮을수록 높은 점수)' },
+];
+
+const REVIEW_ITEMS_SELF = [
+  { name: '업무 만족도', desc: '현재 담당 업무에 얼마나 만족하는가?' },
+  { name: '성장 체감도', desc: '3개월 간 본인이 성장했다고 느끼는가?' },
+  { name: '팀 적응도', desc: '팀 문화와 동료들과 잘 어울리고 있는가?' },
+  { name: '지원 충분도', desc: '업무에 필요한 지원을 충분히 받고 있는가?' },
+  { name: '지속 의향', desc: 'HS에서 계속 성장하고 싶은 의지가 있는가?' },
+];
 
 // ── API ──
 async function api(method, params = {}, body = null) {
@@ -243,8 +511,11 @@ async function api(method, params = {}, body = null) {
 async function loadData() {
   document.getElementById('loading').style.display = 'flex';
   try {
-    const data = await api('GET', { table: 'Applicants' });
-    applicants = (data.records || []).map(r => ({
+    const [appData, fbData] = await Promise.all([
+      api('GET', { table: 'Applicants' }),
+      api('GET', { table: 'Interview Feedback' }).catch(() => ({ records: [] })),
+    ]);
+    applicants = (appData.records || []).map(r => ({
       id:        r.id,
       name:      r.fields[FIELDS.name]      || '(이름없음)',
       dept:      r.fields[FIELDS.dept]      || '',
@@ -256,13 +527,25 @@ async function loadData() {
       contact:   r.fields[FIELDS.contact]   || '',
       memo:      r.fields[FIELDS.memo]      || '',
     }));
+    feedbacks = (fbData.records || []).map(r => ({
+      id:             r.id,
+      applicantName:  r.fields[FB_FIELDS.applicant]       || '',
+      score:          r.fields[FB_FIELDS.evaluationScore] || 0,
+      recommendation: r.fields[FB_FIELDS.recommendation]  || '',
+      strengths:      r.fields[FB_FIELDS.strengths]        || '',
+      areasFor:       r.fields[FB_FIELDS.areasFor]         || '',
+      summary:        r.fields[FB_FIELDS.feedbackSummary]  || '',
+      notes:          r.fields[FB_FIELDS.interviewNotes]   || '',
+      isStrong:       r.fields[FB_FIELDS.isStrong]         || false,
+    }));
     updateStats();
     buildKanban();
     buildTable();
     buildSchedule();
+    buildEvalSidebar();
+    buildReviewSidebar();
   } catch(e) {
     showToast('❌ 데이터 로드 실패: ' + e.message);
-    console.error('loadData error:', e);
   }
   document.getElementById('loading').style.display = 'none';
 }
@@ -295,6 +578,10 @@ function stageMatch(a, key) {
   return false;
 }
 
+function hasFeedback(name) {
+  return feedbacks.some(f => f.applicantName === name);
+}
+
 function buildKanban() {
   const board = document.getElementById('kanban-board');
   board.innerHTML = '';
@@ -318,6 +605,7 @@ function cardHTML(a) {
   const resumeBtn = a.resume
     ? `<a class="card-resume" href="${a.resume}" target="_blank" onclick="event.stopPropagation()">📄 이력서 보기</a>`
     : `<div class="card-resume-empty">이력서 없음</div>`;
+  const evalDone = hasFeedback(a.name) ? `<span class="tag tag-eval">✓ 평가완료</span>` : '';
   return `
     <div class="applicant-card" onclick="openEditModal('${a.id}')">
       <div class="card-name">${a.name}</div>
@@ -325,6 +613,7 @@ function cardHTML(a) {
       <div class="card-tags">
         ${a.dept     ? `<span class="tag tag-dept">${a.dept}</span>` : ''}
         ${a.platform ? `<span class="tag tag-platform">${a.platform}</span>` : ''}
+        ${evalDone}
       </div>
       ${a.interview ? `<div class="card-interview">🕐 ${a.interview}</div>` : ''}
       ${resumeBtn}
@@ -341,7 +630,7 @@ function buildTable() {
   tbody.innerHTML = applicants.map(a => {
     const sc = stageClass(a.stage);
     const resumeCell = a.resume
-      ? `<a href="${a.resume}" target="_blank" style="color:var(--accent2);font-size:12px;font-weight:600;text-decoration:none" onclick="event.stopPropagation()">📄 보기</a>`
+      ? `<a href="${a.resume}" target="_blank" style="color:var(--accent2);font-size:12px;font-weight:600;text-decoration:none">📄 보기</a>`
       : `<span style="color:#ccc;font-size:12px">없음</span>`;
     return `<tr style="cursor:pointer" onclick="openEditModal('${a.id}')">
       <td style="font-weight:700">${a.name}</td>
@@ -380,6 +669,465 @@ function buildSchedule() {
       <div class="schedule-name">${a.name}</div>
       <div class="schedule-meta">${a.position || ''} · ${a.dept || ''} · ${a.stage}</div>
     </div>`).join('');
+}
+
+// ── EVALUATION SIDEBAR ──
+function buildEvalSidebar() {
+  const list = document.getElementById('eval-applicant-list');
+  const interviewees = applicants.filter(a => stageMatch(a,'1차면접') || stageMatch(a,'2차면접') || stageMatch(a,'최종합격'));
+  if (!interviewees.length) {
+    list.innerHTML = '<div style="padding:20px;color:var(--muted);font-size:12px;text-align:center">면접 대상자 없음</div>';
+    return;
+  }
+  list.innerHTML = interviewees.map(a => {
+    const done = hasFeedback(a.name);
+    return `<div class="eval-applicant-item" onclick="selectEvalApplicant('${a.id}')">
+      <div class="eval-applicant-name">${a.name}</div>
+      <div class="eval-applicant-meta">${a.position} · ${a.dept}</div>
+      <span class="eval-applicant-badge ${done ? 'eval-done' : 'eval-pending'}">${done ? '✓ 평가완료' : '평가대기'}</span>
+    </div>`;
+  }).join('');
+}
+
+function selectEvalApplicant(id) {
+  currentEvalApplicant = applicants.find(a => a.id === id);
+  if (!currentEvalApplicant) return;
+  document.querySelectorAll('.eval-applicant-item').forEach(el => el.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  evalState = { headScores: {}, pracScores: {}, hrScores: {}, selectedQs: [], redFlags: [], verdict: '', comment: '', strengths: '', areasFor: '', notes: '' };
+  const fb = feedbacks.find(f => f.applicantName === currentEvalApplicant.name);
+  renderEvalForm(currentEvalApplicant, fb);
+}
+
+function renderEvalForm(a, existingFb) {
+  const dept = a.dept || '';
+  const questions = getQuestionsForDept(dept);
+  const weighted = calcWeighted();
+
+  const el = document.getElementById('eval-main');
+  el.innerHTML = `
+    <div class="eval-header">
+      <div class="eval-header-left">
+        <h2>${a.name}</h2>
+        <p>${a.position} · ${a.interview || '면접일 미정'}</p>
+      </div>
+      <span class="eval-dept-badge">${dept || '부서 미정'}</span>
+    </div>
+
+    <div class="weighted-score-box">
+      <div>
+        <div class="ws-label">가중 점수 (자동계산)</div>
+        <div class="ws-value" id="ws-total">—</div>
+      </div>
+      <div class="ws-breakdown">
+        <div class="ws-part"><div class="ws-part-label">부서장 50%</div><div class="ws-part-value" id="ws-head">—</div></div>
+        <div class="ws-part"><div class="ws-part-label">실무자 30%</div><div class="ws-part-value" id="ws-prac">—</div></div>
+        <div class="ws-part"><div class="ws-part-label">HR 20%</div><div class="ws-part-value" id="ws-hr">—</div></div>
+      </div>
+    </div>
+
+    <!-- 부서장 평가 -->
+    <div class="eval-section">
+      <div class="eval-section-title">① 부서장 평가 (Weight 50%) — 각 항목 1~5점</div>
+      <div class="score-grid" id="head-scores">
+        ${HEAD_ITEMS.map((item, i) => renderScoreItem('head', i, item)).join('')}
+      </div>
+      <div style="margin-top:12px">
+        <div class="form-label" style="margin-bottom:6px">종합 코멘트</div>
+        <textarea class="form-input" id="head-comment" rows="2" placeholder="부서장 종합 의견..."></textarea>
+      </div>
+    </div>
+
+    <!-- 실무자 평가 -->
+    <div class="eval-section">
+      <div class="eval-section-title">② 실무자 평가 (Weight 30%) — 공통역량</div>
+      <div class="score-grid" id="prac-scores">
+        ${PRAC_ITEMS.map((item, i) => renderScoreItem('prac', i, item)).join('')}
+      </div>
+    </div>
+
+    <!-- 직무 특화 질문 -->
+    <div class="eval-section">
+      <div class="eval-section-title">② 실무자 평가 — 직무 특화 질문 (6개 중 3개 선택)</div>
+      <div class="question-pool" id="question-pool">
+        ${questions.map(q => `
+          <div class="question-item" id="q-${q.id}" onclick="toggleQuestion('${q.id}')">
+            <div class="question-checkbox" id="qc-${q.id}"></div>
+            <div>
+              <div class="question-type">${q.type}</div>
+              <div class="question-text">${q.q}</div>
+            </div>
+          </div>`).join('')}
+      </div>
+      <div style="margin-top:12px">
+        <div class="form-label" style="margin-bottom:6px">실무자 종합 코멘트</div>
+        <textarea class="form-input" id="prac-comment" rows="2" placeholder="실무자 종합 의견..."></textarea>
+      </div>
+    </div>
+
+    <!-- HR 평가 -->
+    <div class="eval-section">
+      <div class="eval-section-title">③ HR 평가 (Weight 20%)</div>
+      <div class="score-grid" id="hr-scores">
+        ${HR_ITEMS.map((item, i) => renderScoreItem('hr', i, item)).join('')}
+      </div>
+    </div>
+
+    <!-- Red Flags -->
+    <div class="eval-section">
+      <div class="eval-section-title">⚠️ Red Flag 체크</div>
+      <div class="redflag-grid">
+        ${RED_FLAGS.map((rf, i) => `
+          <div class="redflag-item" id="rf-${i}" onclick="toggleRedFlag(${i})">
+            <div class="redflag-dot"></div>
+            <div style="font-size:12px">${rf}</div>
+          </div>`).join('')}
+      </div>
+    </div>
+
+    <!-- 강점 / 개선점 -->
+    <div class="eval-section">
+      <div class="eval-section-title">강점 & 개선 필요 영역</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">강점 (Strengths)</label>
+          <textarea class="form-input" id="eval-strengths" rows="3" placeholder="지원자의 강점을 기재하세요...">${existingFb ? existingFb.strengths : ''}</textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">개선 필요 영역 (Areas for Development)</label>
+          <textarea class="form-input" id="eval-areas" rows="3" placeholder="보완이 필요한 부분을 기재하세요...">${existingFb ? existingFb.areasFor : ''}</textarea>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">면접 메모 (Interview Notes)</label>
+          <textarea class="form-input" id="eval-notes" rows="3" placeholder="면접 중 특이사항, 답변 메모 등...">${existingFb ? existingFb.notes : ''}</textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- 최종 판정 -->
+    <div class="eval-section">
+      <div class="eval-section-title">최종 판정</div>
+      <div class="verdict-grid">
+        <button class="verdict-btn v-strong" onclick="selectVerdict('Strong Hire')">
+          <span class="verdict-icon">✅</span>
+          <span class="verdict-label">Strong Hire</span>
+          <span class="verdict-score">90점 이상</span>
+        </button>
+        <button class="verdict-btn v-hire" onclick="selectVerdict('Hire')">
+          <span class="verdict-icon">🟢</span>
+          <span class="verdict-label">Hire</span>
+          <span class="verdict-score">75~89점</span>
+        </button>
+        <button class="verdict-btn v-hold" onclick="selectVerdict('Hold')">
+          <span class="verdict-icon">🔶</span>
+          <span class="verdict-label">Hold</span>
+          <span class="verdict-score">60~74점</span>
+        </button>
+        <button class="verdict-btn v-no" onclick="selectVerdict('No Hire')">
+          <span class="verdict-icon">❌</span>
+          <span class="verdict-label">No Hire</span>
+          <span class="verdict-score">59점 이하</span>
+        </button>
+      </div>
+      <div style="margin-top:12px">
+        <label class="form-label">종합 피드백 요약</label>
+        <textarea class="form-input" id="eval-summary" rows="3" placeholder="전반적인 평가 의견을 요약하세요...">${existingFb ? existingFb.summary : ''}</textarea>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:10px;justify-content:flex-end;padding-top:16px;border-top:1px solid var(--border)">
+      <button class="btn-cancel" onclick="resetEvalForm()">초기화</button>
+      <button class="btn-submit" onclick="saveEvaluation()">💾 평가 저장</button>
+    </div>
+  `;
+
+  if (existingFb) {
+    evalState.verdict = existingFb.recommendation;
+    if (existingFb.recommendation) selectVerdict(existingFb.recommendation);
+  }
+  updateWeightedScore();
+}
+
+function renderScoreItem(type, idx, item) {
+  return `<div class="score-item">
+    <div class="score-item-left">
+      <div class="score-item-name">${item.name}</div>
+      <div class="score-item-desc">${item.desc}</div>
+    </div>
+    <div class="score-stars">
+      ${[1,2,3,4,5].map(n => `<div class="score-star" id="${type}-${idx}-${n}" onclick="setScore('${type}',${idx},${n})">${n}</div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function setScore(type, idx, val) {
+  if (type === 'head') evalState.headScores[idx] = val;
+  else if (type === 'prac') evalState.pracScores[idx] = val;
+  else if (type === 'hr') evalState.hrScores[idx] = val;
+  [1,2,3,4,5].forEach(n => {
+    const el = document.getElementById(`${type}-${idx}-${n}`);
+    if (el) el.classList.toggle('selected', n <= val);
+  });
+  updateWeightedScore();
+}
+
+function updateWeightedScore() {
+  const headVals = Object.values(evalState.headScores);
+  const pracVals = Object.values(evalState.pracScores);
+  const hrVals   = Object.values(evalState.hrScores);
+
+  const headRaw = headVals.length === HEAD_ITEMS.length ? headVals.reduce((a,b)=>a+b,0) : null;
+  const pracRaw = pracVals.length === PRAC_ITEMS.length ? pracVals.reduce((a,b)=>a+b,0) : null;
+  const hrRaw   = hrVals.length === HR_ITEMS.length     ? hrVals.reduce((a,b)=>a+b,0)   : null;
+
+  const headPct  = headRaw !== null ? (headRaw / (HEAD_ITEMS.length * 5)) * 50 : null;
+  const pracPct  = pracRaw !== null ? (pracRaw / (PRAC_ITEMS.length * 5)) * 30 : null;
+  const hrPct    = hrRaw   !== null ? (hrRaw   / (HR_ITEMS.length * 5))   * 20 : null;
+
+  const wsHead = document.getElementById('ws-head');
+  const wsPrac = document.getElementById('ws-prac');
+  const wsHr   = document.getElementById('ws-hr');
+  const wsTotal = document.getElementById('ws-total');
+
+  if (wsHead) wsHead.textContent = headPct !== null ? headPct.toFixed(1) : '—';
+  if (wsPrac) wsPrac.textContent = pracPct !== null ? pracPct.toFixed(1) : '—';
+  if (wsHr)   wsHr.textContent   = hrPct   !== null ? hrPct.toFixed(1)   : '—';
+
+  if (headPct !== null && pracPct !== null && hrPct !== null) {
+    const total = headPct + pracPct + hrPct;
+    if (wsTotal) wsTotal.textContent = total.toFixed(1) + '점';
+    evalState.totalScore = total;
+  } else {
+    if (wsTotal) wsTotal.textContent = '—';
+    evalState.totalScore = null;
+  }
+}
+
+function calcWeighted() { return evalState.totalScore || 0; }
+
+function toggleQuestion(id) {
+  const idx = evalState.selectedQs.indexOf(id);
+  if (idx >= 0) {
+    evalState.selectedQs.splice(idx, 1);
+  } else {
+    if (evalState.selectedQs.length >= 3) { showToast('질문은 3개까지 선택 가능합니다'); return; }
+    evalState.selectedQs.push(id);
+  }
+  const el = document.getElementById(`q-${id}`);
+  const cb = document.getElementById(`qc-${id}`);
+  if (el) el.classList.toggle('selected', evalState.selectedQs.includes(id));
+  if (cb) cb.textContent = evalState.selectedQs.includes(id) ? '✓' : '';
+}
+
+function toggleRedFlag(i) {
+  const idx = evalState.redFlags.indexOf(i);
+  if (idx >= 0) evalState.redFlags.splice(idx, 1);
+  else evalState.redFlags.push(i);
+  const el = document.getElementById(`rf-${i}`);
+  if (el) el.classList.toggle('flagged', evalState.redFlags.includes(i));
+}
+
+function selectVerdict(v) {
+  evalState.verdict = v;
+  document.querySelectorAll('.verdict-btn').forEach(b => b.classList.remove('selected'));
+  const map = { 'Strong Hire': 'v-strong', 'Hire': 'v-hire', 'Hold': 'v-hold', 'No Hire': 'v-no' };
+  document.querySelectorAll(`.${map[v]}`).forEach(b => b.classList.add('selected'));
+}
+
+function getQuestionsForDept(dept) {
+  const key = Object.keys(DEPT_QUESTIONS).find(k => dept.includes(k));
+  return key ? DEPT_QUESTIONS[key] : DEPT_QUESTIONS['플랫폼사업팀'];
+}
+
+function resetEvalForm() {
+  if (currentEvalApplicant) renderEvalForm(currentEvalApplicant, null);
+}
+
+async function saveEvaluation() {
+  if (!currentEvalApplicant) return;
+  if (!evalState.verdict) { showToast('최종 판정을 선택해주세요'); return; }
+
+  const score = evalState.totalScore ? Math.round(evalState.totalScore) : 0;
+  const isStrong = evalState.verdict === 'Strong Hire';
+  const redFlagText = evalState.redFlags.map(i => RED_FLAGS[i]).join(', ');
+  const summary = document.getElementById('eval-summary')?.value || '';
+  const strengths = document.getElementById('eval-strengths')?.value || '';
+  const areasFor = document.getElementById('eval-areas')?.value || '';
+  const notes = document.getElementById('eval-notes')?.value || '';
+  const headComment = document.getElementById('head-comment')?.value || '';
+  const pracComment = document.getElementById('prac-comment')?.value || '';
+
+  const fullNotes = [notes, headComment ? `[부서장] ${headComment}` : '', pracComment ? `[실무자] ${pracComment}` : '', redFlagText ? `[Red Flag] ${redFlagText}` : ''].filter(Boolean).join('\n\n');
+
+  const fields = {
+    [FB_FIELDS.interviewName]:   `${currentEvalApplicant.name} 면접평가`,
+    [FB_FIELDS.applicant]:       currentEvalApplicant.name,
+    [FB_FIELDS.interviewDate]:   currentEvalApplicant.interview || '',
+    [FB_FIELDS.evaluationScore]: score,
+    [FB_FIELDS.recommendation]:  evalState.verdict,
+    [FB_FIELDS.strengths]:       strengths,
+    [FB_FIELDS.areasFor]:        areasFor,
+    [FB_FIELDS.feedbackSummary]: summary,
+    [FB_FIELDS.interviewNotes]:  fullNotes,
+    [FB_FIELDS.isStrong]:        isStrong,
+    [FB_FIELDS.hiringStages]:    currentEvalApplicant.stage,
+  };
+
+  try {
+    const existing = feedbacks.find(f => f.applicantName === currentEvalApplicant.name);
+    if (existing) {
+      await api('PATCH', { table: 'Interview Feedback', id: existing.id }, fields);
+      showToast('✅ 평가 업데이트 완료');
+    } else {
+      await api('POST', { table: 'Interview Feedback' }, fields);
+      showToast('✅ 평가 저장 완료');
+    }
+    await loadData();
+    buildEvalSidebar();
+  } catch(e) {
+    showToast('❌ 저장 실패: ' + e.message);
+  }
+}
+
+// ── 3-MONTH REVIEW ──
+function buildReviewSidebar() {
+  const list = document.getElementById('review-applicant-list');
+  const hired = applicants.filter(a => stageMatch(a, '최종합격'));
+  if (!hired.length) {
+    list.innerHTML = '<div style="padding:20px;color:var(--muted);font-size:12px;text-align:center">최종 합격자 없음</div>';
+    return;
+  }
+  list.innerHTML = hired.map(a => `
+    <div class="eval-applicant-item" onclick="selectReviewApplicant('${a.id}', this)">
+      <div class="eval-applicant-name">${a.name}</div>
+      <div class="eval-applicant-meta">${a.position} · ${a.dept}</div>
+    </div>`).join('');
+}
+
+function selectReviewApplicant(id, el) {
+  currentReviewApplicant = applicants.find(a => a.id === id);
+  if (!currentReviewApplicant) return;
+  document.querySelectorAll('#review-applicant-list .eval-applicant-item').forEach(e => e.classList.remove('active'));
+  el.classList.add('active');
+  reviewState = { activeTab: 'manager', managerScores: {}, hrScores: {}, selfScores: {}, managerComment: '', hrComment: '', selfComment: '' };
+  renderReviewForm();
+}
+
+function renderReviewForm() {
+  const a = currentReviewApplicant;
+  if (!a) return;
+  const el = document.getElementById('review-main');
+  el.innerHTML = `
+    <div class="eval-header">
+      <div class="eval-header-left">
+        <h2>${a.name}</h2>
+        <p>${a.position} · ${a.dept} · 입사 후 3개월 평가</p>
+      </div>
+      <span class="eval-dept-badge" style="background:#f5f0ff;color:var(--purple)">3개월 평가</span>
+    </div>
+    <div class="review-tabs">
+      <button class="review-tab active" id="rtab-manager" onclick="switchReviewTab('manager')">👔 직속 상사</button>
+      <button class="review-tab" id="rtab-hr" onclick="switchReviewTab('hr')">🏢 HR 담당자</button>
+      <button class="review-tab" id="rtab-self" onclick="switchReviewTab('self')">🙋 본인 자기평가</button>
+    </div>
+    <div id="review-tab-content"></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;padding-top:16px;border-top:1px solid var(--border);margin-top:20px">
+      <button class="btn-cancel" onclick="renderReviewForm()">초기화</button>
+      <button class="btn-purple" onclick="saveReview()">💾 평가 저장</button>
+    </div>
+  `;
+  renderReviewTabContent('manager');
+}
+
+function switchReviewTab(tab) {
+  reviewState.activeTab = tab;
+  ['manager','hr','self'].forEach(t => {
+    const btn = document.getElementById(`rtab-${t}`);
+    if (btn) btn.classList.toggle('active', t === tab);
+  });
+  renderReviewTabContent(tab);
+}
+
+function renderReviewTabContent(tab) {
+  const el = document.getElementById('review-tab-content');
+  if (!el) return;
+  let items, scoreKey, commentKey, title;
+  if (tab === 'manager') {
+    items = REVIEW_ITEMS_MANAGER; scoreKey = 'managerScores'; commentKey = 'managerComment';
+    title = '직속 상사 평가 — 업무 성과 및 역량';
+  } else if (tab === 'hr') {
+    items = REVIEW_ITEMS_HR; scoreKey = 'hrScores'; commentKey = 'hrComment';
+    title = 'HR 평가 — 조직 적응 및 근태';
+  } else {
+    items = REVIEW_ITEMS_SELF; scoreKey = 'selfScores'; commentKey = 'selfComment';
+    title = '본인 자기평가 — 적응 및 만족도';
+  }
+  el.innerHTML = `
+    <div class="eval-section-title" style="margin-bottom:16px">${title}</div>
+    <div class="review-scale-grid">
+      ${items.map((item, i) => `
+        <div class="review-scale-item">
+          <div>
+            <div class="review-scale-name">${item.name}</div>
+            <div class="review-scale-desc">${item.desc}</div>
+          </div>
+          <div class="review-scale-btns">
+            ${[1,2,3,4,5].map(n => `<div class="rs-btn ${(reviewState[scoreKey][i]||0) >= n ? 'sel':''}" onclick="setReviewScore('${scoreKey}',${i},${n})">${n}</div>`).join('')}
+          </div>
+        </div>`).join('')}
+    </div>
+    <div style="margin-top:16px">
+      <label class="form-label">종합 코멘트</label>
+      <textarea class="form-input" id="rv-comment-${tab}" rows="3" placeholder="종합 의견을 작성하세요...">${reviewState[commentKey]}</textarea>
+    </div>
+  `;
+}
+
+function setReviewScore(key, idx, val) {
+  const prevTab = reviewState.activeTab;
+  const commentEl = document.getElementById(`rv-comment-${prevTab}`);
+  if (commentEl) {
+    const ck = prevTab === 'manager' ? 'managerComment' : prevTab === 'hr' ? 'hrComment' : 'selfComment';
+    reviewState[ck] = commentEl.value;
+  }
+  reviewState[key][idx] = val;
+  renderReviewTabContent(prevTab);
+}
+
+async function saveReview() {
+  if (!currentReviewApplicant) return;
+  const commentEl = document.getElementById(`rv-comment-${reviewState.activeTab}`);
+  if (commentEl) {
+    const ck = reviewState.activeTab === 'manager' ? 'managerComment' : reviewState.activeTab === 'hr' ? 'hrComment' : 'selfComment';
+    reviewState[ck] = commentEl.value;
+  }
+
+  const avgScore = (scores) => {
+    const vals = Object.values(scores);
+    return vals.length ? (vals.reduce((a,b)=>a+b,0) / vals.length).toFixed(1) : 'N/A';
+  };
+
+  const summary = [
+    `직속상사: ${avgScore(reviewState.managerScores)}/5 — ${reviewState.managerComment}`,
+    `HR: ${avgScore(reviewState.hrScores)}/5 — ${reviewState.hrComment}`,
+    `본인: ${avgScore(reviewState.selfScores)}/5 — ${reviewState.selfComment}`,
+  ].join('\n');
+
+  const fields = {
+    [FB_FIELDS.interviewName]:   `${currentReviewApplicant.name} 3개월평가`,
+    [FB_FIELDS.applicant]:       currentReviewApplicant.name,
+    [FB_FIELDS.feedbackSummary]: summary,
+    [FB_FIELDS.interviewNotes]:  `[3개월 평가]\n${summary}`,
+    [FB_FIELDS.hiringStages]:    '최종합격',
+  };
+
+  try {
+    await api('POST', { table: 'Interview Feedback' }, fields);
+    showToast('✅ 3개월 평가 저장 완료');
+    await loadData();
+  } catch(e) {
+    showToast('❌ 저장 실패: ' + e.message);
+  }
 }
 
 // ── MODAL ──
@@ -427,12 +1175,8 @@ function closeModalDirect() { document.getElementById('modal').classList.remove(
 async function submitForm() {
   const name = document.getElementById('f-name').value.trim();
   if (!name) { showToast('이름을 입력해주세요'); return; }
-
   const btn = document.getElementById('btn-submit');
-  btn.disabled = true;
-  btn.textContent = '저장 중...';
-
-  // ✅ Airtable 실제 컬럼명으로 전송
+  btn.disabled = true; btn.textContent = '저장 중...';
   const fields = {
     [FIELDS.name]:      name,
     [FIELDS.dept]:      document.getElementById('f-dept').value,
@@ -444,7 +1188,6 @@ async function submitForm() {
     [FIELDS.contact]:   document.getElementById('f-contact').value,
     [FIELDS.memo]:      document.getElementById('f-memo').value,
   };
-
   try {
     if (editingId) {
       await api('PATCH', { table: 'Applicants', id: editingId }, fields);
@@ -457,9 +1200,7 @@ async function submitForm() {
     await loadData();
   } catch(e) {
     showToast('❌ 저장 실패: ' + e.message);
-    console.error('submitForm error:', e);
   }
-
   btn.disabled = false;
   btn.textContent = editingId ? '저장' : '추가';
 }
