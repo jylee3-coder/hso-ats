@@ -88,6 +88,7 @@ tr:hover td { background: #faf9f7; }
 .s-1차면접 { background: #eef2ff; color: #3545b0; }
 .s-2차면접 { background: #fff0ee; color: #c8502a; }
 .s-최종합격 { background: #f0fdf4; color: #1a7a45; }
+.s-입사확정 { background: #e0f2fe; color: #0369a1; }
 .s-보류 { background: #f5f0ff; color: #7c3aed; }
 .s-불합격 { background: #f5f5f5; color: #888; }
 
@@ -600,7 +601,7 @@ textarea.form-input { resize: vertical; }
         </div>
         <div class="form-group"><label class="form-label">채용 단계</label>
           <select class="form-input" id="f-stage">
-            <option>서류검토</option><option>1차면접</option><option>2차면접</option><option>최종합격</option><option>보류</option><option>불합격</option>
+            <option>서류검토</option><option>1차면접</option><option>2차면접</option><option>최종합격</option><option>입사확정</option><option>보류</option><option>불합격</option>
           </select>
         </div>
         <div class="form-group"><label class="form-label">면접일</label><input class="form-input" id="f-interview" placeholder="수요일 오전 10:00"></div>
@@ -1153,7 +1154,7 @@ function updateStats() {
   document.getElementById('st-total').textContent     = applicants.length;
   document.getElementById('st-review').textContent    = applicants.filter(a => stageMatch(a,'서류검토')).length;
   document.getElementById('st-interview').textContent = applicants.filter(a => stageMatch(a,'1차면접') || stageMatch(a,'2차면접')).length;
-  document.getElementById('st-passed').textContent    = applicants.filter(a => stageMatch(a,'최종합격')).length;
+  document.getElementById('st-passed').textContent    = applicants.filter(a => stageMatch(a,'최종합격') || stageMatch(a,'입사확정')).length;
   document.getElementById('st-rejected').textContent  = applicants.filter(a => stageMatch(a,'불합격')).length;
 }
 
@@ -1165,6 +1166,7 @@ function stageMatch(a, key) {
   if (key === '1차면접')  return s.includes('1차');
   if (key === '2차면접')  return s.includes('2차');
   if (key === '최종합격') return s === '최종합격' || s === '최 종합격' || (s.replace(/\s/g,'').includes('최종합격') && !s.includes('불') && !s.includes('서류'));
+  if (key === '입사확정') return s === '입사확정' || s.includes('입사');
   if (key === '보류')     return s === '보류';
   if (key === '불합격')   return s.includes('불합격');
   return false;
@@ -1403,6 +1405,7 @@ const STAGES = [
   { key:'1차면접', label:'1차 면접', color:'#2a6ec8' },
   { key:'2차면접', label:'2차 면접', color:'#c8502a' },
   { key:'최종합격', label:'최종 합격', color:'#2a8c5a' },
+  { key:'입사확정', label:'입사 확정', color:'#0ea5e9' },
   { key:'보류',    label:'보류',      color:'#9b59b6' },
   { key:'불합격',  label:'불합격',    color:'#aaa' },
 ];
@@ -1529,6 +1532,7 @@ function stageClass(s) {
   if (s.includes('서류') || s.includes('검토')) return 's-서류검토';
   if (s.includes('1차')) return 's-1차면접';
   if (s.includes('2차')) return 's-2차면접';
+  if (s === '입사확정' || s.includes('입사')) return 's-입사확정';
   if (s.includes('합격') && !s.includes('불')) return 's-최종합격';
   if (s === '보류') return 's-보류';
   if (s.includes('불합격')) return 's-불합격';
@@ -1884,15 +1888,16 @@ async function saveEvaluation() {
 // ── 3-MONTH REVIEW ──
 function buildReviewSidebar() {
   const list = document.getElementById('review-applicant-list');
-  const hired = applicants.filter(a => stageMatch(a, '최종합격'));
+  const hired = applicants.filter(a => stageMatch(a, '입사확정'));
   if (!hired.length) {
-    list.innerHTML = '<div style="padding:20px;color:var(--muted);font-size:12px;text-align:center">최종 합격자 없음</div>';
+    list.innerHTML = '<div style="padding:20px;color:var(--muted);font-size:12px;text-align:center">입사확정 인원 없음<br><span style="font-size:11px;color:#bbb">지원자 수정에서 단계를 입사확정으로 변경하세요</span></div>';
     return;
   }
   list.innerHTML = hired.map(a => `
     <div class="eval-applicant-item" onclick="selectReviewApplicant('${a.id}', this)">
       <div class="eval-applicant-name">${a.name}</div>
       <div class="eval-applicant-meta">${a.position} · ${a.dept}</div>
+      <span class="stage-badge s-입사확정" style="font-size:9px;padding:1px 6px;margin-top:4px;display:inline-block">입사확정</span>
     </div>`).join('');
 }
 
