@@ -792,22 +792,31 @@ function buildHiringStatus() {
   };
 
   tbody.innerHTML = jobOpenings.map(row => {
+    const n = (v) => Number(v) || 0;
+
+    // Airtable Job Openings 기반
+    const numHires   = n(row.numHires) || 1;
+    const jobkorea   = n(row.jobkorea);
+    const saramin    = n(row.saramin);
+    const wanted     = n(row.wanted);
+    const jobplanet  = n(row.jobplanet);
+    const groupby    = n(row.groupby);
+    const etc        = n(row.groupby) ? 0 : 0; // 기타는 Job Openings에 별도 컬럼 없으면 0
+    // 합계 = 플랫폼별 합산 (Airtable 기준)
+    const totalCnt   = jobkorea + saramin + wanted + jobplanet + groupby;
+
     // Applicants 기반 자동 계산
     const posApplicants  = applicants.filter(a => a.dept === row.dept && a.position === row.position);
-    const totalCnt       = posApplicants.length;                                                                           // 합계
-    const screenedCnt    = posApplicants.filter(a => stageMatch(a,'1차면접')||stageMatch(a,'2차면접')||stageMatch(a,'최종합격')).length; // 서류합격
-    const interviewedCnt = posApplicants.filter(a => stageMatch(a,'1차면접')||stageMatch(a,'2차면접')||stageMatch(a,'최종합격')).length; // 면접자
-    const finalCnt       = posApplicants.filter(a => stageMatch(a,'최종합격')).length;                                     // 최종합격
-    // Airtable Job Openings 기반 (채용인원 + 플랫폼별 지원수)
-    const numHires       = Number(row.numHires) || 1;
-    const n = (v) => Number(v) || 0;
+    const screenedCnt    = posApplicants.length;  // 등록된 전원 = 서류합격자
+    const interviewedCnt = posApplicants.filter(a => stageMatch(a,'1차면접')||stageMatch(a,'2차면접')||stageMatch(a,'최종합격')).length;
+    const finalCnt       = posApplicants.filter(a => stageMatch(a,'최종합격')).length;
     totals.numHires    += numHires;
-    totals.jobkorea    += n(row.jobkorea);
-    totals.saramin     += n(row.saramin);
-    totals.wanted      += n(row.wanted);
-    totals.jobplanet   += n(row.jobplanet);
-    totals.groupby     += n(row.groupby);
-    totals.total       += totalCnt;  // Applicants 기반
+    totals.jobkorea    += jobkorea;
+    totals.saramin     += saramin;
+    totals.wanted      += wanted;
+    totals.jobplanet   += jobplanet;
+    totals.groupby     += groupby;
+    totals.total       += totalCnt;
     totals.screened    += screenedCnt;
     totals.interviewed += interviewedCnt;
     totals.finalHires  += finalCnt;
@@ -818,11 +827,11 @@ function buildHiringStatus() {
       <td class="dept-cell">${row.dept}</td>
       <td class="pos-cell">${row.position}</td>
       <td class="num-cell">${numHires}</td>
-      ${numCell(n(row.jobkorea), true)}
-      ${numCell(n(row.saramin), true)}
-      ${numCell(n(row.wanted), true)}
-      ${numCell(n(row.jobplanet), true)}
-      ${numCell(n(row.groupby), true)}
+      ${numCell(jobkorea, true)}
+      ${numCell(saramin, true)}
+      ${numCell(wanted, true)}
+      ${numCell(jobplanet, true)}
+      ${numCell(groupby, true)}
       <td class="num-cell" style="font-weight:700">${totalCnt||'—'}</td>
       <td class="num-cell ${screenedCnt?'highlight':''}">${screenedCnt||'—'}</td>
       ${rateCell(screenedCnt, totalCnt)}
