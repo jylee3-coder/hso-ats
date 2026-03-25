@@ -270,6 +270,58 @@ textarea.form-input { resize: vertical; }
 .filter-btn.active { background: var(--text); color: #f5f3ee; border-color: var(--text); }
 .filter-label { font-size: 11px; color: var(--muted); font-weight: 600; margin-right: 4px; }
 .sort-select { padding: 5px 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 12px; font-family: inherit; background: var(--surface); cursor: pointer; color: var(--text); }
+/* ARCHIVE / STATUS badge */
+.badge-active { background: #f0fdf4; color: var(--green); font-size: 10px; padding: 2px 8px; border-radius: 3px; font-weight: 700; }
+.badge-archived { background: #f5f5f5; color: #888; font-size: 10px; padding: 2px 8px; border-radius: 3px; font-weight: 700; }
+
+/* REPORT PAGE */
+.report-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+.report-kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; position: relative; overflow: hidden; }
+.report-kpi::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.kpi-c1::before { background: var(--accent2); }
+.kpi-c2::before { background: var(--green); }
+.kpi-c3::before { background: var(--yellow); }
+.kpi-c4::before { background: var(--accent); }
+.kpi-c5::before { background: var(--purple); }
+.kpi-c6::before { background: #0ea5e9; }
+.report-kpi-label { font-size: 11px; color: var(--muted); font-weight: 600; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+.report-kpi-value { font-size: 32px; font-weight: 700; font-family: 'DM Mono', monospace; margin-bottom: 4px; }
+.report-kpi-sub { font-size: 11px; color: var(--muted); }
+
+.report-section { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+.report-section-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+
+.platform-row { display: grid; grid-template-columns: 100px 1fr 60px 80px 80px; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.platform-row:last-child { border-bottom: none; }
+.platform-row.header { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; }
+
+.funnel-row { display: grid; grid-template-columns: 120px 60px 1fr 70px; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.funnel-row:last-child { border-bottom: none; }
+.funnel-bar-wrap { background: var(--bg); border-radius: 4px; height: 12px; overflow: hidden; }
+.funnel-bar { height: 100%; border-radius: 4px; }
+
+/* HIRING TABLE extra cols */
+.rate-cell { font-size: 12px; font-weight: 700; }
+.rate-good { color: var(--green); }
+.rate-mid { color: var(--yellow); }
+.rate-low { color: var(--accent); }
+
+/* Archive view */
+.archive-filter { display: flex; gap: 8px; margin-bottom: 16px; align-items: center; }
+.archive-search { padding: 7px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; font-family: inherit; background: var(--surface); width: 240px; outline: none; }
+.archive-search:focus { border-color: var(--accent2); }
+
+/* Role login modal */
+.role-modal { background: var(--surface); border-radius: 14px; width: 400px; max-width: 95vw; box-shadow: var(--shadow-lg); padding: 32px; text-align: center; }
+.role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+.role-btn { padding: 16px 12px; border: 2px solid var(--border); border-radius: 10px; background: var(--surface); cursor: pointer; transition: all 0.15s; font-family: inherit; }
+.role-btn:hover { border-color: var(--accent2); background: #eef5ff; }
+.role-btn.selected { border-color: var(--accent2); background: #eef5ff; }
+.role-icon { font-size: 24px; display: block; margin-bottom: 6px; }
+.role-name { font-size: 13px; font-weight: 700; display: block; }
+.role-desc { font-size: 11px; color: var(--muted); display: block; margin-top: 2px; }
+.role-bar { background: var(--text); color: #f5f3ee; padding: 6px 16px; border-radius: 20px; font-size: 12px; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.role-bar:hover { background: #333; }
 </style>
 </head>
 <body>
@@ -287,12 +339,15 @@ textarea.form-input { resize: vertical; }
     <button class="nav-btn" onclick="showView('kanban',this)">칸반보드</button>
     <button class="nav-btn" onclick="showView('table',this)">지원자 목록</button>
     <button class="nav-btn" onclick="showView('schedule',this)">면접 일정</button>
-    <button class="nav-btn" onclick="showView('evaluation',this)">면접 평가서</button>
-    <button class="nav-btn" onclick="showView('review',this)">3개월 평가</button>
+    <button class="nav-btn" id="nav-eval" onclick="showView('evaluation',this)">면접 평가서</button>
+    <button class="nav-btn" id="nav-review" onclick="showView('review',this)">3개월 평가</button>
+    <button class="nav-btn" onclick="showView('report',this)">📊 분기 리포트</button>
+    <button class="nav-btn" onclick="showView('archive',this)">🗂 아카이브</button>
   </nav>
   <div class="header-right">
+    <div class="role-bar" onclick="openRoleModal()" id="role-indicator">👤 역할 선택</div>
     <button class="btn-refresh" onclick="loadData()">↻ 새로고침</button>
-    <button class="btn-add-top" onclick="openAddModal()">+ 지원자 추가</button>
+    <button class="btn-add-top" id="btn-add-top" onclick="openAddModal()">+ 지원자 추가</button>
   </div>
 </header>
 
@@ -339,7 +394,7 @@ textarea.form-input { resize: vertical; }
           <tr>
             <th>부서</th><th>포지션</th><th>채용인원</th>
             <th>잡코리아</th><th>사람인</th><th>원티드</th><th>잡플래닛</th><th>그룹바이</th><th>기타</th>
-            <th>합계</th><th>서류합격</th><th>면접자</th><th>최종합격</th>
+            <th>합계</th><th>서류합격</th><th>서류합격률</th><th>면접자</th><th>면접합격률</th><th>최종합격</th><th>채용달성률</th>
           </tr>
         </thead>
         <tbody id="hiring-body"></tbody>
@@ -422,7 +477,75 @@ textarea.form-input { resize: vertical; }
       </div>
     </div>
   </div>
+  <!-- REPORT -->
+  <div id="view-report" class="view">
+    <div class="section-header">
+      <span class="section-title">📊 분기 채용 리포트</span>
+      <span style="font-size:12px;color:var(--muted)">채용 전 과정 성과 분석</span>
+    </div>
+    <div class="report-grid" id="report-kpis"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+      <div class="report-section">
+        <div class="report-section-title">🔽 채용 퍼널 전환율</div>
+        <div id="report-funnel"></div>
+      </div>
+      <div class="report-section">
+        <div class="report-section-title">📣 플랫폼별 효율 분석</div>
+        <div class="platform-row header">
+          <div>플랫폼</div><div>지원자</div><div>합격</div><div>합격률</div><div>효율</div>
+        </div>
+        <div id="report-platforms"></div>
+      </div>
+    </div>
+    <div class="report-section" style="margin-top:20px">
+      <div class="report-section-title">🌱 3개월 온보딩 평가 현황</div>
+      <div id="report-onboarding"></div>
+    </div>
+    <div class="report-section">
+      <div class="report-section-title">⚠️ 면접 평가 미완료 현황</div>
+      <div id="report-pending-eval"></div>
+    </div>
+  </div>
+
+  <!-- ARCHIVE -->
+  <div id="view-archive" class="view">
+    <div class="section-header">
+      <span class="section-title">🗂 아카이브 — 채용 완료 데이터</span>
+      <button class="btn-submit" style="font-size:12px;padding:6px 14px" onclick="archiveCompleted()">✓ 완료건 아카이브 처리</button>
+    </div>
+    <div style="background:#fff8e6;border:1px solid #f0d080;border-radius:8px;padding:14px 18px;margin-bottom:16px;font-size:13px;color:#7a5c00;">
+      💡 <strong>아카이브란?</strong> 최종합격 + 3개월 평가 완료된 지원자를 Active에서 분리해 누적 관리합니다. Active 데이터는 가볍게 유지되고, 아카이브에서 과거 데이터를 언제든 검색할 수 있어요.
+    </div>
+    <div class="archive-filter">
+      <input class="archive-search" id="archive-search" placeholder="이름, 포지션, 부서로 검색..." oninput="buildArchiveTable()">
+      <select class="sort-select" id="archive-year" onchange="buildArchiveTable()">
+        <option value="전체">전체 기간</option>
+        <option value="2025">2025년</option>
+        <option value="2024">2024년</option>
+      </select>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>이름</th><th>부서</th><th>포지션</th><th>최종단계</th><th>면접평가</th><th>3개월평가</th><th>상태</th></tr></thead>
+        <tbody id="archive-body"></tbody>
+      </table>
+    </div>
+  </div>
 </main>
+
+<!-- ROLE MODAL -->
+<div class="modal-overlay" id="role-modal" onclick="closeRoleModal(event)">
+  <div class="role-modal">
+    <div style="font-size:20px;font-weight:700;margin-bottom:8px">역할을 선택하세요</div>
+    <div style="font-size:13px;color:var(--muted)">역할에 따라 접근 가능한 메뉴가 달라집니다</div>
+    <div class="role-grid">
+      <button class="role-btn" onclick="setRole('hr')"><span class="role-icon">🏢</span><span class="role-name">HR 담당자</span><span class="role-desc">전체 접근 가능</span></button>
+      <button class="role-btn" onclick="setRole('head')"><span class="role-icon">👔</span><span class="role-name">부서장</span><span class="role-desc">면접 평가서만</span></button>
+      <button class="role-btn" onclick="setRole('interviewer')"><span class="role-icon">🗣</span><span class="role-name">면접관</span><span class="role-desc">면접 평가서만</span></button>
+      <button class="role-btn" onclick="setRole('executive')"><span class="role-icon">📊</span><span class="role-name">임원</span><span class="role-desc">대시보드 + 리포트</span></button>
+    </div>
+  </div>
+</div>
 
 <!-- APPLICANT MODAL -->
 <div class="modal-overlay" id="modal" onclick="closeModal(event)">
@@ -475,6 +598,39 @@ let currentReviewApplicant = null;
 let evalState = {};
 let reviewState = {};
 let activeDeptFilter = '전체';
+let currentRole = localStorage.getItem('hso_role') || 'hr';
+
+// ── ROLE MANAGEMENT ──
+const ROLES = {
+  hr:          { name:'HR 담당자', icon:'🏢', tabs: ['dashboard','hiring','kanban','table','schedule','evaluation','review','report','archive'], canAdd: true },
+  head:        { name:'부서장',    icon:'👔', tabs: ['evaluation'], canAdd: false },
+  interviewer: { name:'면접관',    icon:'🗣', tabs: ['evaluation'], canAdd: false },
+  executive:   { name:'임원',      icon:'📊', tabs: ['dashboard','hiring','report'], canAdd: false },
+};
+
+function applyRole(role) {
+  currentRole = role;
+  localStorage.setItem('hso_role', role);
+  const r = ROLES[role] || ROLES.hr;
+  document.getElementById('role-indicator').textContent = `${r.icon} ${r.name}`;
+  document.getElementById('btn-add-top').style.display = r.canAdd ? '' : 'none';
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    const view = btn.getAttribute('onclick')?.match(/'(\w+)'/)?.[1];
+    if (!view) return;
+    btn.style.display = r.tabs.includes(view) ? '' : 'none';
+  });
+  // Show first allowed tab
+  const firstTab = document.querySelector('.nav-btn:not([style*="none"])');
+  if (firstTab) firstTab.click();
+}
+
+function setRole(role) {
+  applyRole(role);
+  document.getElementById('role-modal').classList.remove('open');
+}
+
+function openRoleModal() { document.getElementById('role-modal').classList.add('open'); }
+function closeRoleModal(e) { if (e.target === document.getElementById('role-modal')) document.getElementById('role-modal').classList.remove('open'); }
 
 const POSITIONS = [
   'OTA관리자','마케터','영업매니저','호텔사업부장','레비뉴매니저',
@@ -554,30 +710,36 @@ function buildDashboard() {
 function buildHiringStatus() {
   const tbody = document.getElementById('hiring-body');
   if (!jobOpenings.length) {
-    tbody.innerHTML = `<tr><td colspan="13" style="text-align:center;color:var(--muted);padding:32px">Job Openings 데이터 없음</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="16" style="text-align:center;color:var(--muted);padding:32px">Job Openings 데이터 없음</td></tr>`;
     return;
   }
 
   const totals = { numHires:0, jobkorea:0, saramin:0, wanted:0, jobplanet:0, groupby:0, total:0, screened:0, interviewed:0, finalHires:0 };
 
+  const rateCell = (num, den) => {
+    if (!den) return `<td class="rate-cell" style="color:var(--muted)">—</td>`;
+    const r = ((num/den)*100).toFixed(0);
+    const cls = Number(r) >= 30 ? 'rate-good' : Number(r) >= 15 ? 'rate-mid' : 'rate-low';
+    return `<td class="rate-cell ${cls}">${r}%</td>`;
+  };
+
   tbody.innerHTML = jobOpenings.map(row => {
-    // 서류합격/면접자/최종합격 → Applicants에서 자동 계산
-    const posApplicants = applicants.filter(a =>
-      a.dept === row.dept && a.position === row.position
-    );
-    const screenedCnt    = posApplicants.filter(a => stageMatch(a,'서류검토') || stageMatch(a,'1차면접') || stageMatch(a,'2차면접') || stageMatch(a,'최종합격')).length;
-    const interviewedCnt = posApplicants.filter(a => stageMatch(a,'1차면접') || stageMatch(a,'2차면접') || stageMatch(a,'최종합격')).length;
+    const posApplicants = applicants.filter(a => a.dept === row.dept && a.position === row.position);
+    // 서류합격 = 1차면접 이상 진행된 인원 (서류통과)
+    const screenedCnt    = posApplicants.filter(a => stageMatch(a,'1차면접')||stageMatch(a,'2차면접')||stageMatch(a,'최종합격')).length;
+    const interviewedCnt = posApplicants.filter(a => stageMatch(a,'1차면접')||stageMatch(a,'2차면접')||stageMatch(a,'최종합격')).length;
     const finalCnt       = posApplicants.filter(a => stageMatch(a,'최종합격')).length;
+    const totalCnt       = Number(row.total) || posApplicants.length;
+    const numHires       = Number(row.numHires) || 1;
 
     const n = (v) => Number(v) || 0;
-
-    totals.numHires    += n(row.numHires);
+    totals.numHires    += numHires;
     totals.jobkorea    += n(row.jobkorea);
     totals.saramin     += n(row.saramin);
     totals.wanted      += n(row.wanted);
     totals.jobplanet   += n(row.jobplanet);
     totals.groupby     += n(row.groupby);
-    totals.total       += n(row.total);
+    totals.total       += totalCnt;
     totals.screened    += screenedCnt;
     totals.interviewed += interviewedCnt;
     totals.finalHires  += finalCnt;
@@ -587,16 +749,19 @@ function buildHiringStatus() {
     return `<tr>
       <td class="dept-cell">${row.dept}</td>
       <td class="pos-cell">${row.position}</td>
-      <td class="num-cell">${n(row.numHires)}</td>
+      <td class="num-cell">${numHires}</td>
       ${numCell(n(row.jobkorea), true)}
       ${numCell(n(row.saramin), true)}
       ${numCell(n(row.wanted), true)}
       ${numCell(n(row.jobplanet), true)}
       ${numCell(n(row.groupby), true)}
-      <td class="num-cell" style="font-weight:700">${n(row.total)}</td>
+      <td class="num-cell" style="font-weight:700">${totalCnt||'—'}</td>
       <td class="num-cell ${screenedCnt?'highlight':''}">${screenedCnt||'—'}</td>
+      ${rateCell(screenedCnt, totalCnt)}
       <td class="num-cell ${interviewedCnt?'highlight':''}">${interviewedCnt||'—'}</td>
-      <td class="num-cell" style="color:var(--green)">${finalCnt||'—'}</td>
+      ${rateCell(finalCnt, interviewedCnt)}
+      <td class="num-cell" style="color:var(--green);font-weight:700">${finalCnt||'—'}</td>
+      ${rateCell(finalCnt, numHires)}
     </tr>`;
   }).join('') + `<tr class="total-row">
     <td colspan="2" style="font-weight:700;text-align:center">합 계</td>
@@ -608,8 +773,11 @@ function buildHiringStatus() {
     <td class="num-cell highlight">${totals.groupby||'—'}</td>
     <td class="num-cell" style="font-weight:700">${totals.total}</td>
     <td class="num-cell highlight">${totals.screened}</td>
+    ${rateCell(totals.screened, totals.total)}
     <td class="num-cell highlight">${totals.interviewed}</td>
-    <td class="num-cell" style="color:var(--green)">${totals.finalHires}</td>
+    ${rateCell(totals.finalHires, totals.interviewed)}
+    <td class="num-cell" style="color:var(--green);font-weight:700">${totals.finalHires}</td>
+    ${rateCell(totals.finalHires, totals.numHires)}
   </tr>`;
 }
 
@@ -829,6 +997,9 @@ async function loadData() {
     buildSchedule();
     buildEvalSidebar();
     buildReviewSidebar();
+    buildReport();
+    buildArchiveTable();
+    applyRole(currentRole);
   } catch(e) {
     showToast('❌ 데이터 로드 실패: ' + e.message);
   }
@@ -854,13 +1025,145 @@ const STAGES = [
 ];
 
 function stageMatch(a, key) {
-  const s = (a.stage || '');
+  const s = (a.stage || '').trim();
   if (key === '서류검토') return s.includes('서류') || s.includes('검토') || s === '';
   if (key === '1차면접')  return s.includes('1차');
   if (key === '2차면접')  return s.includes('2차');
-  if (key === '최종합격') return s.includes('합격') && !s.includes('불');
+  if (key === '최종합격') return s === '최종합격' || (s.includes('합격') && !s.includes('불') && !s.includes('서류'));
   if (key === '불합격')   return s.includes('불합격');
   return false;
+}
+
+// ── REPORT ──
+function buildReport() {
+  const total = applicants.length;
+  const interviewed = applicants.filter(a => stageMatch(a,'1차면접')||stageMatch(a,'2차면접')||stageMatch(a,'최종합격')).length;
+  const passed = applicants.filter(a => stageMatch(a,'최종합격')).length;
+  const rejected = applicants.filter(a => stageMatch(a,'불합격')).length;
+  const screened = applicants.filter(a => !stageMatch(a,'서류검토')||stageMatch(a,'1차면접')).length;
+
+  const docRate  = total     ? ((interviewed/total)*100).toFixed(1) : '0.0';
+  const intRate  = interviewed ? ((passed/interviewed)*100).toFixed(1) : '0.0';
+  const fillRate = jobOpenings.length ? ((passed / jobOpenings.reduce((s,j)=>s+Number(j.numHires||1),0))*100).toFixed(0) : '0';
+  const evalDone = feedbacks.filter(f => f.recommendation).length;
+  const evalRate = interviewed ? ((evalDone/interviewed)*100).toFixed(0) : '0';
+
+  // 3개월 평가 완료 수
+  const reviewDone = feedbacks.filter(f => f.interviewNotes && f.interviewNotes.includes('3개월 평가')).length;
+
+  document.getElementById('report-kpis').innerHTML = `
+    <div class="report-kpi kpi-c1"><div class="report-kpi-label">서류 → 면접 전환율</div><div class="report-kpi-value" style="color:var(--accent2)">${docRate}%</div><div class="report-kpi-sub">전체 ${total}명 중 면접 ${interviewed}명</div></div>
+    <div class="report-kpi kpi-c2"><div class="report-kpi-label">면접 → 최종합격률</div><div class="report-kpi-value" style="color:var(--green)">${intRate}%</div><div class="report-kpi-sub">면접 ${interviewed}명 중 합격 ${passed}명</div></div>
+    <div class="report-kpi kpi-c3"><div class="report-kpi-label">채용 달성률</div><div class="report-kpi-value" style="color:var(--yellow)">${fillRate}%</div><div class="report-kpi-sub">목표 대비 최종합격 ${passed}명</div></div>
+    <div class="report-kpi kpi-c4"><div class="report-kpi-label">불합격률</div><div class="report-kpi-value" style="color:var(--accent)">${total?((rejected/total)*100).toFixed(1):0}%</div><div class="report-kpi-sub">전체 ${total}명 중 불합격 ${rejected}명</div></div>
+    <div class="report-kpi kpi-c5"><div class="report-kpi-label">평가서 완료율</div><div class="report-kpi-value" style="color:var(--purple)">${evalRate}%</div><div class="report-kpi-sub">면접자 ${interviewed}명 중 평가 ${evalDone}건</div></div>
+    <div class="report-kpi kpi-c6"><div class="report-kpi-label">3개월 평가 완료</div><div class="report-kpi-value" style="color:#0ea5e9">${reviewDone}명</div><div class="report-kpi-sub">최종합격자 ${passed}명 중</div></div>
+  `;
+
+  // Funnel
+  const funnelSteps = [
+    { name: '전체 지원', cnt: total, color: '#2a6ec8' },
+    { name: '서류 통과', cnt: interviewed + passed, color: '#c8a02a' },
+    { name: '면접 진행', cnt: interviewed, color: '#c8502a' },
+    { name: '최종 합격', cnt: passed, color: '#2a8c5a' },
+  ];
+  document.getElementById('report-funnel').innerHTML = funnelSteps.map(s => {
+    const pct = total ? Math.round((s.cnt/total)*100) : 0;
+    return `<div class="funnel-row">
+      <div style="font-size:13px;font-weight:600">${s.name}</div>
+      <div style="font-family:'DM Mono',monospace;font-weight:700;color:${s.color}">${s.cnt}</div>
+      <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:${pct}%;background:${s.color}"></div></div>
+      <div style="font-size:12px;color:var(--muted)">${pct}%</div>
+    </div>`;
+  }).join('');
+
+  // Platform efficiency
+  const platData = PLATFORMS.map(p => {
+    const platApps = applicants.filter(a => a.platform === p);
+    const platPassed = platApps.filter(a => stageMatch(a,'최종합격')).length;
+    const rate = platApps.length ? ((platPassed/platApps.length)*100).toFixed(1) : '0.0';
+    const rateClass = Number(rate) >= 20 ? 'rate-good' : Number(rate) >= 10 ? 'rate-mid' : 'rate-low';
+    const efficiency = platApps.length >= 5 && platPassed >= 1 ? '⭐ 효율' : platApps.length === 0 ? '—' : '보통';
+    return { name: p, total: platApps.length, passed: platPassed, rate, rateClass, efficiency };
+  }).sort((a,b) => b.total - a.total);
+
+  document.getElementById('report-platforms').innerHTML = platData.map(p => `
+    <div class="platform-row">
+      <div style="font-size:13px;font-weight:600">${p.name}</div>
+      <div style="font-family:'DM Mono',monospace;font-weight:700;color:var(--accent2)">${p.total}</div>
+      <div style="font-family:'DM Mono',monospace;font-weight:700;color:var(--green)">${p.passed}</div>
+      <div class="rate-cell ${p.rateClass}">${p.rate}%</div>
+      <div style="font-size:11px;color:var(--muted)">${p.efficiency}</div>
+    </div>`).join('');
+
+  // Onboarding
+  const hiredApps = applicants.filter(a => stageMatch(a,'최종합격'));
+  document.getElementById('report-onboarding').innerHTML = hiredApps.length
+    ? `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px">
+        ${hiredApps.map(a => {
+          const hasReview = feedbacks.some(f => f.applicantName === a.name && f.interviewNotes?.includes('3개월'));
+          return `<div style="padding:12px;border:1px solid var(--border);border-radius:8px;background:var(--bg)">
+            <div style="font-weight:700;font-size:13px">${a.name}</div>
+            <div style="font-size:11px;color:var(--muted);margin-bottom:6px">${a.position} · ${a.dept}</div>
+            <span class="${hasReview ? 'badge-active' : 'badge-archived'}">${hasReview ? '✓ 평가완료' : '평가대기'}</span>
+          </div>`;
+        }).join('')}
+      </div>`
+    : '<div style="color:var(--muted);font-size:13px">최종합격자 없음</div>';
+
+  // Pending eval
+  const pendingEval = applicants.filter(a =>
+    (stageMatch(a,'1차면접')||stageMatch(a,'2차면접')) && !hasFeedback(a.name)
+  );
+  document.getElementById('report-pending-eval').innerHTML = pendingEval.length
+    ? `<div style="display:flex;flex-wrap:wrap;gap:8px">
+        ${pendingEval.map(a => `<div style="padding:8px 12px;border:1px solid #fad4c8;background:#fff0ee;border-radius:6px;font-size:12px">
+          <strong>${a.name}</strong> <span style="color:var(--muted)">${a.position}</span>
+        </div>`).join('')}
+      </div>`
+    : '<div style="color:var(--green);font-size:13px">✅ 모든 면접자 평가 완료</div>';
+}
+
+// ── ARCHIVE ──
+function buildArchiveTable() {
+  const search = (document.getElementById('archive-search')?.value || '').toLowerCase();
+  const year = document.getElementById('archive-year')?.value || '전체';
+
+  // 아카이브 대상: 최종합격 또는 불합격 처리된 지원자
+  const archived = applicants.filter(a =>
+    stageMatch(a,'최종합격') || stageMatch(a,'불합격')
+  ).filter(a => {
+    if (search) return a.name.includes(search) || a.position.toLowerCase().includes(search) || a.dept.toLowerCase().includes(search);
+    return true;
+  });
+
+  const tbody = document.getElementById('archive-body');
+  if (!archived.length) {
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:32px">아카이브 데이터 없음</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = archived.map(a => {
+    const hasFb = hasFeedback(a.name);
+    const hasReview = feedbacks.some(f => f.applicantName === a.name && f.interviewNotes?.includes('3개월'));
+    const isHired = stageMatch(a,'최종합격');
+    return `<tr>
+      <td style="font-weight:700">${a.name}</td>
+      <td style="color:#666">${a.dept||'—'}</td>
+      <td>${a.position||'—'}</td>
+      <td><span class="stage-badge ${stageClass(a.stage)}">${a.stage}</span></td>
+      <td><span class="${hasFb?'badge-active':'badge-archived'}">${hasFb?'✓ 완료':'미완료'}</span></td>
+      <td>${isHired ? `<span class="${hasReview?'badge-active':'badge-archived'}">${hasReview?'✓ 완료':'대기'}</span>` : '—'}</td>
+      <td><span class="${isHired?'badge-active':'badge-archived'}">${isHired?'입사':'불합격'}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+async function archiveCompleted() {
+  const completed = applicants.filter(a => stageMatch(a,'최종합격') || stageMatch(a,'불합격'));
+  if (!completed.length) { showToast('아카이브할 완료 건이 없어요'); return; }
+  showToast(`✅ ${completed.length}건이 아카이브 탭에서 관리됩니다`);
+  buildArchiveTable();
 }
 
 function hasFeedback(name) {
@@ -1520,6 +1823,8 @@ function showView(name, btn) {
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('view-' + name).classList.add('active');
   if (btn) btn.classList.add('active');
+  if (name === 'report') buildReport();
+  if (name === 'archive') buildArchiveTable();
 }
 
 function showToast(msg) {
@@ -1530,6 +1835,7 @@ function showToast(msg) {
 }
 
 loadData();
+// role은 loadData 내부에서 applyRole 호출
 </script>
 </body>
 </html>
