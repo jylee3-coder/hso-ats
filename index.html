@@ -1413,17 +1413,24 @@ function buildTable() {
   const STAGE_ORDER = { '서류검토': 1, '1차면접': 2, '2차면접': 3, '최종합격': 4, '불합격': 5 };
 
   const getStageOrder = (a) => {
-    if (stageMatch(a,'서류검토')) return 1;
-    if (stageMatch(a,'1차면접'))  return 2;
-    if (stageMatch(a,'2차면접'))  return 3;
-    if (stageMatch(a,'최종합격')) return 4;
+    if (stageMatch(a,'1차면접'))  return 1;
+    if (stageMatch(a,'2차면접'))  return 2;
+    if (stageMatch(a,'최종합격')) return 3;
+    if (stageMatch(a,'서류검토')) return 4;
     if (stageMatch(a,'불합격'))   return 5;
     return 9;
   };
 
   let sorted = [...applicants];
   if (sortVal === 'stage') {
-    sorted.sort((a, b) => getStageOrder(a) - getStageOrder(b));
+    sorted.sort((a, b) => {
+      const stageDiff = getStageOrder(a) - getStageOrder(b);
+      if (stageDiff !== 0) return stageDiff;
+      // 같은 단계면 면접일 빠른 순
+      if (!a.interview) return 1;
+      if (!b.interview) return -1;
+      return a.interview.localeCompare(b.interview);
+    });
   } else if (sortVal === 'date-desc') {
     sorted.sort((a, b) => {
       if (!a.interview) return 1;
