@@ -1807,7 +1807,6 @@ async function saveEvaluation() {
 
   const fields = {
     [FB_FIELDS.interviewName]:   currentEvalApplicant.name,
-    [FB_FIELDS.interviewDate]:   currentEvalApplicant.interview || '',
     [FB_FIELDS.evaluationScore]: score,
     [FB_FIELDS.recommendation]:  evalState.verdict,
     [FB_FIELDS.strengths]:       strengths,
