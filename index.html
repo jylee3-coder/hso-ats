@@ -1289,6 +1289,8 @@ function downloadEvalCSV() {
   URL.revokeObjectURL(url);
   showToast('✅ 면접 평가 CSV 다운로드 완료');
 }
+
+function downloadArchiveCSV() {
   const archived = applicants.filter(a => stageMatch(a,'최종합격') || stageMatch(a,'불합격'));
   if (!archived.length) { showToast('다운로드할 데이터가 없어요'); return; }
 
