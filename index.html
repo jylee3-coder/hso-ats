@@ -1206,6 +1206,7 @@ function buildReport() {
     stageMatch(a,'최종합격') || stageMatch(a,'불합격') || stageMatch(a,'보류')
   ).length;
   const passed   = applicants.filter(a => stageMatch(a,'최종합격')).length;
+  const confirmed = applicants.filter(a => stageMatch(a,'입사확정')).length;
   const rejected = applicants.filter(a => stageMatch(a,'불합격')).length;
 
   const docRate  = total      ? ((interviewed/total)*100).toFixed(1) : '0.0';
@@ -1227,7 +1228,7 @@ function buildReport() {
     <div class="report-kpi kpi-c3"><div class="report-kpi-label">채용 달성률</div><div class="report-kpi-value" style="color:var(--yellow)">${fillRate}%</div><div class="report-kpi-sub">목표 대비 최종합격 ${passed}명</div></div>
     <div class="report-kpi kpi-c4"><div class="report-kpi-label">불합격률</div><div class="report-kpi-value" style="color:var(--accent)">${total?((rejected/total)*100).toFixed(1):0}%</div><div class="report-kpi-sub">전체 ${total}명 중 불합격 ${rejected}명</div></div>
     <div class="report-kpi kpi-c5"><div class="report-kpi-label">평가서 완료율</div><div class="report-kpi-value" style="color:var(--purple)">${evalRate}%</div><div class="report-kpi-sub">면접자 ${interviewed}명 중 평가 ${evalDone}건</div></div>
-    <div class="report-kpi kpi-c6"><div class="report-kpi-label">3개월 평가 완료</div><div class="report-kpi-value" style="color:#0ea5e9">${reviewDone}명</div><div class="report-kpi-sub">최종합격자 ${passed}명 중</div></div>
+    <div class="report-kpi kpi-c6"><div class="report-kpi-label">3개월 평가 완료</div><div class="report-kpi-value" style="color:#0ea5e9">${reviewDone}명</div><div class="report-kpi-sub">입사확정 ${confirmed}명 중</div></div>
   `;
 
   // Funnel
@@ -1267,12 +1268,12 @@ function buildReport() {
       <div style="font-size:11px;color:var(--muted)">${p.efficiency}</div>
     </div>`).join('');
 
-  // Onboarding
-  const hiredApps = applicants.filter(a => stageMatch(a,'최종합격'));
+  // Onboarding — 입사확정 단계만 표시
+  const hiredApps = applicants.filter(a => stageMatch(a,'입사확정'));
   document.getElementById('report-onboarding').innerHTML = hiredApps.length
     ? `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px">
         ${hiredApps.map(a => {
-          const hasReview = feedbacks.some(f => f.applicantName === a.name && f.interviewNotes?.includes('3개월'));
+          const hasReview = feedbacks.some(f => f.applicantName === a.name && f.notes?.includes('3개월'));
           return `<div style="padding:12px;border:1px solid var(--border);border-radius:8px;background:var(--bg)">
             <div style="font-weight:700;font-size:13px">${a.name}</div>
             <div style="font-size:11px;color:var(--muted);margin-bottom:6px">${a.position} · ${a.dept}</div>
@@ -1280,7 +1281,7 @@ function buildReport() {
           </div>`;
         }).join('')}
       </div>`
-    : '<div style="color:var(--muted);font-size:13px">최종합격자 없음</div>';
+    : '<div style="color:var(--muted);font-size:13px">입사확정 인원 없음</div>';
 
   // Pending eval
   const pendingEval = applicants.filter(a =>
@@ -2139,10 +2140,10 @@ async function deleteApplicant() {
 // ── PASSWORD PROTECTION ──
 // 비밀번호 설정 (여기서 변경하세요)
 const PASSWORDS = {
-  evaluation: '0691',   // 면접 평가서 비밀번호
-  review:     '0691', // 3개월 평가 비밀번호
-  report:     '0691',   // 분기 리포트 비밀번호
-  archive:    '0691',   // 아카이브 비밀번호
+  evaluation: 'hso2025',   // 면접 평가서 비밀번호
+  review:     'hso3month', // 3개월 평가 비밀번호
+  report:     'hso2025',   // 분기 리포트 비밀번호
+  archive:    'hso2025',   // 아카이브 비밀번호
 };
 const unlockedTabs = new Set(); // 세션 중 한번 입력하면 유지
 let pendingView = null;
