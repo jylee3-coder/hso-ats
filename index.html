@@ -1582,21 +1582,21 @@ function buildSchedule() {
 function buildEvalSidebar() {
   const list = document.getElementById('eval-applicant-list');
   let interviewees = applicants.filter(a =>
-    stageMatch(a,'서류검토') || stageMatch(a,'1차면접') || stageMatch(a,'2차면접') || stageMatch(a,'최종합격') || stageMatch(a,'보류') || stageMatch(a,'불합격')
+    stageMatch(a,'1차면접') || stageMatch(a,'최종합격') || stageMatch(a,'입사확정') || stageMatch(a,'보류') || stageMatch(a,'불합격')
   );
   // 부서장/면접관은 본인 부서만
   if ((currentRole === 'head' || currentRole === 'interviewer') && currentRoleDept) {
     interviewees = interviewees.filter(a => a.dept === currentRoleDept);
   }
   if (!interviewees.length) {
-    list.innerHTML = `<div style="padding:20px;color:var(--muted);font-size:12px;text-align:center">${currentRoleDept ? currentRoleDept + ' ' : ''}지원자 없음</div>`;
+    list.innerHTML = `<div style="padding:20px;color:var(--muted);font-size:12px;text-align:center">${currentRoleDept ? currentRoleDept + ' ' : ''}면접 대상자 없음</div>`;
     return;
   }
   // 단계순 정렬: 1차면접 → 2차면접 → 최종합격 → 보류 → 서류검토
   const order = { '1차면접':1, '2차면접':2, '최종합격':3, '보류':4, '서류검토':5 };
   interviewees.sort((a, b) => {
-    const ao = stageMatch(a,'1차면접') ? 1 : stageMatch(a,'2차면접') ? 2 : stageMatch(a,'최종합격') ? 3 : stageMatch(a,'보류') ? 4 : stageMatch(a,'서류검토') ? 5 : 6;
-    const bo = stageMatch(b,'1차면접') ? 1 : stageMatch(b,'2차면접') ? 2 : stageMatch(b,'최종합격') ? 3 : stageMatch(b,'보류') ? 4 : stageMatch(b,'서류검토') ? 5 : 6;
+    const ao = stageMatch(a,'1차면접') ? 1 : stageMatch(a,'최종합격') ? 2 : stageMatch(a,'입사확정') ? 3 : stageMatch(a,'보류') ? 4 : 5;
+    const bo = stageMatch(b,'1차면접') ? 1 : stageMatch(b,'최종합격') ? 2 : stageMatch(b,'입사확정') ? 3 : stageMatch(b,'보류') ? 4 : 5;
     return ao - bo;
   });
   list.innerHTML = interviewees.map(a => {
