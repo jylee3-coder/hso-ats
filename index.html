@@ -85,12 +85,12 @@ tr:last-child td { border-bottom: none; }
 tr:hover td { background: #faf9f7; }
 .stage-badge { display: inline-flex; padding: 3px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; }
 .s-서류검토 { background: #fff8e6; color: #b07a00; }
-.s-1차면접 { background: #eef2ff; color: #3545b0; }
-.s-2차면접 { background: #fff0ee; color: #c8502a; }
+.s-면접 { background: #eef2ff; color: #3545b0; }
 .s-최종합격 { background: #f0fdf4; color: #1a7a45; }
 .s-입사확정 { background: #e0f2fe; color: #0369a1; }
 .s-보류 { background: #f5f0ff; color: #7c3aed; }
-.s-불합격 { background: #f5f5f5; color: #888; }
+.s-서류탈락 { background: #fff0ee; color: #c8502a; }
+.s-면접탈락 { background: #f5f5f5; color: #888; }
 
 /* SCHEDULE */
 .schedule-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
@@ -125,10 +125,8 @@ tr:hover td { background: #faf9f7; }
 .eval-section { margin-bottom: 24px; }
 .eval-section-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
 
-/* Score grid */
 .score-grid { display: grid; gap: 12px; }
 .score-item { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 16px; padding: 14px; background: var(--bg); border-radius: 8px; border: 1px solid var(--border); }
-.score-item-left { }
 .score-item-name { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
 .score-item-desc { font-size: 11px; color: var(--muted); }
 .score-stars { display: flex; gap: 4px; }
@@ -136,7 +134,6 @@ tr:hover td { background: #faf9f7; }
 .score-star:hover { border-color: var(--yellow); background: #fff8e6; }
 .score-star.selected { border-color: var(--yellow); background: var(--yellow); color: #fff; }
 
-/* Question pool */
 .question-pool { display: grid; gap: 8px; }
 .question-item { display: flex; align-items: flex-start; gap: 10px; padding: 12px; background: var(--bg); border-radius: 8px; border: 1px solid var(--border); cursor: pointer; transition: all 0.12s; }
 .question-item.selected { background: #eef5ff; border-color: var(--accent2); }
@@ -145,14 +142,12 @@ tr:hover td { background: #faf9f7; }
 .question-text { font-size: 12px; line-height: 1.5; }
 .question-type { font-size: 10px; color: var(--muted); font-weight: 600; margin-bottom: 2px; }
 
-/* Red flags */
 .redflag-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .redflag-item { display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: var(--bg); border-radius: 6px; border: 1px solid var(--border); cursor: pointer; transition: all 0.12s; font-size: 12px; }
 .redflag-item.flagged { background: #fff0ee; border-color: var(--accent); color: var(--accent); }
 .redflag-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); flex-shrink: 0; }
 .redflag-item.flagged .redflag-dot { background: var(--accent); }
 
-/* Verdict */
 .verdict-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
 .verdict-btn { padding: 12px 8px; border: 2px solid var(--border); border-radius: 8px; background: var(--surface); cursor: pointer; text-align: center; transition: all 0.15s; font-family: inherit; }
 .verdict-btn .verdict-icon { font-size: 20px; display: block; margin-bottom: 4px; }
@@ -163,7 +158,6 @@ tr:hover td { background: #faf9f7; }
 .verdict-btn.v-hold.selected { border-color: var(--yellow); background: #fff8e6; }
 .verdict-btn.v-no.selected { border-color: var(--accent); background: #fff0ee; }
 
-/* Weighted score display */
 .weighted-score-box { background: var(--text); color: #f5f3ee; border-radius: 10px; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
 .ws-label { font-size: 12px; color: rgba(245,243,238,0.6); margin-bottom: 4px; }
 .ws-value { font-family: 'DM Mono', monospace; font-size: 36px; font-weight: 700; }
@@ -172,7 +166,6 @@ tr:hover td { background: #faf9f7; }
 .ws-part-label { font-size: 10px; color: rgba(245,243,238,0.5); }
 .ws-part-value { font-family: 'DM Mono', monospace; font-size: 16px; font-weight: 700; }
 
-/* 3-month review */
 .review-layout { display: grid; grid-template-columns: 280px 1fr; gap: 20px; }
 .review-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
 .review-tab { padding: 8px 16px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); cursor: pointer; font-size: 12px; font-weight: 600; font-family: inherit; transition: all 0.12s; }
@@ -186,7 +179,6 @@ tr:hover td { background: #faf9f7; }
 .rs-btn { width: 28px; height: 28px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); cursor: pointer; font-size: 11px; font-weight: 700; font-family: 'DM Mono', monospace; color: var(--muted); display: flex; align-items: center; justify-content: center; transition: all 0.12s; }
 .rs-btn.sel { background: var(--purple); border-color: var(--purple); color: #fff; }
 
-/* MODAL */
 .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
 .modal-overlay.open { display: flex; }
 .modal { background: var(--surface); border-radius: 14px; width: 520px; max-width: 95vw; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-lg); animation: slideUp 0.2s ease; }
@@ -213,27 +205,18 @@ select.form-input { cursor: pointer; }
 .toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(10px); background: var(--text); color: #f5f3ee; padding: 10px 20px; border-radius: 8px; font-size: 13px; opacity: 0; transition: all 0.3s; pointer-events: none; z-index: 9999; }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 .empty-col { text-align: center; color: #ccc; font-size: 12px; padding: 24px 0; }
-
 textarea.form-input { resize: vertical; }
 
-/* DASHBOARD */
 .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
-.dashboard-grid.full { grid-template-columns: 1fr; }
 .dash-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
 .dash-card-header { padding: 14px 20px; background: var(--text); color: #f5f3ee; display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; }
 .dash-card-body { padding: 16px 20px; }
-
 .dash-summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .dash-summary-item { text-align: center; padding: 16px 8px; border-radius: 8px; }
-.dsi-total { background: #f5f3ee; }
-.dsi-review { background: #fff8e6; }
-.dsi-interview { background: #eef2ff; }
-.dsi-pass { background: #f0fdf4; }
-.dsi-fail { background: #f5f5f5; }
-.dsi-rate { background: #fff0ee; }
+.dsi-total { background: #f5f3ee; } .dsi-review { background: #fff8e6; } .dsi-interview { background: #eef2ff; }
+.dsi-pass { background: #f0fdf4; } .dsi-fail { background: #f5f5f5; } .dsi-rate { background: #fff0ee; }
 .dash-summary-label { font-size: 11px; color: var(--muted); font-weight: 500; margin-bottom: 6px; }
 .dash-summary-value { font-size: 28px; font-weight: 700; font-family: 'DM Mono', monospace; }
-
 .dash-stage-row { display: grid; grid-template-columns: 100px 1fr 50px 50px; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
 .dash-stage-row:last-child { border-bottom: none; }
 .dash-stage-name { font-size: 13px; font-weight: 600; }
@@ -241,15 +224,9 @@ textarea.form-input { resize: vertical; }
 .dash-stage-bar { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
 .dash-stage-count { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 700; text-align: right; }
 .dash-stage-pct { font-size: 11px; color: var(--muted); text-align: right; }
-
 .dash-screening-row { display: grid; grid-template-columns: 80px 1fr 60px 50px; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
 .dash-screening-row:last-child { border-bottom: none; }
 
-.dash-position-row { display: grid; grid-template-columns: 120px 60px 60px; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
-.dash-position-row:last-child { border-bottom: none; }
-.dash-position-row.header { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; padding-bottom: 6px; }
-
-/* HIRING STATUS TABLE */
 .hiring-table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: auto; }
 .hiring-table { width: 100%; border-collapse: collapse; font-size: 13px; white-space: nowrap; }
 .hiring-table thead { background: #3a3573; color: #fff; }
@@ -266,59 +243,43 @@ textarea.form-input { resize: vertical; }
 .hiring-table .ing-cell { font-size: 11px; color: var(--muted); }
 .hiring-table .total-row td { background: #f0f4ff !important; font-weight: 700; }
 
-/* KANBAN FILTERS */
 .kanban-filters { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
 .filter-btn { padding: 5px 14px; border: 1px solid var(--border); border-radius: 20px; background: var(--surface); font-size: 12px; font-weight: 600; font-family: inherit; cursor: pointer; transition: all 0.12s; color: var(--muted); }
 .filter-btn.active { background: var(--text); color: #f5f3ee; border-color: var(--text); }
 .filter-label { font-size: 11px; color: var(--muted); font-weight: 600; margin-right: 4px; }
 .sort-select { padding: 5px 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 12px; font-family: inherit; background: var(--surface); cursor: pointer; color: var(--text); }
-/* ARCHIVE / STATUS badge */
 .badge-active { background: #f0fdf4; color: var(--green); font-size: 10px; padding: 2px 8px; border-radius: 3px; font-weight: 700; }
 .badge-archived { background: #f5f5f5; color: #888; font-size: 10px; padding: 2px 8px; border-radius: 3px; font-weight: 700; }
 
-/* REPORT PAGE */
 .report-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
 .report-kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; position: relative; overflow: hidden; }
 .report-kpi::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
-.kpi-c1::before { background: var(--accent2); }
-.kpi-c2::before { background: var(--green); }
-.kpi-c3::before { background: var(--yellow); }
-.kpi-c4::before { background: var(--accent); }
-.kpi-c5::before { background: var(--purple); }
-.kpi-c6::before { background: #0ea5e9; }
+.kpi-c1::before { background: var(--accent2); } .kpi-c2::before { background: var(--green); }
+.kpi-c3::before { background: var(--yellow); } .kpi-c4::before { background: var(--accent); }
+.kpi-c5::before { background: var(--purple); } .kpi-c6::before { background: #0ea5e9; }
 .report-kpi-label { font-size: 11px; color: var(--muted); font-weight: 600; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
 .report-kpi-value { font-size: 32px; font-weight: 700; font-family: 'DM Mono', monospace; margin-bottom: 4px; }
 .report-kpi-sub { font-size: 11px; color: var(--muted); }
-
 .report-section { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-bottom: 20px; }
 .report-section-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
-
 .platform-row { display: grid; grid-template-columns: 100px 1fr 60px 80px 80px; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
 .platform-row:last-child { border-bottom: none; }
 .platform-row.header { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; }
-
 .funnel-row { display: grid; grid-template-columns: 120px 60px 1fr 70px; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
 .funnel-row:last-child { border-bottom: none; }
 .funnel-bar-wrap { background: var(--bg); border-radius: 4px; height: 12px; overflow: hidden; }
 .funnel-bar { height: 100%; border-radius: 4px; }
-
-/* HIRING TABLE extra cols */
 .rate-cell { font-size: 12px; font-weight: 700; }
-.rate-good { color: var(--green); }
-.rate-mid { color: var(--yellow); }
-.rate-low { color: var(--accent); }
+.rate-good { color: var(--green); } .rate-mid { color: var(--yellow); } .rate-low { color: var(--accent); }
 
-/* Archive view */
 .archive-filter { display: flex; gap: 8px; margin-bottom: 16px; align-items: center; }
 .archive-search { padding: 7px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; font-family: inherit; background: var(--surface); width: 240px; outline: none; }
 .archive-search:focus { border-color: var(--accent2); }
 
-/* Role login modal */
 .role-modal { background: var(--surface); border-radius: 14px; width: 400px; max-width: 95vw; box-shadow: var(--shadow-lg); padding: 32px; text-align: center; }
 .role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
 .role-btn { padding: 16px 12px; border: 2px solid var(--border); border-radius: 10px; background: var(--surface); cursor: pointer; transition: all 0.15s; font-family: inherit; }
 .role-btn:hover { border-color: var(--accent2); background: #eef5ff; }
-.role-btn.selected { border-color: var(--accent2); background: #eef5ff; }
 .role-icon { font-size: 24px; display: block; margin-bottom: 6px; }
 .role-name { font-size: 13px; font-weight: 700; display: block; }
 .role-desc { font-size: 11px; color: var(--muted); display: block; margin-top: 2px; }
@@ -368,18 +329,15 @@ textarea.form-input { resize: vertical; }
     <div class="stat-card s1"><div class="stat-label">전체 지원자</div><div class="stat-value" id="st-total">—</div></div>
     <div class="stat-card s2"><div class="stat-label">서류 검토 중</div><div class="stat-value" id="st-review">—</div></div>
     <div class="stat-card s3"><div class="stat-label">면접 진행 중</div><div class="stat-value" id="st-interview">—</div></div>
-    <div class="stat-card s4"><div class="stat-label">최종 합격</div><div class="stat-value" id="st-passed">—</div></div>
-    <div class="stat-card s5"><div class="stat-label">불합격</div><div class="stat-value" id="st-rejected">—</div></div>
+    <div class="stat-card s4"><div class="stat-label">입사 확정</div><div class="stat-value" id="st-passed">—</div></div>
+    <div class="stat-card s5"><div class="stat-label">탈락</div><div class="stat-value" id="st-rejected">—</div></div>
   </div>
 
-  <!-- DASHBOARD -->
   <div id="view-dashboard" class="view active">
     <div class="section-header"><span class="section-title">요약 현황</span></div>
     <div class="dash-card" style="margin-bottom:20px">
       <div class="dash-card-header">📊 요약 현황</div>
-      <div class="dash-card-body">
-        <div class="dash-summary-grid" id="dash-summary"></div>
-      </div>
+      <div class="dash-card-body"><div class="dash-summary-grid" id="dash-summary"></div></div>
     </div>
     <div class="dashboard-grid">
       <div class="dash-card">
@@ -397,24 +355,20 @@ textarea.form-input { resize: vertical; }
     </div>
   </div>
 
-  <!-- HIRING STATUS -->
   <div id="view-hiring" class="view">
     <div class="section-header"><span class="section-title">채용 현황</span></div>
     <div class="hiring-table-wrap">
       <table class="hiring-table">
-        <thead>
-          <tr>
-            <th>부서</th><th>포지션</th><th>채용인원</th>
-            <th>잡코리아</th><th>사람인</th><th>원티드</th><th>잡플래닛</th><th>그룹바이</th><th>기타</th>
-            <th>합계</th><th>서류합격</th><th>서류합격률</th><th>면접자</th><th>면접합격률</th><th>최종합격</th><th>채용달성률</th>
-          </tr>
-        </thead>
+        <thead><tr>
+          <th>부서</th><th>포지션</th><th>채용인원</th>
+          <th>잡코리아</th><th>사람인</th><th>원티드</th><th>잡플래닛</th><th>그룹바이</th><th>기타</th>
+          <th>합계</th><th>서류합격</th><th>서류합격률</th><th>면접자</th><th>면접합격률</th><th>최종합격</th><th>채용달성률</th>
+        </tr></thead>
         <tbody id="hiring-body"></tbody>
       </table>
     </div>
   </div>
 
-  <!-- KANBAN -->
   <div id="view-kanban" class="view">
     <div class="section-header"><span class="section-title">전형 단계별 현황</span></div>
     <div class="kanban-filters">
@@ -436,7 +390,6 @@ textarea.form-input { resize: vertical; }
     <div class="kanban-board" id="kanban-board"></div>
   </div>
 
-  <!-- TABLE -->
   <div id="view-table" class="view">
     <div class="section-header">
       <span class="section-title">지원자 전체 목록</span>
@@ -461,13 +414,11 @@ textarea.form-input { resize: vertical; }
     </div>
   </div>
 
-  <!-- SCHEDULE -->
   <div id="view-schedule" class="view">
     <div class="section-header"><span class="section-title">면접 일정</span></div>
     <div class="schedule-grid" id="schedule-grid"></div>
   </div>
 
-  <!-- EVALUATION -->
   <div id="view-evaluation" class="view">
     <div class="section-header">
       <span class="section-title">면접 평가서</span>
@@ -488,7 +439,6 @@ textarea.form-input { resize: vertical; }
     </div>
   </div>
 
-  <!-- 3-MONTH REVIEW -->
   <div id="view-review" class="view">
     <div class="section-header">
       <span class="section-title">채용 후 3개월 평가</span>
@@ -508,7 +458,7 @@ textarea.form-input { resize: vertical; }
       </div>
     </div>
   </div>
-  <!-- REPORT -->
+
   <div id="view-report" class="view">
     <div class="section-header">
       <span class="section-title">📊 분기 채용 리포트</span>
@@ -522,9 +472,7 @@ textarea.form-input { resize: vertical; }
       </div>
       <div class="report-section">
         <div class="report-section-title">📣 플랫폼별 효율 분석</div>
-        <div class="platform-row header">
-          <div>플랫폼</div><div>지원자</div><div>합격</div><div>합격률</div><div>효율</div>
-        </div>
+        <div class="platform-row header"><div>플랫폼</div><div>지원자</div><div>합격</div><div>합격률</div><div>효율</div></div>
         <div id="report-platforms"></div>
       </div>
     </div>
@@ -538,13 +486,10 @@ textarea.form-input { resize: vertical; }
     </div>
   </div>
 
-  <!-- ARCHIVE -->
   <div id="view-archive" class="view">
     <div class="section-header">
       <span class="section-title">🗂 아카이브 — 채용 완료 데이터</span>
-      <div style="display:flex;gap:8px">
-        <button class="btn-submit" style="font-size:12px;padding:6px 14px;background:var(--green)" onclick="downloadArchiveCSV()">⬇ 전체 CSV 다운로드</button>
-      </div>
+      <button class="btn-submit" style="font-size:12px;padding:6px 14px;background:var(--green)" onclick="downloadArchiveCSV()">⬇ 전체 CSV 다운로드</button>
     </div>
     <div style="background:#fff8e6;border:1px solid #f0d080;border-radius:8px;padding:14px 18px;margin-bottom:16px;font-size:13px;color:#7a5c00;">
       💡 지원자별 면접 평가 점수, 판정, 강점, 개선점까지 한눈에 확인하고 CSV로 다운로드할 수 있어요.
@@ -554,7 +499,8 @@ textarea.form-input { resize: vertical; }
       <select class="sort-select" id="archive-filter-stage" onchange="buildArchiveTable()">
         <option value="전체">전체 단계</option>
         <option value="최종합격">최종합격</option>
-        <option value="불합격">불합격</option>
+        <option value="서류탈락">서류탈락</option>
+        <option value="면접탈락">면접탈락</option>
         <option value="보류">보류</option>
       </select>
     </div>
@@ -562,8 +508,7 @@ textarea.form-input { resize: vertical; }
       <table>
         <thead><tr>
           <th>이름</th><th>부서</th><th>포지션</th><th>최종단계</th>
-          <th>평가점수</th><th>최종판정</th><th>강점</th><th>개선필요</th><th>면접메모</th>
-          <th>3개월평가</th>
+          <th>평가점수</th><th>최종판정</th><th>강점</th><th>개선필요</th><th>면접메모</th><th>3개월평가</th>
         </tr></thead>
         <tbody id="archive-body"></tbody>
       </table>
@@ -612,7 +557,7 @@ textarea.form-input { resize: vertical; }
         </div>
         <div class="form-group"><label class="form-label">채용 단계</label>
           <select class="form-input" id="f-stage">
-            <option>서류검토</option><option>면접</option><option>최종합격</option><option>입사확정</option><option>보류</option><option>불합격</option>
+            <option>서류검토</option><option>면접</option><option>최종합격</option><option>입사확정</option><option>보류</option><option>서류탈락</option><option>면접탈락</option>
           </select>
         </div>
         <div class="form-group"><label class="form-label">면접일</label><input class="form-input" id="f-interview" placeholder="수요일 오전 10:00"></div>
@@ -635,8 +580,7 @@ textarea.form-input { resize: vertical; }
     <div class="pwd-icon" id="pwd-icon">🔒</div>
     <div class="pwd-title" id="pwd-title">접근 제한</div>
     <div class="pwd-desc" id="pwd-desc">이 메뉴는 권한이 필요합니다</div>
-    <input class="pwd-input" id="pwd-input" type="password" placeholder="••••" maxlength="20"
-      onkeydown="if(event.key==='Enter')checkPassword()">
+    <input class="pwd-input" id="pwd-input" type="password" placeholder="••••" maxlength="20" onkeydown="if(event.key==='Enter')checkPassword()">
     <button class="pwd-btn" onclick="checkPassword()">확인</button>
     <div class="pwd-error" id="pwd-error">비밀번호가 맞지 않아요</div>
     <div style="margin-top:12px">
@@ -660,9 +604,10 @@ let activeDeptFilter = '전체';
 let activeTableDeptFilter = '전체';
 let activeInterviewFilter = 'all';
 let pendingRoleForDept = null;
+// ✅ 수정 1: currentRole 선언 추가
+let currentRole = localStorage.getItem('hso_role') || 'hr';
 let currentRoleDept = localStorage.getItem('hso_role_dept') || '';
 
-// ── ROLE MANAGEMENT ──
 const ROLES = {
   hr:          { name:'HR 담당자', icon:'🏢', tabs: ['dashboard','hiring','kanban','table','evaluation','review','report','archive'], canAdd: true },
   head:        { name:'부서장',    icon:'👔', tabs: ['evaluation'], canAdd: false },
@@ -683,7 +628,6 @@ function applyRole(role) {
     if (!view) return;
     btn.style.display = (!view || r.tabs.includes(view)) ? '' : 'none';
   });
-  // 부서장/면접관이면 평가서 사이드바 부서 필터 적용
   buildEvalSidebar();
   const firstTab = document.querySelector('.nav-btn:not([style*="none"])');
   if (firstTab) firstTab.click();
@@ -716,252 +660,7 @@ function openRoleModal() {
 }
 function closeRoleModal(e) { if (e.target === document.getElementById('role-modal')) document.getElementById('role-modal').classList.remove('open'); }
 
-const POSITIONS = [
-  'OTA관리자','마케터','영업매니저','호텔사업부장','레비뉴매니저',
-  'HR (HSO)','HR (더퍼슨컴퍼니)','본부스텝','운영지원 사무','QA','아카데미 담당자'
-];
 const PLATFORMS = ['잡코리아','사람인','원티드','잡플래닛','그룹바이'];
-
-// ── DASHBOARD ──
-function buildDashboard() {
-  const total = applicants.length;
-  const review = applicants.filter(a => stageMatch(a,'서류검토')).length;
-  const interview = applicants.filter(a => stageMatch(a,'1차면접') || stageMatch(a,'2차면접')).length;
-  const passed = applicants.filter(a => stageMatch(a,'최종합격')).length;
-  const rejected = applicants.filter(a => stageMatch(a,'불합격')).length;
-  const rate = total ? ((passed/total)*100).toFixed(1) : '0.0';
-
-  document.getElementById('dash-summary').innerHTML = `
-    <div class="dash-summary-item dsi-total"><div class="dash-summary-label">전체 지원자</div><div class="dash-summary-value">${total}</div></div>
-    <div class="dash-summary-item dsi-review"><div class="dash-summary-label">서류 검토 중</div><div class="dash-summary-value" style="color:var(--yellow)">${review}</div></div>
-    <div class="dash-summary-item dsi-interview"><div class="dash-summary-label">면접 진행 중</div><div class="dash-summary-value" style="color:var(--accent2)">${interview}</div></div>
-    <div class="dash-summary-item dsi-pass"><div class="dash-summary-label">최종 합격</div><div class="dash-summary-value" style="color:var(--green)">${passed}</div></div>
-    <div class="dash-summary-item dsi-fail"><div class="dash-summary-label">불합격</div><div class="dash-summary-value" style="color:#888">${rejected}</div></div>
-    <div class="dash-summary-item dsi-rate"><div class="dash-summary-label">합격률</div><div class="dash-summary-value" style="color:var(--accent)">${rate}%</div></div>
-  `;
-
-  const stageData = [
-    { name:'서류검토', key:'서류검토', color:'#c8a02a' },
-    { name:'면접',    key:'1차면접',  color:'#2a6ec8' },
-    { name:'최종합격', key:'최종합격', color:'#2a8c5a' },
-    { name:'입사확정', key:'입사확정', color:'#0ea5e9' },
-    { name:'보류',    key:'보류',     color:'#9b59b6' },
-    { name:'불합격',  key:'불합격',   color:'#aaa' },
-  ];
-  document.getElementById('dash-stages').innerHTML = stageData.map(s => {
-    const cnt = applicants.filter(a => stageMatch(a, s.key)).length;
-    const pct = total ? Math.round((cnt/total)*100) : 0;
-    return `<div class="dash-stage-row">
-      <div class="dash-stage-name" style="color:${s.color}">${s.name}</div>
-      <div class="dash-stage-bar-wrap"><div class="dash-stage-bar" style="width:${pct}%;background:${s.color}"></div></div>
-      <div class="dash-stage-count" style="color:${s.color}">${cnt}</div>
-      <div class="dash-stage-pct">${pct}%</div>
-    </div>`;
-  }).join('');
-
-  const screeningData = [
-    { name:'합격', filter: a => stageMatch(a,'최종합격'), color:'var(--green)', bg:'#f0fdf4' },
-    { name:'검토중', filter: a => !stageMatch(a,'최종합격') && !stageMatch(a,'불합격'), color:'var(--yellow)', bg:'#fff8e6' },
-    { name:'보류', filter: a => false, color:'#888', bg:'#f5f5f5' },
-    { name:'불합격', filter: a => stageMatch(a,'불합격'), color:'var(--accent)', bg:'#fff0ee' },
-  ];
-  document.getElementById('dash-screening').innerHTML = screeningData.map(s => {
-    const cnt = applicants.filter(s.filter).length;
-    const pct = total ? Math.round((cnt/total)*100) : 0;
-    return `<div class="dash-screening-row">
-      <div class="dash-stage-name" style="color:${s.color};background:${s.bg};padding:3px 8px;border-radius:4px;font-size:12px">${s.name}</div>
-      <div class="dash-stage-bar-wrap"><div class="dash-stage-bar" style="width:${pct}%;background:${s.color}"></div></div>
-      <div class="dash-stage-count" style="color:${s.color}">${cnt}</div>
-      <div class="dash-stage-pct">${pct}%</div>
-    </div>`;
-  }).join('');
-
-  // 포지션별 5단계 — Job Openings 기준으로 포지션 목록 사용
-  const positionList = jobOpenings.length
-    ? jobOpenings.map(j => ({ pos: j.position, dept: j.dept }))
-    : [...new Set(applicants.map(a => a.position).filter(Boolean))].map(p => ({ pos: p, dept: '' }));
-
-  document.getElementById('dash-positions').innerHTML = `
-    <div style="display:grid;grid-template-columns:160px repeat(5,1fr);gap:0;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;padding:8px 12px;border-bottom:2px solid var(--border);letter-spacing:0.5px">
-      <div>포지션</div>
-      <div style="text-align:center">지원자</div>
-      <div style="text-align:center;color:var(--yellow)">서류합격</div>
-      <div style="text-align:center;color:var(--accent2)">면접자</div>
-      <div style="text-align:center;color:var(--green)">최종합격</div>
-      <div style="text-align:center;color:#888">탈락</div>
-    </div>
-    ${positionList.map(({pos, dept}) => {
-      const posApps    = applicants.filter(a => a.position === pos);
-      // 지원자 = Job Openings 합계 (잡코리아+사람인 등), 없으면 Applicants 수
-      const jobRow     = jobOpenings.find(j => j.position === pos);
-      const totalApplied = jobRow ? (Number(jobRow.jobkorea)||0)+(Number(jobRow.saramin)||0)+(Number(jobRow.wanted)||0)+(Number(jobRow.jobplanet)||0)+(Number(jobRow.groupby)||0) : posApps.length;
-      const screened   = posApps.length;                                                // 서류합격 = Applicants 등록 전원
-      const interviewed= posApps.filter(a => stageMatch(a,'1차면접')||stageMatch(a,'최종합격')||stageMatch(a,'입사확정')).length;
-      const finalHired = posApps.filter(a => stageMatch(a,'최종합격')||stageMatch(a,'입사확정')).length;
-      const rejected   = posApps.filter(a => stageMatch(a,'불합격')).length;
-      const maxVal = Math.max(totalApplied, 1);
-      const col = (val, color) => `<div style="text-align:center">
-        <div style="font-family:'DM Mono',monospace;font-weight:700;font-size:16px;color:${color}">${val||'—'}</div>
-        <div style="height:4px;background:var(--border);border-radius:2px;margin-top:4px"><div style="height:4px;width:${(val/maxVal*100)}%;background:${color};border-radius:2px"></div></div>
-      </div>`;
-      return `<div style="display:grid;grid-template-columns:160px repeat(5,1fr);align-items:center;gap:0;padding:10px 12px;border-bottom:1px solid var(--border)">
-        <div>
-          <div style="font-size:13px;font-weight:700">${pos}</div>
-          ${dept ? `<div style="font-size:10px;color:var(--muted)">${dept}</div>` : ''}
-        </div>
-        ${col(totalApplied, 'var(--text)')}
-        ${col(screened, 'var(--yellow)')}
-        ${col(interviewed, 'var(--accent2)')}
-        ${col(finalHired, 'var(--green)')}
-        ${col(rejected, '#aaa')}
-      </div>`;
-    }).join('')}
-  `;
-}
-
-// ── HIRING STATUS (from Job Openings table + auto-calc from Applicants) ──
-function buildHiringStatus() {
-  const tbody = document.getElementById('hiring-body');
-  if (!jobOpenings.length) {
-    tbody.innerHTML = `<tr><td colspan="16" style="text-align:center;color:var(--muted);padding:32px">Job Openings 데이터 없음</td></tr>`;
-    return;
-  }
-
-  const totals = { numHires:0, jobkorea:0, saramin:0, wanted:0, jobplanet:0, groupby:0, total:0, screened:0, interviewed:0, finalHires:0 };
-
-  const rateCell = (num, den) => {
-    if (!den) return `<td class="rate-cell" style="color:var(--muted)">—</td>`;
-    const r = ((num/den)*100).toFixed(0);
-    const cls = Number(r) >= 30 ? 'rate-good' : Number(r) >= 10 ? 'rate-mid' : 'rate-low';
-    return `<td class="rate-cell ${cls}">${r}%</td>`;
-  };
-
-  tbody.innerHTML = jobOpenings.map(row => {
-    const n = (v) => Number(v) || 0;
-
-    // Airtable Job Openings 기반
-    const numHires   = n(row.numHires) > 0 ? n(row.numHires) : 1;
-    const jobkorea   = n(row.jobkorea);
-    const saramin    = n(row.saramin);
-    const wanted     = n(row.wanted);
-    const jobplanet  = n(row.jobplanet);
-    const groupby    = n(row.groupby);
-    const etc        = n(row.groupby) ? 0 : 0; // 기타는 Job Openings에 별도 컬럼 없으면 0
-    // 합계 = 플랫폼별 합산 (Airtable 기준)
-    const totalCnt   = jobkorea + saramin + wanted + jobplanet + groupby;
-
-    // Applicants 기반 자동 계산
-    const posApplicants  = applicants.filter(a => a.dept === row.dept && a.position === row.position);
-    if (posApplicants.length) console.log(row.position, '단계값:', posApplicants.map(a => a.stage));
-    const screenedCnt    = posApplicants.length;  // 등록된 전원 = 서류합격자
-    const interviewedCnt = posApplicants.filter(a => stageMatch(a,'1차면접')||stageMatch(a,'2차면접')||stageMatch(a,'최종합격')).length;
-    const finalCnt       = posApplicants.filter(a => stageMatch(a,'최종합격')).length;
-    totals.numHires    += numHires;
-    totals.jobkorea    += jobkorea;
-    totals.saramin     += saramin;
-    totals.wanted      += wanted;
-    totals.jobplanet   += jobplanet;
-    totals.groupby     += groupby;
-    totals.total       += totalCnt;
-    totals.screened    += screenedCnt;
-    totals.interviewed += interviewedCnt;
-    totals.finalHires  += finalCnt;
-
-    const numCell = (v, colored) => v ? `<td class="num-cell ${colored?'highlight':''}">${v}</td>` : `<td class="ing-cell">—</td>`;
-
-    return `<tr>
-      <td class="dept-cell">${row.dept}</td>
-      <td class="pos-cell">${row.position}</td>
-      <td class="num-cell">${numHires}</td>
-      ${numCell(jobkorea, true)}
-      ${numCell(saramin, true)}
-      ${numCell(wanted, true)}
-      ${numCell(jobplanet, true)}
-      ${numCell(groupby, true)}
-      <td class="ing-cell">—</td>
-      <td class="num-cell" style="font-weight:700">${totalCnt||'—'}</td>
-      <td class="num-cell ${screenedCnt?'highlight':''}">${screenedCnt||'—'}</td>
-      ${rateCell(screenedCnt, totalCnt)}
-      <td class="num-cell ${interviewedCnt?'highlight':''}">${interviewedCnt||'—'}</td>
-      ${rateCell(finalCnt, interviewedCnt)}
-      <td class="num-cell" style="color:var(--green);font-weight:700">${finalCnt||'—'}</td>
-      ${rateCell(finalCnt, numHires)}
-    </tr>`;
-  }).join('') + `<tr class="total-row">
-    <td colspan="2" style="font-weight:700;text-align:center">합 계</td>
-    <td class="num-cell">${totals.numHires}</td>
-    <td class="num-cell highlight">${totals.jobkorea||'—'}</td>
-    <td class="num-cell highlight">${totals.saramin||'—'}</td>
-    <td class="num-cell highlight">${totals.wanted||'—'}</td>
-    <td class="num-cell highlight">${totals.jobplanet||'—'}</td>
-    <td class="num-cell highlight">${totals.groupby||'—'}</td>
-    <td class="ing-cell">—</td>
-    <td class="num-cell" style="font-weight:700">${totals.total}</td>
-    <td class="num-cell highlight">${totals.screened}</td>
-    ${rateCell(totals.screened, totals.total)}
-    <td class="num-cell highlight">${totals.interviewed}</td>
-    ${rateCell(totals.finalHires, totals.interviewed)}
-    <td class="num-cell" style="color:var(--green);font-weight:700">${totals.finalHires}</td>
-    ${rateCell(totals.finalHires, totals.numHires)}
-  </tr>`;
-}
-
-// ── KANBAN DEPT FILTER ──
-function buildDeptFilterBtns() {
-  const depts = [...new Set(applicants.map(a => a.dept).filter(Boolean))];
-  const btnHtml = depts.map(d =>
-    `<button class="filter-btn" onclick="setDeptFilter('${d}',this)">${d}</button>`
-  ).join('');
-  document.getElementById('dept-filter-btns').innerHTML = btnHtml;
-
-  // 지원자 목록 부서 필터도 같이 업데이트
-  const tableBtns = depts.map(d =>
-    `<button class="filter-btn" onclick="setTableDeptFilter('${d}',this)">${d}</button>`
-  ).join('');
-  const tableEl = document.getElementById('table-dept-filter-btns');
-  if (tableEl) tableEl.innerHTML = tableBtns;
-}
-
-function setTableDeptFilter(dept, btn) {
-  activeTableDeptFilter = dept;
-  document.querySelectorAll('#view-table .filter-btn').forEach(b => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-  buildTable();
-}
-
-function setDeptFilter(dept, btn) {
-  activeDeptFilter = dept;
-  document.querySelectorAll('#view-kanban .filter-btn:not([id^="kf-"])').forEach(b => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-  buildKanban();
-}
-
-function setInterviewFilter(filter, btn) {
-  activeInterviewFilter = activeInterviewFilter === filter ? 'all' : filter;
-  document.querySelectorAll('[id^="kf-"]').forEach(b => b.classList.remove('active'));
-  if (activeInterviewFilter !== 'all' && btn) btn.classList.add('active');
-  buildKanban();
-}
-
-function matchInterviewFilter(a) {
-  if (activeInterviewFilter === 'all') return true;
-  const iv = a.interview || '';
-  if (activeInterviewFilter === 'hasdate') return iv.length > 0;
-  if (activeInterviewFilter === 'nodate') return iv.length === 0;
-  const today = new Date();
-  const todayStr = `${today.getMonth()+1}.${today.getDate()}`;
-  if (activeInterviewFilter === 'today') return iv.includes(todayStr);
-  if (activeInterviewFilter === 'week') {
-    // 이번주: 간단히 7일내 포함된 날짜 체크 (날짜 텍스트 기반)
-    for (let i = 0; i < 7; i++) {
-      const d = new Date(today); d.setDate(today.getDate() + i);
-      const ds = `${d.getMonth()+1}.${d.getDate()}`;
-      if (iv.includes(ds)) return true;
-    }
-    return false;
-  }
-  return true;
-}
 
 const FIELDS = {
   name:      'Name',
@@ -976,44 +675,24 @@ const FIELDS = {
 };
 
 const FB_FIELDS = {
-  interviewName:    'Interviewer Name',
-  applicant:        'Interviewer Name',
-  interviewDate:    'Interview Date',
-  feedbackSummary:  'Feedback Summary',
-  evaluationScore:  'Evaluation Score',
-  strengths:        'Strengths',
-  areasFor:         'Areas for Improvement',
-  interviewNotes:   'Interview Notes',
-  recommendation:   'Recommendation',
-  isStrong:         'Is Strong Recommendation',
-  hiringStages:     'Hiring Stages',
+  interviewName:   'Interviewer Name',
+  feedbackSummary: 'Feedback Summary',
+  evaluationScore: 'Evaluation Score',
+  strengths:       'Strengths',
+  areasFor:        'Areas for Improvement',
+  interviewNotes:  'Interview Notes',
+  recommendation:  'Recommendation',
+  isStrong:        'Is Strong Recommendation',
 };
 
-// Dept → question pool mapping
 const DEPT_QUESTIONS = {
   '인사': [
-    { id:'D1', type:'채용', q:'채용 전형을 설계하거나 개선한 경험이 있는가? 프로세스와 결과를 설명하라.' },
+    { id:'D1', type:'채용', q:'채용 전형을 설계하거나 개선한 경험이 있는가?' },
     { id:'D2', type:'노무', q:'근로기준법 또는 취업규칙 관련 이슈를 처리한 경험이 있는가?' },
     { id:'D3', type:'교육/OD', q:'구성원 역량 개발을 위해 설계·운영한 프로그램이 있는가?' },
     { id:'D4', type:'HRBP', q:'현업 부서와 협업하여 HR 이슈를 해결한 경험을 설명하라.' },
     { id:'D5', type:'평가/보상', q:'성과평가 또는 보상 체계를 설계·운영한 경험이 있는가?' },
     { id:'D6', type:'데이터', q:'HR 데이터를 분석하여 의사결정에 활용한 경험이 있는가?' },
-  ],
-  '경영지원본부': [
-    { id:'D1', type:'재무', q:'예산 수립 또는 원가 관리 경험이 있는가? 구체적 성과를 설명하라.' },
-    { id:'D2', type:'법무/계약', q:'계약서 검토 또는 법적 리스크를 관리한 경험이 있는가?' },
-    { id:'D3', type:'총무', q:'다수 부서를 지원하는 총무 업무를 효율화한 경험이 있는가?' },
-    { id:'D4', type:'기획', q:'경영 현황 보고서 또는 전략 기획 문서를 작성한 경험이 있는가?' },
-    { id:'D5', type:'IT/시스템', q:'사내 시스템 도입 또는 프로세스 디지털화를 주도한 경험이 있는가?' },
-    { id:'D6', type:'협력사', q:'외부 협력사와의 계약·관계를 관리한 경험과 성과를 설명하라.' },
-  ],
-  '운영지원': [
-    { id:'D1', type:'운영관리', q:'다수 현장을 동시에 지원·관리한 경험이 있는가?' },
-    { id:'D2', type:'SOP', q:'업무 표준화(SOP) 문서를 작성하거나 적용한 경험이 있는가?' },
-    { id:'D3', type:'문제해결', q:'현장 돌발 상황을 빠르게 해결한 구체적 사례를 설명하라.' },
-    { id:'D4', type:'CS', q:'고객 불만을 체계적으로 처리하고 재발을 방지한 경험이 있는가?' },
-    { id:'D5', type:'데이터', q:'운영 KPI를 설정하고 모니터링하여 개선한 경험이 있는가?' },
-    { id:'D6', type:'협업', q:'본사-현장 간 커뮤니케이션 문제를 해결한 경험을 설명하라.' },
   ],
   '홍보전략': [
     { id:'D1', type:'PR/홍보', q:'브랜드 인지도를 높이기 위해 실행한 캠페인과 성과를 설명하라.' },
@@ -1023,7 +702,7 @@ const DEPT_QUESTIONS = {
     { id:'D5', type:'B2B/B2C', q:'B2B와 B2C 타깃에 따라 메시지를 다르게 설계한 경험이 있는가?' },
     { id:'D6', type:'파트너', q:'언론사·인플루언서·에이전시와 협업한 경험과 성과를 설명하라.' },
   ],
-  '플랫폼사업팀': [
+  '플랫폼': [
     { id:'D1', type:'OTA운영', q:'야놀자·여기어때·에어비앤비 등 OTA 플랫폼을 직접 운영한 경험은?' },
     { id:'D2', type:'가격전략', q:'객실 요금 전략(Revenue Management)을 설계·적용한 경험이 있는가?' },
     { id:'D3', type:'리뷰관리', q:'OTA 리뷰 점수를 높이기 위해 실행한 전략과 성과를 설명하라.' },
@@ -1031,7 +710,7 @@ const DEPT_QUESTIONS = {
     { id:'D5', type:'채널믹스', q:'다양한 판매 채널을 조합하여 최적화한 경험과 결과를 설명하라.' },
     { id:'D6', type:'신규입점', q:'신규 업장 OTA 입점 프로세스를 처음부터 진행한 경험이 있는가?' },
   ],
-  '호텔사업부': [
+  '호텔': [
     { id:'D1', type:'사업개발', q:'신규 위탁 계약을 수주하거나 사업을 확장한 경험을 설명하라.' },
     { id:'D2', type:'수익분석', q:'숙박 업장의 수익성 분석(P&L)을 직접 수행한 경험이 있는가?' },
     { id:'D3', type:'오너관계', q:'건물주·사업주 등 파트너와의 관계를 관리한 경험을 설명하라.' },
@@ -1042,12 +721,9 @@ const DEPT_QUESTIONS = {
 };
 
 const RED_FLAGS = [
-  '잦은 이직 (3년 내 2회 이상)',
-  '이전 회사 과도한 비판',
-  '지각/무단결석 경력',
-  '급여 외 과도한 조건 요구',
-  '구체적 경험 답변 불가',
-  '조직 적응 어려움 징후',
+  '잦은 이직 (3년 내 2회 이상)', '이전 회사 과도한 비판',
+  '지각/무단결석 경력', '급여 외 과도한 조건 요구',
+  '구체적 경험 답변 불가', '조직 적응 어려움 징후',
 ];
 
 const HEAD_ITEMS = [
@@ -1057,20 +733,17 @@ const HEAD_ITEMS = [
   { name: '실행력 & 책임감', desc: '목표 달성을 위해 자율적으로 행동하고 결과에 책임지는가?' },
   { name: 'HS 사업 이해도', desc: '숙박업 위탁운영 비즈니스의 맥락과 성장 방향을 이해하는가?' },
 ];
-
 const PRAC_ITEMS = [
   { name: '직무 핵심역량', desc: '해당 직무 핵심 역량을 본인 경험과 연결하여 설명하는가?' },
   { name: '업무 우선순위 & 실행', desc: '동시 다발적 업무 상황에서 어떻게 판단하고 처리했는가?' },
   { name: '실패 & 학습 경험', desc: '실패 경험에서 무엇을 배웠는가? (STAR 기법 답변 유도)' },
 ];
-
 const HR_ITEMS = [
   { name: '컬처핏', desc: 'HS 조직 문화와의 적합성' },
   { name: '커뮤니케이션', desc: '의사소통 방식과 명확성' },
   { name: '성장 가능성', desc: '장기적 성장 잠재력' },
   { name: '이직 가능성 (역)', desc: '낮을수록 높은 점수 부여' },
 ];
-
 const REVIEW_ITEMS_MANAGER = [
   { name: '업무 이해도', desc: '담당 업무를 얼마나 빠르게 파악했는가?' },
   { name: '실행력', desc: '주어진 과제를 스스로 완수하는가?' },
@@ -1079,7 +752,6 @@ const REVIEW_ITEMS_MANAGER = [
   { name: '성과 달성도', desc: '3개월 내 목표 대비 실적은 어떠한가?' },
   { name: '조직 적응도', desc: '조직 문화에 적응하고 있는가?' },
 ];
-
 const REVIEW_ITEMS_HR = [
   { name: '출퇴근 성실도', desc: '출결 및 근태 현황' },
   { name: '규정 준수', desc: '사내 규정 및 정책 이해·준수' },
@@ -1087,7 +759,6 @@ const REVIEW_ITEMS_HR = [
   { name: '조직 몰입도', desc: '회사에 대한 소속감과 몰입 정도' },
   { name: '이탈 리스크', desc: '조기 이직 가능성 (역: 낮을수록 높은 점수)' },
 ];
-
 const REVIEW_ITEMS_SELF = [
   { name: '업무 만족도', desc: '현재 담당 업무에 얼마나 만족하는가?' },
   { name: '성장 체감도', desc: '3개월 간 본인이 성장했다고 느끼는가?' },
@@ -1131,30 +802,27 @@ async function loadData() {
     }));
     feedbacks = (fbData.records || []).map(r => ({
       id:             r.id,
-      applicantName:  r.fields['Interviewer Name']              || '',
-      score:          r.fields[FB_FIELDS.evaluationScore]       || 0,
-      recommendation: r.fields[FB_FIELDS.recommendation]        || '',
-      strengths:      r.fields[FB_FIELDS.strengths]             || '',
-      areasFor:       r.fields[FB_FIELDS.areasFor]              || '',
-      summary:        r.fields[FB_FIELDS.feedbackSummary]       || '',
-      notes:          r.fields[FB_FIELDS.interviewNotes]        || '',
-      isStrong:       r.fields[FB_FIELDS.isStrong]              || false,
+      applicantName:  r.fields['Interviewer Name']        || '',
+      score:          r.fields[FB_FIELDS.evaluationScore] || 0,
+      recommendation: r.fields[FB_FIELDS.recommendation]  || '',
+      strengths:      r.fields[FB_FIELDS.strengths]       || '',
+      areasFor:       r.fields[FB_FIELDS.areasFor]        || '',
+      summary:        r.fields[FB_FIELDS.feedbackSummary] || '',
+      notes:          r.fields[FB_FIELDS.interviewNotes]  || '',
+      isStrong:       r.fields[FB_FIELDS.isStrong]        || false,
     }));
-    jobOpenings = (jobData.records || []).map(r => {
-      // 디버그: 첫 번째 레코드 필드명 콘솔 출력
-      if (!jobOpenings.length) console.log('Job Openings fields:', Object.keys(r.fields), r.fields);
-      return {
-      id:          r.id,
-      dept:        r.fields['Department']            || '',
-      position:    r.fields['Position']              || r.fields['position'] || '',
-      numHires:    r.fields['Number of Hires']        || 0,
-      jobkorea:    r.fields['JobKorea Applicants']    || 0,
-      saramin:     r.fields['Saramin Applicants']     || 0,
-      wanted:      r.fields['Wanted Applicants']      || 0,
-      jobplanet:   r.fields['JobPlanet Applicants']   || 0,
-      groupby:     r.fields['GroupBy Applicants']     || 0,
-      total:       r.fields['Total Applicants']      || 0,
-    };});
+    jobOpenings = (jobData.records || []).map(r => ({
+      id:        r.id,
+      dept:      r.fields['Department']          || '',
+      position:  r.fields['Position']            || '',
+      numHires:  r.fields['Number of Hires']     || 0,
+      jobkorea:  r.fields['JobKorea Applicants'] || 0,
+      saramin:   r.fields['Saramin Applicants']  || 0,
+      wanted:    r.fields['Wanted Applicants']   || 0,
+      jobplanet: r.fields['JobPlanet Applicants']|| 0,
+      groupby:   r.fields['GroupBy Applicants']  || 0,
+      total:     r.fields['Total Applicants']    || 0,
+    }));
     updateStats();
     buildDashboard();
     buildHiringStatus();
@@ -1169,6 +837,7 @@ async function loadData() {
     applyRole(currentRole);
   } catch(e) {
     showToast('❌ 데이터 로드 실패: ' + e.message);
+    console.error('loadData error:', e);
   }
   document.getElementById('loading').style.display = 'none';
 }
@@ -1177,262 +846,236 @@ async function loadData() {
 function updateStats() {
   document.getElementById('st-total').textContent     = applicants.length;
   document.getElementById('st-review').textContent    = applicants.filter(a => stageMatch(a,'서류검토')).length;
-  document.getElementById('st-interview').textContent = applicants.filter(a => stageMatch(a,'1차면접')).length;
-  document.getElementById('st-passed').textContent    = applicants.filter(a => stageMatch(a,'최종합격') || stageMatch(a,'입사확정')).length;
-  document.getElementById('st-rejected').textContent  = applicants.filter(a => stageMatch(a,'불합격')).length;
+  document.getElementById('st-interview').textContent = applicants.filter(a => stageMatch(a,'면접')).length;
+  document.getElementById('st-passed').textContent    = applicants.filter(a => stageMatch(a,'입사확정')).length;
+  document.getElementById('st-rejected').textContent  = applicants.filter(a => stageMatch(a,'서류탈락') || stageMatch(a,'면접탈락')).length;
 }
 
-// ── KANBAN ──
-
+// ✅ 수정 2: stageMatch — 서류탈락/면접탈락 추가, 불합격 제거
 function stageMatch(a, key) {
   const s = (a.stage || '').trim();
-  if (key === '서류검토') return s.includes('서류') || s.includes('검토') || s === '';
-  if (key === '1차면접')  return s.includes('1차') || s.includes('2차') || s === '면접';
-  if (key === '2차면접')  return false;
-  if (key === '최종합격') return s === '최종합격' || s === '최 종합격' || (s.replace(/\s/g,'').includes('최종합격') && !s.includes('불') && !s.includes('서류'));
+  if (key === '서류검토') return s.includes('서류검토') || s.includes('검토') || s === '';
+  if (key === '면접')     return s === '면접' || s.includes('1차') || s.includes('2차');
+  if (key === '최종합격') return s === '최종합격';
   if (key === '입사확정') return s === '입사확정' || s.includes('입사');
   if (key === '보류')     return s === '보류';
-  if (key === '불합격')   return s.includes('불합격');
+  if (key === '서류탈락') return s === '서류탈락';
+  if (key === '면접탈락') return s === '면접탈락';
+  // 하위 호환: 기존 '불합격' 데이터 처리
+  if (key === '불합격')   return s.includes('불합격') || s === '서류탈락' || s === '면접탈락';
   return false;
 }
 
-// ── REPORT ──
-function buildReport() {
+// ✅ 수정 3: STAGES — 불합격 → 서류탈락/면접탈락으로 분리
+const STAGES = [
+  { key:'서류검토', label:'서류 검토', color:'#c8a02a' },
+  { key:'면접',     label:'면접',      color:'#2a6ec8' },
+  { key:'최종합격', label:'최종 합격', color:'#2a8c5a' },
+  { key:'입사확정', label:'입사 확정', color:'#0ea5e9' },
+  { key:'보류',     label:'보류',      color:'#9b59b6' },
+  { key:'서류탈락', label:'서류 탈락', color:'#c8502a' },
+  { key:'면접탈락', label:'면접 탈락', color:'#aaa' },
+];
+
+function stageClass(s) {
+  if (!s) return 's-서류검토';
+  if (s === '서류검토' || s.includes('검토')) return 's-서류검토';
+  if (s === '면접' || s.includes('1차') || s.includes('2차')) return 's-면접';
+  if (s === '최종합격') return 's-최종합격';
+  if (s === '입사확정' || s.includes('입사')) return 's-입사확정';
+  if (s === '보류') return 's-보류';
+  if (s === '서류탈락') return 's-서류탈락';
+  if (s === '면접탈락') return 's-면접탈락';
+  return 's-서류검토';
+}
+
+// ── DASHBOARD ──
+function buildDashboard() {
   const total = applicants.length;
-  // 면접을 거친 전체 인원 = 현재 1차/2차면접 + 이미 최종합격/불합격/보류된 사람 중 면접 경험자
-  // → 실질적으로 서류검토가 아닌 모든 단계
-  const interviewed = applicants.filter(a =>
-    stageMatch(a,'1차면접') || stageMatch(a,'2차면접') ||
-    stageMatch(a,'최종합격') || stageMatch(a,'불합격') || stageMatch(a,'보류')
-  ).length;
-  const passed   = applicants.filter(a => stageMatch(a,'최종합격')).length;
-  const confirmed = applicants.filter(a => stageMatch(a,'입사확정')).length;
-  const rejected = applicants.filter(a => stageMatch(a,'불합격')).length;
+  const review = applicants.filter(a => stageMatch(a,'서류검토')).length;
+  const interview = applicants.filter(a => stageMatch(a,'면접')).length;
+  const passed = applicants.filter(a => stageMatch(a,'최종합격') || stageMatch(a,'입사확정')).length;
+  const rejected = applicants.filter(a => stageMatch(a,'서류탈락') || stageMatch(a,'면접탈락')).length;
+  const rate = total ? ((passed/total)*100).toFixed(1) : '0.0';
 
-  const docRate  = total      ? ((interviewed/total)*100).toFixed(1) : '0.0';
-  const intRate  = interviewed ? ((passed/interviewed)*100).toFixed(1) : '0.0';
-  const fillRate = jobOpenings.length ? ((passed / jobOpenings.reduce((s,j)=>s+Number(j.numHires||1),0))*100).toFixed(0) : '0';
-
-  // 평가서 완료율 — 지원자 기준 중복 제거 (한 명당 1건만 카운트)
-  const evalDoneNames = new Set(feedbacks.filter(f => f.recommendation).map(f => f.applicantName));
-  const evalDone = evalDoneNames.size;
-  const evalRate = interviewed ? ((evalDone/interviewed)*100).toFixed(0) : '0';
-
-  // 3개월 평가 완료 수
-  const reviewDoneNames = new Set(feedbacks.filter(f => f.notes?.includes('3개월')).map(f => f.applicantName));
-  const reviewDone = reviewDoneNames.size;
-
-  document.getElementById('report-kpis').innerHTML = `
-    <div class="report-kpi kpi-c1"><div class="report-kpi-label">서류 → 면접 전환율</div><div class="report-kpi-value" style="color:var(--accent2)">${docRate}%</div><div class="report-kpi-sub">전체 ${total}명 중 면접 ${interviewed}명</div></div>
-    <div class="report-kpi kpi-c2"><div class="report-kpi-label">면접 → 최종합격률</div><div class="report-kpi-value" style="color:var(--green)">${intRate}%</div><div class="report-kpi-sub">면접 ${interviewed}명 중 합격 ${passed}명</div></div>
-    <div class="report-kpi kpi-c3"><div class="report-kpi-label">채용 달성률</div><div class="report-kpi-value" style="color:var(--yellow)">${fillRate}%</div><div class="report-kpi-sub">목표 대비 최종합격 ${passed}명</div></div>
-    <div class="report-kpi kpi-c4"><div class="report-kpi-label">불합격률</div><div class="report-kpi-value" style="color:var(--accent)">${total?((rejected/total)*100).toFixed(1):0}%</div><div class="report-kpi-sub">전체 ${total}명 중 불합격 ${rejected}명</div></div>
-    <div class="report-kpi kpi-c5"><div class="report-kpi-label">평가서 완료율</div><div class="report-kpi-value" style="color:var(--purple)">${evalRate}%</div><div class="report-kpi-sub">면접자 ${interviewed}명 중 평가 ${evalDone}건</div></div>
-    <div class="report-kpi kpi-c6"><div class="report-kpi-label">3개월 평가 완료</div><div class="report-kpi-value" style="color:#0ea5e9">${reviewDone}명</div><div class="report-kpi-sub">입사확정 ${confirmed}명 중</div></div>
+  document.getElementById('dash-summary').innerHTML = `
+    <div class="dash-summary-item dsi-total"><div class="dash-summary-label">전체 지원자</div><div class="dash-summary-value">${total}</div></div>
+    <div class="dash-summary-item dsi-review"><div class="dash-summary-label">서류 검토 중</div><div class="dash-summary-value" style="color:var(--yellow)">${review}</div></div>
+    <div class="dash-summary-item dsi-interview"><div class="dash-summary-label">면접 진행 중</div><div class="dash-summary-value" style="color:var(--accent2)">${interview}</div></div>
+    <div class="dash-summary-item dsi-pass"><div class="dash-summary-label">합격/입사확정</div><div class="dash-summary-value" style="color:var(--green)">${passed}</div></div>
+    <div class="dash-summary-item dsi-fail"><div class="dash-summary-label">탈락</div><div class="dash-summary-value" style="color:#888">${rejected}</div></div>
+    <div class="dash-summary-item dsi-rate"><div class="dash-summary-label">합격률</div><div class="dash-summary-value" style="color:var(--accent)">${rate}%</div></div>
   `;
 
-  // Funnel
-  const screenedCnt = applicants.filter(a => !stageMatch(a,'서류검토')).length;
-  const funnelSteps = [
-    { name: '전체 지원', cnt: total,       color: '#2a6ec8' },
-    { name: '서류 통과', cnt: screenedCnt, color: '#c8a02a' },
-    { name: '면접 진행', cnt: interviewed,  color: '#c8502a' },
-    { name: '최종 합격', cnt: passed,       color: '#2a8c5a' },
-  ];
-  document.getElementById('report-funnel').innerHTML = funnelSteps.map(s => {
-    const pct = total ? Math.round((s.cnt/total)*100) : 0;
-    return `<div class="funnel-row">
-      <div style="font-size:13px;font-weight:600">${s.name}</div>
-      <div style="font-family:'DM Mono',monospace;font-weight:700;color:${s.color}">${s.cnt}</div>
-      <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:${pct}%;background:${s.color}"></div></div>
-      <div style="font-size:12px;color:var(--muted)">${pct}%</div>
+  const stageData = STAGES.map(s => ({ name: s.label, key: s.key, color: s.color }));
+  document.getElementById('dash-stages').innerHTML = stageData.map(s => {
+    const cnt = applicants.filter(a => stageMatch(a, s.key)).length;
+    const pct = total ? Math.round((cnt/total)*100) : 0;
+    return `<div class="dash-stage-row">
+      <div class="dash-stage-name" style="color:${s.color}">${s.name}</div>
+      <div class="dash-stage-bar-wrap"><div class="dash-stage-bar" style="width:${pct}%;background:${s.color}"></div></div>
+      <div class="dash-stage-count" style="color:${s.color}">${cnt}</div>
+      <div class="dash-stage-pct">${pct}%</div>
     </div>`;
   }).join('');
 
-  // Platform efficiency
-  const platData = PLATFORMS.map(p => {
-    const platApps = applicants.filter(a => a.platform === p);
-    const platPassed = platApps.filter(a => stageMatch(a,'최종합격')).length;
-    const rate = platApps.length ? ((platPassed/platApps.length)*100).toFixed(1) : '0.0';
-    const rateClass = Number(rate) >= 20 ? 'rate-good' : Number(rate) >= 10 ? 'rate-mid' : 'rate-low';
-    const efficiency = platApps.length >= 5 && platPassed >= 1 ? '⭐ 효율' : platApps.length === 0 ? '—' : '보통';
-    return { name: p, total: platApps.length, passed: platPassed, rate, rateClass, efficiency };
-  }).sort((a,b) => b.total - a.total);
+  const screeningData = [
+    { name:'합격/확정', filter: a => stageMatch(a,'최종합격')||stageMatch(a,'입사확정'), color:'var(--green)', bg:'#f0fdf4' },
+    { name:'검토/면접중', filter: a => stageMatch(a,'서류검토')||stageMatch(a,'면접'), color:'var(--yellow)', bg:'#fff8e6' },
+    { name:'보류', filter: a => stageMatch(a,'보류'), color:'#9b59b6', bg:'#f5f0ff' },
+    { name:'탈락', filter: a => stageMatch(a,'서류탈락')||stageMatch(a,'면접탈락'), color:'var(--accent)', bg:'#fff0ee' },
+  ];
+  document.getElementById('dash-screening').innerHTML = screeningData.map(s => {
+    const cnt = applicants.filter(s.filter).length;
+    const pct = total ? Math.round((cnt/total)*100) : 0;
+    return `<div class="dash-screening-row">
+      <div class="dash-stage-name" style="color:${s.color};background:${s.bg};padding:3px 8px;border-radius:4px;font-size:12px">${s.name}</div>
+      <div class="dash-stage-bar-wrap"><div class="dash-stage-bar" style="width:${pct}%;background:${s.color}"></div></div>
+      <div class="dash-stage-count" style="color:${s.color}">${cnt}</div>
+      <div class="dash-stage-pct">${pct}%</div>
+    </div>`;
+  }).join('');
 
-  document.getElementById('report-platforms').innerHTML = platData.map(p => `
-    <div class="platform-row">
-      <div style="font-size:13px;font-weight:600">${p.name}</div>
-      <div style="font-family:'DM Mono',monospace;font-weight:700;color:var(--accent2)">${p.total}</div>
-      <div style="font-family:'DM Mono',monospace;font-weight:700;color:var(--green)">${p.passed}</div>
-      <div class="rate-cell ${p.rateClass}">${p.rate}%</div>
-      <div style="font-size:11px;color:var(--muted)">${p.efficiency}</div>
-    </div>`).join('');
+  const positionList = jobOpenings.length
+    ? jobOpenings.map(j => ({ pos: j.position, dept: j.dept }))
+    : [...new Set(applicants.map(a => a.position).filter(Boolean))].map(p => ({ pos: p, dept: '' }));
 
-  // Onboarding — 입사확정 단계만 표시
-  const hiredApps = applicants.filter(a => stageMatch(a,'입사확정'));
-  document.getElementById('report-onboarding').innerHTML = hiredApps.length
-    ? `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px">
-        ${hiredApps.map(a => {
-          const hasReview = feedbacks.some(f => f.applicantName === a.name && f.notes?.includes('3개월'));
-          return `<div style="padding:12px;border:1px solid var(--border);border-radius:8px;background:var(--bg)">
-            <div style="font-weight:700;font-size:13px">${a.name}</div>
-            <div style="font-size:11px;color:var(--muted);margin-bottom:6px">${a.position} · ${a.dept}</div>
-            <span class="${hasReview ? 'badge-active' : 'badge-archived'}">${hasReview ? '✓ 평가완료' : '평가대기'}</span>
-          </div>`;
-        }).join('')}
-      </div>`
-    : '<div style="color:var(--muted);font-size:13px">입사확정 인원 없음</div>';
-
-  // Pending eval
-  const pendingEval = applicants.filter(a =>
-    (stageMatch(a,'1차면접')||stageMatch(a,'2차면접')) && !hasFeedback(a.name)
-  );
-  document.getElementById('report-pending-eval').innerHTML = pendingEval.length
-    ? `<div style="display:flex;flex-wrap:wrap;gap:8px">
-        ${pendingEval.map(a => `<div style="padding:8px 12px;border:1px solid #fad4c8;background:#fff0ee;border-radius:6px;font-size:12px">
-          <strong>${a.name}</strong> <span style="color:var(--muted)">${a.position}</span>
-        </div>`).join('')}
-      </div>`
-    : '<div style="color:var(--green);font-size:13px">✅ 모든 면접자 평가 완료</div>';
+  document.getElementById('dash-positions').innerHTML = `
+    <div style="display:grid;grid-template-columns:160px repeat(5,1fr);gap:0;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;padding:8px 12px;border-bottom:2px solid var(--border);letter-spacing:0.5px">
+      <div>포지션</div>
+      <div style="text-align:center">지원자</div>
+      <div style="text-align:center;color:var(--yellow)">서류합격</div>
+      <div style="text-align:center;color:var(--accent2)">면접자</div>
+      <div style="text-align:center;color:var(--green)">최종합격</div>
+      <div style="text-align:center;color:#888">탈락</div>
+    </div>
+    ${positionList.filter(({pos}) => pos).map(({pos, dept}) => {
+      const posApps = applicants.filter(a => a.position === pos);
+      const jobRow = jobOpenings.find(j => j.position === pos);
+      const totalApplied = jobRow ? (Number(jobRow.jobkorea)||0)+(Number(jobRow.saramin)||0)+(Number(jobRow.wanted)||0)+(Number(jobRow.jobplanet)||0)+(Number(jobRow.groupby)||0) : posApps.length;
+      const screened = posApps.length;
+      const interviewed = posApps.filter(a => stageMatch(a,'면접')||stageMatch(a,'최종합격')||stageMatch(a,'입사확정')||stageMatch(a,'면접탈락')).length;
+      const finalHired = posApps.filter(a => stageMatch(a,'최종합격')||stageMatch(a,'입사확정')).length;
+      const rejected = posApps.filter(a => stageMatch(a,'서류탈락')||stageMatch(a,'면접탈락')).length;
+      const maxVal = Math.max(totalApplied, 1);
+      const col = (val, color) => `<div style="text-align:center">
+        <div style="font-family:'DM Mono',monospace;font-weight:700;font-size:16px;color:${color}">${val||'—'}</div>
+        <div style="height:4px;background:var(--border);border-radius:2px;margin-top:4px"><div style="height:4px;width:${(val/maxVal*100)}%;background:${color};border-radius:2px"></div></div>
+      </div>`;
+      return `<div style="display:grid;grid-template-columns:160px repeat(5,1fr);align-items:center;gap:0;padding:10px 12px;border-bottom:1px solid var(--border)">
+        <div><div style="font-size:13px;font-weight:700">${pos}</div>${dept ? `<div style="font-size:10px;color:var(--muted)">${dept}</div>` : ''}</div>
+        ${col(totalApplied,'var(--text)')}${col(screened,'var(--yellow)')}${col(interviewed,'var(--accent2)')}${col(finalHired,'var(--green)')}${col(rejected,'#aaa')}
+      </div>`;
+    }).join('')}
+  `;
 }
 
-// ── ARCHIVE ──
-function buildArchiveTable() {
-  const search = (document.getElementById('archive-search')?.value || '').toLowerCase();
-  const stageFilter = document.getElementById('archive-filter-stage')?.value || '전체';
-
-  let archived = applicants.filter(a =>
-    stageMatch(a,'최종합격') || stageMatch(a,'불합격') || stageMatch(a,'보류')
-  );
-
-  if (stageFilter !== '전체') archived = archived.filter(a => stageMatch(a, stageFilter));
-  if (search) archived = archived.filter(a =>
-    a.name.includes(search) || a.position.toLowerCase().includes(search) || a.dept.toLowerCase().includes(search)
-  );
-
-  const tbody = document.getElementById('archive-body');
-  if (!archived.length) {
-    tbody.innerHTML = `<tr><td colspan="10" style="text-align:center;color:var(--muted);padding:32px">데이터 없음</td></tr>`;
+// ── HIRING STATUS ──
+function buildHiringStatus() {
+  const tbody = document.getElementById('hiring-body');
+  if (!jobOpenings.length) {
+    tbody.innerHTML = `<tr><td colspan="16" style="text-align:center;color:var(--muted);padding:32px">Job Openings 데이터 없음</td></tr>`;
     return;
   }
-
-  tbody.innerHTML = archived.map(a => {
-    const fb = feedbacks.find(f => f.applicantName === a.name);
-    const hasReview = feedbacks.some(f => f.applicantName === a.name && f.notes?.includes('3개월'));
-    const isHired = stageMatch(a,'최종합격');
-
-    const scoreCell = fb?.score
-      ? `<td style="font-family:'DM Mono',monospace;font-weight:700;color:var(--accent2);text-align:center">${fb.score}점</td>`
-      : `<td style="color:var(--muted);text-align:center">—</td>`;
-
-    const verdictColor = fb?.recommendation === 'Strong Hire' ? 'var(--green)' : fb?.recommendation === 'Hire' ? 'var(--accent2)' : fb?.recommendation === 'Hold' ? 'var(--yellow)' : fb?.recommendation === 'No Hire' ? 'var(--accent)' : '';
-    const verdictCell = fb?.recommendation
-      ? `<td style="font-weight:700;color:${verdictColor};font-size:12px">${fb.recommendation}</td>`
-      : `<td style="color:var(--muted)">—</td>`;
-
-    const truncate = (str, n) => str && str.length > n ? str.substring(0,n) + '...' : (str || '—');
-
+  const totals = { numHires:0, jobkorea:0, saramin:0, wanted:0, jobplanet:0, groupby:0, total:0, screened:0, interviewed:0, finalHires:0 };
+  const rateCell = (num, den) => {
+    if (!den) return `<td class="rate-cell" style="color:var(--muted)">—</td>`;
+    const r = ((num/den)*100).toFixed(0);
+    const cls = Number(r) >= 30 ? 'rate-good' : Number(r) >= 10 ? 'rate-mid' : 'rate-low';
+    return `<td class="rate-cell ${cls}">${r}%</td>`;
+  };
+  tbody.innerHTML = jobOpenings.map(row => {
+    const n = (v) => Number(v) || 0;
+    const numHires = n(row.numHires) > 0 ? n(row.numHires) : 1;
+    const jobkorea = n(row.jobkorea), saramin = n(row.saramin), wanted = n(row.wanted);
+    const jobplanet = n(row.jobplanet), groupby = n(row.groupby);
+    const totalCnt = jobkorea + saramin + wanted + jobplanet + groupby;
+    const posApplicants = applicants.filter(a => a.dept === row.dept && a.position === row.position);
+    const screenedCnt = posApplicants.length;
+    const interviewedCnt = posApplicants.filter(a => stageMatch(a,'면접')||stageMatch(a,'최종합격')||stageMatch(a,'입사확정')||stageMatch(a,'면접탈락')).length;
+    const finalCnt = posApplicants.filter(a => stageMatch(a,'최종합격')||stageMatch(a,'입사확정')).length;
+    totals.numHires += numHires; totals.jobkorea += jobkorea; totals.saramin += saramin;
+    totals.wanted += wanted; totals.jobplanet += jobplanet; totals.groupby += groupby;
+    totals.total += totalCnt; totals.screened += screenedCnt;
+    totals.interviewed += interviewedCnt; totals.finalHires += finalCnt;
+    const numCell = (v, colored) => v ? `<td class="num-cell ${colored?'highlight':''}">${v}</td>` : `<td class="ing-cell">—</td>`;
     return `<tr>
-      <td style="font-weight:700">${a.name}</td>
-      <td style="color:#666;font-size:12px">${a.dept||'—'}</td>
-      <td style="font-size:12px">${a.position||'—'}</td>
-      <td><span class="stage-badge ${stageClass(a.stage)}">${a.stage}</span></td>
-      ${scoreCell}
-      ${verdictCell}
-      <td style="font-size:12px;color:#444;max-width:160px" title="${fb?.strengths||''}">${truncate(fb?.strengths, 30)}</td>
-      <td style="font-size:12px;color:#444;max-width:160px" title="${fb?.areasFor||''}">${truncate(fb?.areasFor, 30)}</td>
-      <td style="font-size:12px;color:var(--muted);max-width:160px" title="${fb?.notes||''}">${truncate(fb?.notes, 30)}</td>
-      <td style="text-align:center"><span class="${isHired ? (hasReview?'badge-active':'badge-archived') : 'badge-archived'}">${isHired ? (hasReview?'✓ 완료':'대기') : '—'}</span></td>
+      <td class="dept-cell">${row.dept}</td><td class="pos-cell">${row.position}</td>
+      <td class="num-cell">${numHires}</td>
+      ${numCell(jobkorea,true)}${numCell(saramin,true)}${numCell(wanted,true)}${numCell(jobplanet,true)}${numCell(groupby,true)}
+      <td class="ing-cell">—</td>
+      <td class="num-cell" style="font-weight:700">${totalCnt||'—'}</td>
+      <td class="num-cell ${screenedCnt?'highlight':''}">${screenedCnt||'—'}</td>
+      ${rateCell(screenedCnt,totalCnt)}
+      <td class="num-cell ${interviewedCnt?'highlight':''}">${interviewedCnt||'—'}</td>
+      ${rateCell(finalCnt,interviewedCnt)}
+      <td class="num-cell" style="color:var(--green);font-weight:700">${finalCnt||'—'}</td>
+      ${rateCell(finalCnt,numHires)}
     </tr>`;
-  }).join('');
+  }).join('') + `<tr class="total-row">
+    <td colspan="2" style="font-weight:700;text-align:center">합 계</td>
+    <td class="num-cell">${totals.numHires}</td>
+    <td class="num-cell highlight">${totals.jobkorea||'—'}</td><td class="num-cell highlight">${totals.saramin||'—'}</td>
+    <td class="num-cell highlight">${totals.wanted||'—'}</td><td class="num-cell highlight">${totals.jobplanet||'—'}</td>
+    <td class="num-cell highlight">${totals.groupby||'—'}</td><td class="ing-cell">—</td>
+    <td class="num-cell" style="font-weight:700">${totals.total}</td>
+    <td class="num-cell highlight">${totals.screened}</td>
+    ${rateCell(totals.screened,totals.total)}
+    <td class="num-cell highlight">${totals.interviewed}</td>
+    ${rateCell(totals.finalHires,totals.interviewed)}
+    <td class="num-cell" style="color:var(--green);font-weight:700">${totals.finalHires}</td>
+    ${rateCell(totals.finalHires,totals.numHires)}
+  </tr>`;
 }
 
-async function archiveCompleted() {
-  const completed = applicants.filter(a => stageMatch(a,'최종합격') || stageMatch(a,'불합격'));
-  if (!completed.length) { showToast('아카이브할 완료 건이 없어요'); return; }
-  showToast(`✅ ${completed.length}건이 아카이브 탭에서 관리됩니다`);
-  buildArchiveTable();
+// ── KANBAN FILTERS ──
+function buildDeptFilterBtns() {
+  const depts = [...new Set(applicants.map(a => a.dept).filter(Boolean))];
+  document.getElementById('dept-filter-btns').innerHTML = depts.map(d =>
+    `<button class="filter-btn" onclick="setDeptFilter('${d}',this)">${d}</button>`).join('');
+  const tableEl = document.getElementById('table-dept-filter-btns');
+  if (tableEl) tableEl.innerHTML = depts.map(d =>
+    `<button class="filter-btn" onclick="setTableDeptFilter('${d}',this)">${d}</button>`).join('');
 }
 
-function downloadEvalCSV() {
-  if (!feedbacks.length) { showToast('저장된 평가 데이터가 없어요'); return; }
-
-  const headers = [
-    '지원자명', '부서', '포지션', '면접일', '채용단계',
-    '평가점수', '최종판정', '강점', '개선필요영역', '면접메모', 'Strong Hire 여부'
-  ];
-
-  const rows = feedbacks.map(fb => {
-    const applicant = applicants.find(a => a.name === fb.applicantName) || {};
-    return [
-      fb.applicantName,
-      applicant.dept || '',
-      applicant.position || '',
-      applicant.interview || '',
-      applicant.stage || '',
-      fb.score || '',
-      fb.recommendation || '',
-      fb.strengths || '',
-      fb.areasFor || '',
-      (fb.notes || '').replace(/\n/g, ' '),
-      fb.isStrong ? 'Yes' : 'No',
-    ].map(v => `"${(v||'').toString().replace(/"/g, '""')}"`);
-  });
-
-  const csv = [headers, ...rows].map(r => r.join(',')).join('\n');
-  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `HSO_면접평가_${new Date().toLocaleDateString('ko-KR').replace(/\. /g,'-').replace('.','')}.csv`;
-  a.click();
-  URL.revokeObjectURL(url);
-  showToast('✅ 면접 평가 CSV 다운로드 완료');
+function setTableDeptFilter(dept, btn) {
+  activeTableDeptFilter = dept;
+  document.querySelectorAll('#view-table .filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  buildTable();
 }
 
-function downloadArchiveCSV() {
-  const archived = applicants.filter(a => stageMatch(a,'최종합격') || stageMatch(a,'불합격') || stageMatch(a,'보류'));
-  if (!archived.length) { showToast('다운로드할 데이터가 없어요'); return; }
-
-  const headers = ['이름','부서','포지션','플랫폼','최종단계','면접일','연락처','평가점수','최종판정','강점','개선필요영역','면접메모','3개월평가'];
-  const rows = archived.map(a => {
-    const fb = feedbacks.find(f => f.applicantName === a.name);
-    const hasReview = feedbacks.some(f => f.applicantName === a.name && f.notes?.includes('3개월'));
-    const isHired = stageMatch(a,'최종합격');
-    return [
-      a.name, a.dept, a.position, a.platform, a.stage, a.interview, a.contact,
-      fb?.score || '',
-      fb?.recommendation || '',
-      fb?.strengths || '',
-      fb?.areasFor || '',
-      (fb?.notes || '').replace(/\n/g,' '),
-      isHired ? (hasReview ? '완료' : '대기') : '—',
-    ].map(v => `"${(v||'').toString().replace(/"/g,'""')}"`);
-  });
-
-  const csv = [headers, ...rows].map(r => r.join(',')).join('\n');
-  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `HSO_채용_아카이브_${new Date().toLocaleDateString('ko-KR').replace(/\. /g,'-').replace('.','')}.csv`;
-  a.click();
-  URL.revokeObjectURL(url);
-  showToast('✅ 아카이브 CSV 다운로드 완료');
+function setDeptFilter(dept, btn) {
+  activeDeptFilter = dept;
+  document.querySelectorAll('#view-kanban .filter-btn:not([id^="kf-"])').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  buildKanban();
 }
 
-function hasFeedback(name) {
-  return feedbacks.some(f => f.applicantName === name);
+function setInterviewFilter(filter, btn) {
+  activeInterviewFilter = activeInterviewFilter === filter ? 'all' : filter;
+  document.querySelectorAll('[id^="kf-"]').forEach(b => b.classList.remove('active'));
+  if (activeInterviewFilter !== 'all' && btn) btn.classList.add('active');
+  buildKanban();
 }
 
-const STAGES = [
-  { key:'서류검토', label:'서류 검토', color:'#c8a02a' },
-  { key:'1차면접', label:'면접',       color:'#2a6ec8' },
-  { key:'최종합격', label:'최종 합격', color:'#2a8c5a' },
-  { key:'입사확정', label:'입사 확정', color:'#0ea5e9' },
-  { key:'보류',    label:'보류',      color:'#9b59b6' },
-  { key:'불합격',  label:'불합격',    color:'#aaa' },
-];
+function matchInterviewFilter(a) {
+  if (activeInterviewFilter === 'all') return true;
+  const iv = a.interview || '';
+  if (activeInterviewFilter === 'hasdate') return iv.length > 0;
+  if (activeInterviewFilter === 'nodate') return iv.length === 0;
+  const today = new Date();
+  const todayStr = `${today.getMonth()+1}.${today.getDate()}`;
+  if (activeInterviewFilter === 'today') return iv.includes(todayStr);
+  if (activeInterviewFilter === 'week') {
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(today); d.setDate(today.getDate() + i);
+      if (iv.includes(`${d.getMonth()+1}.${d.getDate()}`)) return true;
+    }
+    return false;
+  }
+  return true;
+}
 
 function buildKanban() {
   const sortVal = document.getElementById('kanban-sort')?.value || 'default';
@@ -1442,15 +1085,8 @@ function buildKanban() {
     let cards = applicants.filter(a => stageMatch(a, stage.key));
     if (activeDeptFilter !== '전체') cards = cards.filter(a => a.dept === activeDeptFilter);
     cards = cards.filter(a => matchInterviewFilter(a));
-    if (sortVal === 'date') {
-      cards = cards.sort((a, b) => {
-        if (!a.interview) return 1;
-        if (!b.interview) return -1;
-        return a.interview.localeCompare(b.interview);
-      });
-    } else if (sortVal === 'name') {
-      cards = cards.sort((a, b) => a.name.localeCompare(b.name, 'ko'));
-    }
+    if (sortVal === 'date') cards.sort((a,b) => !a.interview ? 1 : !b.interview ? -1 : a.interview.localeCompare(b.interview));
+    else if (sortVal === 'name') cards.sort((a,b) => a.name.localeCompare(b.name,'ko'));
     const col = document.createElement('div');
     col.className = 'kanban-col';
     col.innerHTML = `
@@ -1470,18 +1106,17 @@ function cardHTML(a) {
     ? `<a class="card-resume" href="${a.resume}" target="_blank" onclick="event.stopPropagation()">📄 이력서 보기</a>`
     : `<div class="card-resume-empty">이력서 없음</div>`;
   const evalDone = hasFeedback(a.name) ? `<span class="tag tag-eval">✓ 평가완료</span>` : '';
-  return `
-    <div class="applicant-card" onclick="openEditModal('${a.id}')">
-      <div class="card-name">${a.name}</div>
-      <div class="card-position">${a.position || '포지션 미정'}</div>
-      <div class="card-tags">
-        ${a.dept     ? `<span class="tag tag-dept">${a.dept}</span>` : ''}
-        ${a.platform ? `<span class="tag tag-platform">${a.platform}</span>` : ''}
-        ${evalDone}
-      </div>
-      ${a.interview ? `<div class="card-interview">🕐 ${a.interview}</div>` : ''}
-      ${resumeBtn}
-    </div>`;
+  return `<div class="applicant-card" onclick="openEditModal('${a.id}')">
+    <div class="card-name">${a.name}</div>
+    <div class="card-position">${a.position || '포지션 미정'}</div>
+    <div class="card-tags">
+      ${a.dept ? `<span class="tag tag-dept">${a.dept}</span>` : ''}
+      ${a.platform ? `<span class="tag tag-platform">${a.platform}</span>` : ''}
+      ${evalDone}
+    </div>
+    ${a.interview ? `<div class="card-interview">🕐 ${a.interview}</div>` : ''}
+    ${resumeBtn}
+  </div>`;
 }
 
 // ── TABLE ──
@@ -1491,47 +1126,29 @@ function buildTable() {
     tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:32px">지원자가 없습니다</td></tr>`;
     return;
   }
-
   const sortVal = document.getElementById('table-sort')?.value || 'stage';
-  const STAGE_ORDER = { '서류검토': 1, '1차면접': 2, '2차면접': 3, '최종합격': 4, '불합격': 5 };
-
   const getStageOrder = (a) => {
-    if (stageMatch(a,'1차면접'))  return 1;
-    if (stageMatch(a,'2차면접'))  return 2;
-    if (stageMatch(a,'최종합격')) return 3;
+    if (stageMatch(a,'면접'))     return 1;
+    if (stageMatch(a,'최종합격')) return 2;
+    if (stageMatch(a,'입사확정')) return 3;
     if (stageMatch(a,'서류검토')) return 4;
-    if (stageMatch(a,'불합격'))   return 5;
+    if (stageMatch(a,'보류'))     return 5;
+    if (stageMatch(a,'서류탈락')) return 6;
+    if (stageMatch(a,'면접탈락')) return 7;
     return 9;
   };
-
   let sorted = [...applicants];
-  if (activeTableDeptFilter !== '전체') {
-    sorted = sorted.filter(a => a.dept === activeTableDeptFilter);
-  }
+  if (activeTableDeptFilter !== '전체') sorted = sorted.filter(a => a.dept === activeTableDeptFilter);
   if (sortVal === 'stage') {
-    sorted.sort((a, b) => {
-      const stageDiff = getStageOrder(a) - getStageOrder(b);
-      if (stageDiff !== 0) return stageDiff;
-      // 같은 단계면 면접일 빠른 순
-      if (!a.interview) return 1;
-      if (!b.interview) return -1;
+    sorted.sort((a,b) => {
+      const d = getStageOrder(a) - getStageOrder(b);
+      if (d !== 0) return d;
+      if (!a.interview) return 1; if (!b.interview) return -1;
       return a.interview.localeCompare(b.interview);
     });
-  } else if (sortVal === 'date-desc') {
-    sorted.sort((a, b) => {
-      if (!a.interview) return 1;
-      if (!b.interview) return -1;
-      return b.interview.localeCompare(a.interview);
-    });
-  } else if (sortVal === 'date-asc') {
-    sorted.sort((a, b) => {
-      if (!a.interview) return 1;
-      if (!b.interview) return -1;
-      return a.interview.localeCompare(b.interview);
-    });
-  } else if (sortVal === 'name') {
-    sorted.sort((a, b) => a.name.localeCompare(b.name, 'ko'));
-  }
+  } else if (sortVal === 'date-desc') sorted.sort((a,b) => !a.interview ? 1 : !b.interview ? -1 : b.interview.localeCompare(a.interview));
+  else if (sortVal === 'date-asc') sorted.sort((a,b) => !a.interview ? 1 : !b.interview ? -1 : a.interview.localeCompare(b.interview));
+  else if (sortVal === 'name') sorted.sort((a,b) => a.name.localeCompare(b.name,'ko'));
 
   tbody.innerHTML = sorted.map(a => {
     const sc = stageClass(a.stage);
@@ -1540,63 +1157,46 @@ function buildTable() {
       : `<span style="color:#ccc;font-size:12px">없음</span>`;
     return `<tr style="cursor:pointer" onclick="openEditModal('${a.id}')">
       <td style="font-weight:700">${a.name}</td>
-      <td style="color:#666">${a.dept || '-'}</td>
-      <td>${a.position || '-'}</td>
-      <td style="color:#999">${a.platform || '-'}</td>
+      <td style="color:#666">${a.dept||'-'}</td>
+      <td>${a.position||'-'}</td>
+      <td style="color:#999">${a.platform||'-'}</td>
       <td><span class="stage-badge ${sc}">${a.stage}</span></td>
-      <td style="color:var(--accent2);font-size:12px">${a.interview || '-'}</td>
+      <td style="color:var(--accent2);font-size:12px">${a.interview||'-'}</td>
       <td onclick="event.stopPropagation()">${resumeCell}</td>
       <td><button style="padding:4px 10px;border:1px solid var(--border);background:var(--surface2);border-radius:4px;font-size:11px;cursor:pointer;font-family:inherit" onclick="event.stopPropagation();openEditModal('${a.id}')">수정</button></td>
     </tr>`;
   }).join('');
 }
 
-function stageClass(s) {
-  if (!s) return 's-서류검토';
-  if (s.includes('서류') || s.includes('검토')) return 's-서류검토';
-  if (s.includes('1차') || s.includes('2차') || s === '면접') return 's-1차면접';
-  if (s === '입사확정' || s.includes('입사')) return 's-입사확정';
-  if (s.includes('합격') && !s.includes('불')) return 's-최종합격';
-  if (s === '보류') return 's-보류';
-  if (s.includes('불합격')) return 's-불합격';
-  return 's-서류검토';
-}
-
 // ── SCHEDULE ──
 function buildSchedule() {
   const grid = document.getElementById('schedule-grid');
   const withInterview = applicants.filter(a => a.interview);
-  if (!withInterview.length) {
-    grid.innerHTML = '<div style="color:var(--muted);font-size:13px">면접 일정 없음</div>';
-    return;
-  }
+  if (!withInterview.length) { grid.innerHTML = '<div style="color:var(--muted);font-size:13px">면접 일정 없음</div>'; return; }
   grid.innerHTML = withInterview.map(a => `
     <div class="schedule-card">
       <div class="schedule-time">${a.interview}</div>
       <div class="schedule-name">${a.name}</div>
-      <div class="schedule-meta">${a.position || ''} · ${a.dept || ''} · ${a.stage}</div>
+      <div class="schedule-meta">${a.position||''} · ${a.dept||''} · ${a.stage}</div>
     </div>`).join('');
 }
 
-// ── EVALUATION SIDEBAR ──
+// ── EVALUATION ──
 function buildEvalSidebar() {
   const list = document.getElementById('eval-applicant-list');
   let interviewees = applicants.filter(a =>
-    stageMatch(a,'1차면접') || stageMatch(a,'최종합격') || stageMatch(a,'입사확정') || stageMatch(a,'보류') || stageMatch(a,'불합격')
+    stageMatch(a,'면접') || stageMatch(a,'최종합격') || stageMatch(a,'입사확정') || stageMatch(a,'보류') || stageMatch(a,'면접탈락')
   );
-  // 부서장/면접관은 본인 부서만
   if ((currentRole === 'head' || currentRole === 'interviewer') && currentRoleDept) {
     interviewees = interviewees.filter(a => a.dept === currentRoleDept);
   }
   if (!interviewees.length) {
-    list.innerHTML = `<div style="padding:20px;color:var(--muted);font-size:12px;text-align:center">${currentRoleDept ? currentRoleDept + ' ' : ''}면접 대상자 없음</div>`;
+    list.innerHTML = `<div style="padding:20px;color:var(--muted);font-size:12px;text-align:center">면접 대상자 없음</div>`;
     return;
   }
-  // 단계순 정렬: 1차면접 → 2차면접 → 최종합격 → 보류 → 서류검토
-  const order = { '1차면접':1, '2차면접':2, '최종합격':3, '보류':4, '서류검토':5 };
-  interviewees.sort((a, b) => {
-    const ao = stageMatch(a,'1차면접') ? 1 : stageMatch(a,'최종합격') ? 2 : stageMatch(a,'입사확정') ? 3 : stageMatch(a,'보류') ? 4 : 5;
-    const bo = stageMatch(b,'1차면접') ? 1 : stageMatch(b,'최종합격') ? 2 : stageMatch(b,'입사확정') ? 3 : stageMatch(b,'보류') ? 4 : 5;
+  interviewees.sort((a,b) => {
+    const ao = stageMatch(a,'면접') ? 1 : stageMatch(a,'최종합격') ? 2 : stageMatch(a,'입사확정') ? 3 : stageMatch(a,'보류') ? 4 : 5;
+    const bo = stageMatch(b,'면접') ? 1 : stageMatch(b,'최종합격') ? 2 : stageMatch(b,'입사확정') ? 3 : stageMatch(b,'보류') ? 4 : 5;
     return ao - bo;
   });
   list.innerHTML = interviewees.map(a => {
@@ -1606,7 +1206,7 @@ function buildEvalSidebar() {
       <div class="eval-applicant-meta">${a.position} · ${a.dept}</div>
       <div style="display:flex;gap:4px;margin-top:4px;align-items:center">
         <span class="stage-badge ${stageClass(a.stage)}" style="font-size:9px;padding:1px 6px">${a.stage}</span>
-        <span class="eval-applicant-badge ${done ? 'eval-done' : 'eval-pending'}">${done ? '✓ 평가완료' : '평가대기'}</span>
+        <span class="eval-applicant-badge ${done?'eval-done':'eval-pending'}">${done?'✓ 평가완료':'평가대기'}</span>
       </div>
     </div>`;
   }).join('');
@@ -1617,7 +1217,7 @@ function selectEvalApplicant(id) {
   if (!currentEvalApplicant) return;
   document.querySelectorAll('.eval-applicant-item').forEach(el => el.classList.remove('active'));
   event.currentTarget.classList.add('active');
-  evalState = { headScores: {}, pracScores: {}, hrScores: {}, selectedQs: [], redFlags: [], verdict: '', comment: '', strengths: '', areasFor: '', notes: '' };
+  evalState = { headScores:{}, pracScores:{}, hrScores:{}, selectedQs:[], redFlags:[], verdict:'', comment:'', strengths:'', areasFor:'', notes:'' };
   const fb = feedbacks.find(f => f.applicantName === currentEvalApplicant.name);
   renderEvalForm(currentEvalApplicant, fb);
 }
@@ -1625,145 +1225,80 @@ function selectEvalApplicant(id) {
 function renderEvalForm(a, existingFb) {
   const dept = a.dept || '';
   const questions = getQuestionsForDept(dept);
-  const weighted = calcWeighted();
-
   const el = document.getElementById('eval-main');
   el.innerHTML = `
     <div class="eval-header">
-      <div class="eval-header-left">
-        <h2>${a.name}</h2>
-        <p>${a.position} · ${a.interview || '면접일 미정'}</p>
-      </div>
-      <span class="eval-dept-badge">${dept || '부서 미정'}</span>
+      <div class="eval-header-left"><h2>${a.name}</h2><p>${a.position} · ${a.interview||'면접일 미정'}</p></div>
+      <span class="eval-dept-badge">${dept||'부서 미정'}</span>
     </div>
-
     <div class="weighted-score-box">
-      <div>
-        <div class="ws-label">가중 점수 (자동계산)</div>
-        <div class="ws-value" id="ws-total">—</div>
-      </div>
+      <div><div class="ws-label">가중 점수 (자동계산)</div><div class="ws-value" id="ws-total">—</div></div>
       <div class="ws-breakdown">
         <div class="ws-part"><div class="ws-part-label">부서장 50%</div><div class="ws-part-value" id="ws-head">—</div></div>
         <div class="ws-part"><div class="ws-part-label">실무자 30%</div><div class="ws-part-value" id="ws-prac">—</div></div>
         <div class="ws-part"><div class="ws-part-label">HR 20%</div><div class="ws-part-value" id="ws-hr">—</div></div>
       </div>
     </div>
-
-    <!-- 부서장 평가 -->
     <div class="eval-section">
       <div class="eval-section-title">① 부서장 평가 (Weight 50%) — 각 항목 1~5점</div>
-      <div class="score-grid" id="head-scores">
-        ${HEAD_ITEMS.map((item, i) => renderScoreItem('head', i, item)).join('')}
-      </div>
-      <div style="margin-top:12px">
-        <div class="form-label" style="margin-bottom:6px">종합 코멘트</div>
-        <textarea class="form-input" id="head-comment" rows="2" placeholder="부서장 종합 의견..."></textarea>
-      </div>
+      <div class="score-grid">${HEAD_ITEMS.map((item,i) => renderScoreItem('head',i,item)).join('')}</div>
+      <div style="margin-top:12px"><div class="form-label" style="margin-bottom:6px">종합 코멘트</div>
+      <textarea class="form-input" id="head-comment" rows="2" placeholder="부서장 종합 의견..."></textarea></div>
     </div>
-
-    <!-- 실무자 평가 -->
     <div class="eval-section">
       <div class="eval-section-title">② 실무자 평가 (Weight 30%) — 공통역량</div>
-      <div class="score-grid" id="prac-scores">
-        ${PRAC_ITEMS.map((item, i) => renderScoreItem('prac', i, item)).join('')}
-      </div>
+      <div class="score-grid">${PRAC_ITEMS.map((item,i) => renderScoreItem('prac',i,item)).join('')}</div>
     </div>
-
-    <!-- 직무 특화 질문 -->
     <div class="eval-section">
       <div class="eval-section-title">② 실무자 평가 — 직무 특화 질문 (6개 중 3개 선택)</div>
-      <div class="question-pool" id="question-pool">
-        ${questions.map(q => `
-          <div class="question-item" id="q-${q.id}" onclick="toggleQuestion('${q.id}')">
-            <div class="question-checkbox" id="qc-${q.id}"></div>
-            <div>
-              <div class="question-type">${q.type}</div>
-              <div class="question-text">${q.q}</div>
-            </div>
-          </div>`).join('')}
+      <div class="question-pool">
+        ${questions.map(q => `<div class="question-item" id="q-${q.id}" onclick="toggleQuestion('${q.id}')">
+          <div class="question-checkbox" id="qc-${q.id}"></div>
+          <div><div class="question-type">${q.type}</div><div class="question-text">${q.q}</div></div>
+        </div>`).join('')}
       </div>
-      <div style="margin-top:12px">
-        <div class="form-label" style="margin-bottom:6px">실무자 종합 코멘트</div>
-        <textarea class="form-input" id="prac-comment" rows="2" placeholder="실무자 종합 의견..."></textarea>
-      </div>
+      <div style="margin-top:12px"><div class="form-label" style="margin-bottom:6px">실무자 종합 코멘트</div>
+      <textarea class="form-input" id="prac-comment" rows="2" placeholder="실무자 종합 의견..."></textarea></div>
     </div>
-
-    <!-- HR 평가 -->
     <div class="eval-section">
       <div class="eval-section-title">③ HR 평가 (Weight 20%)</div>
-      <div class="score-grid" id="hr-scores">
-        ${HR_ITEMS.map((item, i) => renderScoreItem('hr', i, item)).join('')}
-      </div>
+      <div class="score-grid">${HR_ITEMS.map((item,i) => renderScoreItem('hr',i,item)).join('')}</div>
     </div>
-
-    <!-- Red Flags -->
     <div class="eval-section">
       <div class="eval-section-title">⚠️ Red Flag 체크</div>
       <div class="redflag-grid">
-        ${RED_FLAGS.map((rf, i) => `
-          <div class="redflag-item" id="rf-${i}" onclick="toggleRedFlag(${i})">
-            <div class="redflag-dot"></div>
-            <div style="font-size:12px">${rf}</div>
-          </div>`).join('')}
+        ${RED_FLAGS.map((rf,i) => `<div class="redflag-item" id="rf-${i}" onclick="toggleRedFlag(${i})">
+          <div class="redflag-dot"></div><div style="font-size:12px">${rf}</div>
+        </div>`).join('')}
       </div>
     </div>
-
-    <!-- 강점 / 개선점 -->
     <div class="eval-section">
       <div class="eval-section-title">강점 & 개선 필요 영역</div>
       <div class="form-grid">
-        <div class="form-group">
-          <label class="form-label">강점 (Strengths)</label>
-          <textarea class="form-input" id="eval-strengths" rows="3" placeholder="지원자의 강점을 기재하세요...">${existingFb ? existingFb.strengths : ''}</textarea>
-        </div>
-        <div class="form-group">
-          <label class="form-label">개선 필요 영역 (Areas for Development)</label>
-          <textarea class="form-input" id="eval-areas" rows="3" placeholder="보완이 필요한 부분을 기재하세요...">${existingFb ? existingFb.areasFor : ''}</textarea>
-        </div>
-        <div class="form-group full">
-          <label class="form-label">면접 메모 (Interview Notes)</label>
-          <textarea class="form-input" id="eval-notes" rows="3" placeholder="면접 중 특이사항, 답변 메모 등...">${existingFb ? existingFb.notes : ''}</textarea>
-        </div>
+        <div class="form-group"><label class="form-label">강점 (Strengths)</label>
+          <textarea class="form-input" id="eval-strengths" rows="3" placeholder="지원자의 강점을 기재하세요...">${existingFb ? (existingFb.strengths||'') : ''}</textarea></div>
+        <div class="form-group"><label class="form-label">개선 필요 영역</label>
+          <textarea class="form-input" id="eval-areas" rows="3" placeholder="보완이 필요한 부분을 기재하세요...">${existingFb ? (existingFb.areasFor||'') : ''}</textarea></div>
+        <div class="form-group full"><label class="form-label">면접 메모</label>
+          <textarea class="form-input" id="eval-notes" rows="3" placeholder="면접 중 특이사항, 답변 메모 등...">${existingFb ? (existingFb.notes||'') : ''}</textarea></div>
       </div>
     </div>
-
-    <!-- 최종 판정 -->
     <div class="eval-section">
       <div class="eval-section-title">최종 판정</div>
       <div class="verdict-grid">
-        <button class="verdict-btn v-strong" onclick="selectVerdict('Strong Hire')">
-          <span class="verdict-icon">✅</span>
-          <span class="verdict-label">Strong Hire</span>
-          <span class="verdict-score">90점 이상</span>
-        </button>
-        <button class="verdict-btn v-hire" onclick="selectVerdict('Hire')">
-          <span class="verdict-icon">🟢</span>
-          <span class="verdict-label">Hire</span>
-          <span class="verdict-score">75~89점</span>
-        </button>
-        <button class="verdict-btn v-hold" onclick="selectVerdict('Hold')">
-          <span class="verdict-icon">🔶</span>
-          <span class="verdict-label">Hold</span>
-          <span class="verdict-score">60~74점</span>
-        </button>
-        <button class="verdict-btn v-no" onclick="selectVerdict('No Hire')">
-          <span class="verdict-icon">❌</span>
-          <span class="verdict-label">No Hire</span>
-          <span class="verdict-score">59점 이하</span>
-        </button>
+        <button class="verdict-btn v-strong" onclick="selectVerdict('Strong Hire')"><span class="verdict-icon">✅</span><span class="verdict-label">Strong Hire</span><span class="verdict-score">90점 이상</span></button>
+        <button class="verdict-btn v-hire" onclick="selectVerdict('Hire')"><span class="verdict-icon">🟢</span><span class="verdict-label">Hire</span><span class="verdict-score">75~89점</span></button>
+        <button class="verdict-btn v-hold" onclick="selectVerdict('Hold')"><span class="verdict-icon">🔶</span><span class="verdict-label">Hold</span><span class="verdict-score">60~74점</span></button>
+        <button class="verdict-btn v-no" onclick="selectVerdict('No Hire')"><span class="verdict-icon">❌</span><span class="verdict-label">No Hire</span><span class="verdict-score">59점 이하</span></button>
       </div>
-      <div style="margin-top:12px">
-        <label class="form-label">종합 피드백 요약</label>
-        <textarea class="form-input" id="eval-summary" rows="3" placeholder="전반적인 평가 의견을 요약하세요...">${existingFb ? existingFb.summary : ''}</textarea>
-      </div>
+      <div style="margin-top:12px"><label class="form-label">종합 피드백 요약</label>
+        <textarea class="form-input" id="eval-summary" rows="3" placeholder="전반적인 평가 의견을 요약하세요...">${existingFb ? (existingFb.summary||'') : ''}</textarea></div>
     </div>
-
     <div style="display:flex;gap:10px;justify-content:flex-end;padding-top:16px;border-top:1px solid var(--border)">
       <button class="btn-cancel" onclick="resetEvalForm()">초기화</button>
       <button class="btn-submit" onclick="saveEvaluation()">💾 평가 저장</button>
     </div>
   `;
-
   if (existingFb) {
     evalState.verdict = existingFb.recommendation;
     if (existingFb.recommendation) selectVerdict(existingFb.recommendation);
@@ -1773,176 +1308,128 @@ function renderEvalForm(a, existingFb) {
 
 function renderScoreItem(type, idx, item) {
   return `<div class="score-item">
-    <div class="score-item-left">
-      <div class="score-item-name">${item.name}</div>
-      <div class="score-item-desc">${item.desc}</div>
-    </div>
-    <div class="score-stars">
-      ${[1,2,3,4,5].map(n => `<div class="score-star" id="${type}-${idx}-${n}" onclick="setScore('${type}',${idx},${n})">${n}</div>`).join('')}
-    </div>
+    <div class="score-item-left"><div class="score-item-name">${item.name}</div><div class="score-item-desc">${item.desc}</div></div>
+    <div class="score-stars">${[1,2,3,4,5].map(n => `<div class="score-star" id="${type}-${idx}-${n}" onclick="setScore('${type}',${idx},${n})">${n}</div>`).join('')}</div>
   </div>`;
 }
 
 function setScore(type, idx, val) {
-  if (type === 'head') evalState.headScores[idx] = val;
-  else if (type === 'prac') evalState.pracScores[idx] = val;
-  else if (type === 'hr') evalState.hrScores[idx] = val;
-  [1,2,3,4,5].forEach(n => {
-    const el = document.getElementById(`${type}-${idx}-${n}`);
-    if (el) el.classList.toggle('selected', n <= val);
-  });
+  if (type==='head') evalState.headScores[idx]=val;
+  else if (type==='prac') evalState.pracScores[idx]=val;
+  else if (type==='hr') evalState.hrScores[idx]=val;
+  [1,2,3,4,5].forEach(n => { const el=document.getElementById(`${type}-${idx}-${n}`); if(el) el.classList.toggle('selected', n<=val); });
   updateWeightedScore();
 }
 
 function updateWeightedScore() {
-  const headVals = Object.values(evalState.headScores);
-  const pracVals = Object.values(evalState.pracScores);
-  const hrVals   = Object.values(evalState.hrScores);
-
-  const headRaw = headVals.length === HEAD_ITEMS.length ? headVals.reduce((a,b)=>a+b,0) : null;
-  const pracRaw = pracVals.length === PRAC_ITEMS.length ? pracVals.reduce((a,b)=>a+b,0) : null;
-  const hrRaw   = hrVals.length === HR_ITEMS.length     ? hrVals.reduce((a,b)=>a+b,0)   : null;
-
-  const headPct  = headRaw !== null ? (headRaw / (HEAD_ITEMS.length * 5)) * 50 : null;
-  const pracPct  = pracRaw !== null ? (pracRaw / (PRAC_ITEMS.length * 5)) * 30 : null;
-  const hrPct    = hrRaw   !== null ? (hrRaw   / (HR_ITEMS.length * 5))   * 20 : null;
-
-  const wsHead = document.getElementById('ws-head');
-  const wsPrac = document.getElementById('ws-prac');
-  const wsHr   = document.getElementById('ws-hr');
-  const wsTotal = document.getElementById('ws-total');
-
-  if (wsHead) wsHead.textContent = headPct !== null ? headPct.toFixed(1) : '—';
-  if (wsPrac) wsPrac.textContent = pracPct !== null ? pracPct.toFixed(1) : '—';
-  if (wsHr)   wsHr.textContent   = hrPct   !== null ? hrPct.toFixed(1)   : '—';
-
-  if (headPct !== null && pracPct !== null && hrPct !== null) {
-    const total = headPct + pracPct + hrPct;
-    if (wsTotal) wsTotal.textContent = total.toFixed(1) + '점';
-    evalState.totalScore = total;
-  } else {
-    if (wsTotal) wsTotal.textContent = '—';
-    evalState.totalScore = null;
-  }
+  const headVals=Object.values(evalState.headScores), pracVals=Object.values(evalState.pracScores), hrVals=Object.values(evalState.hrScores);
+  const headRaw=headVals.length===HEAD_ITEMS.length?headVals.reduce((a,b)=>a+b,0):null;
+  const pracRaw=pracVals.length===PRAC_ITEMS.length?pracVals.reduce((a,b)=>a+b,0):null;
+  const hrRaw=hrVals.length===HR_ITEMS.length?hrVals.reduce((a,b)=>a+b,0):null;
+  const headPct=headRaw!==null?(headRaw/(HEAD_ITEMS.length*5))*50:null;
+  const pracPct=pracRaw!==null?(pracRaw/(PRAC_ITEMS.length*5))*30:null;
+  const hrPct=hrRaw!==null?(hrRaw/(HR_ITEMS.length*5))*20:null;
+  const wsHead=document.getElementById('ws-head'), wsPrac=document.getElementById('ws-prac');
+  const wsHr=document.getElementById('ws-hr'), wsTotal=document.getElementById('ws-total');
+  if(wsHead) wsHead.textContent=headPct!==null?headPct.toFixed(1):'—';
+  if(wsPrac) wsPrac.textContent=pracPct!==null?pracPct.toFixed(1):'—';
+  if(wsHr) wsHr.textContent=hrPct!==null?hrPct.toFixed(1):'—';
+  if(headPct!==null&&pracPct!==null&&hrPct!==null) {
+    const total=headPct+pracPct+hrPct;
+    if(wsTotal) wsTotal.textContent=total.toFixed(1)+'점';
+    evalState.totalScore=total;
+  } else { if(wsTotal) wsTotal.textContent='—'; evalState.totalScore=null; }
 }
 
-function calcWeighted() { return evalState.totalScore || 0; }
+function calcWeighted() { return evalState.totalScore||0; }
 
 function toggleQuestion(id) {
-  const idx = evalState.selectedQs.indexOf(id);
-  if (idx >= 0) {
-    evalState.selectedQs.splice(idx, 1);
-  } else {
-    if (evalState.selectedQs.length >= 3) { showToast('질문은 3개까지 선택 가능합니다'); return; }
-    evalState.selectedQs.push(id);
-  }
-  const el = document.getElementById(`q-${id}`);
-  const cb = document.getElementById(`qc-${id}`);
-  if (el) el.classList.toggle('selected', evalState.selectedQs.includes(id));
-  if (cb) cb.textContent = evalState.selectedQs.includes(id) ? '✓' : '';
+  const idx=evalState.selectedQs.indexOf(id);
+  if(idx>=0) evalState.selectedQs.splice(idx,1);
+  else { if(evalState.selectedQs.length>=3){showToast('질문은 3개까지 선택 가능합니다');return;} evalState.selectedQs.push(id); }
+  const el=document.getElementById(`q-${id}`), cb=document.getElementById(`qc-${id}`);
+  if(el) el.classList.toggle('selected',evalState.selectedQs.includes(id));
+  if(cb) cb.textContent=evalState.selectedQs.includes(id)?'✓':'';
 }
 
 function toggleRedFlag(i) {
-  const idx = evalState.redFlags.indexOf(i);
-  if (idx >= 0) evalState.redFlags.splice(idx, 1);
-  else evalState.redFlags.push(i);
-  const el = document.getElementById(`rf-${i}`);
-  if (el) el.classList.toggle('flagged', evalState.redFlags.includes(i));
+  const idx=evalState.redFlags.indexOf(i);
+  if(idx>=0) evalState.redFlags.splice(idx,1); else evalState.redFlags.push(i);
+  const el=document.getElementById(`rf-${i}`);
+  if(el) el.classList.toggle('flagged',evalState.redFlags.includes(i));
 }
 
 function selectVerdict(v) {
-  evalState.verdict = v;
-  document.querySelectorAll('.verdict-btn').forEach(b => b.classList.remove('selected'));
-  const map = { 'Strong Hire': 'v-strong', 'Hire': 'v-hire', 'Hold': 'v-hold', 'No Hire': 'v-no' };
-  document.querySelectorAll(`.${map[v]}`).forEach(b => b.classList.add('selected'));
+  evalState.verdict=v;
+  document.querySelectorAll('.verdict-btn').forEach(b=>b.classList.remove('selected'));
+  const map={'Strong Hire':'v-strong','Hire':'v-hire','Hold':'v-hold','No Hire':'v-no'};
+  document.querySelectorAll(`.${map[v]}`).forEach(b=>b.classList.add('selected'));
 }
 
 function getQuestionsForDept(dept) {
-  const key = Object.keys(DEPT_QUESTIONS).find(k => dept.includes(k));
-  return key ? DEPT_QUESTIONS[key] : DEPT_QUESTIONS['플랫폼사업팀'];
+  const key=Object.keys(DEPT_QUESTIONS).find(k=>dept.includes(k));
+  return key?DEPT_QUESTIONS[key]:DEPT_QUESTIONS['플랫폼'];
 }
 
-function resetEvalForm() {
-  if (currentEvalApplicant) renderEvalForm(currentEvalApplicant, null);
-}
+function resetEvalForm() { if(currentEvalApplicant) renderEvalForm(currentEvalApplicant,null); }
 
 async function saveEvaluation() {
-  if (!currentEvalApplicant) return;
-  if (!evalState.verdict) { showToast('최종 판정을 선택해주세요'); return; }
-
-  const score = evalState.totalScore ? Math.round(evalState.totalScore) : 0;
-  const isStrong = evalState.verdict === 'Strong Hire';
-  const redFlagText = evalState.redFlags.map(i => RED_FLAGS[i]).join(', ');
-  const summary = document.getElementById('eval-summary')?.value || '';
-  const strengths = document.getElementById('eval-strengths')?.value || '';
-  const areasFor = document.getElementById('eval-areas')?.value || '';
-  const notes = document.getElementById('eval-notes')?.value || '';
-  const headComment = document.getElementById('head-comment')?.value || '';
-  const pracComment = document.getElementById('prac-comment')?.value || '';
-
-  const fullNotes = [notes, headComment ? `[부서장] ${headComment}` : '', pracComment ? `[실무자] ${pracComment}` : '', redFlagText ? `[Red Flag] ${redFlagText}` : ''].filter(Boolean).join('\n\n');
-
-  const fields = {
-    [FB_FIELDS.interviewName]:   currentEvalApplicant.name,
+  if(!currentEvalApplicant) return;
+  if(!evalState.verdict){showToast('최종 판정을 선택해주세요');return;}
+  const score=evalState.totalScore?Math.round(evalState.totalScore):0;
+  const redFlagText=evalState.redFlags.map(i=>RED_FLAGS[i]).join(', ');
+  const summary=document.getElementById('eval-summary')?.value||'';
+  const strengths=document.getElementById('eval-strengths')?.value||'';
+  const areasFor=document.getElementById('eval-areas')?.value||'';
+  const notes=document.getElementById('eval-notes')?.value||'';
+  const headComment=document.getElementById('head-comment')?.value||'';
+  const pracComment=document.getElementById('prac-comment')?.value||'';
+  const fullNotes=[notes,headComment?`[부서장] ${headComment}`:'',pracComment?`[실무자] ${pracComment}`:'',redFlagText?`[Red Flag] ${redFlagText}`:''].filter(Boolean).join('\n\n');
+  const fields={
+    [FB_FIELDS.interviewName]: currentEvalApplicant.name,
     [FB_FIELDS.evaluationScore]: score,
-    [FB_FIELDS.recommendation]:  evalState.verdict,
-    [FB_FIELDS.strengths]:       strengths,
-    [FB_FIELDS.areasFor]:        areasFor,
+    [FB_FIELDS.recommendation]: evalState.verdict,
+    [FB_FIELDS.strengths]: strengths,
+    [FB_FIELDS.areasFor]: areasFor,
     [FB_FIELDS.feedbackSummary]: summary,
-    [FB_FIELDS.interviewNotes]:  fullNotes,
+    [FB_FIELDS.interviewNotes]: fullNotes,
   };
-
   try {
-    const existing = feedbacks.find(f => f.applicantName === currentEvalApplicant.name);
-    if (existing) {
-      await api('PATCH', { table: 'Interview Feedback', id: existing.id }, fields);
-      showToast('✅ 평가 업데이트 완료');
-    } else {
-      await api('POST', { table: 'Interview Feedback' }, fields);
-      showToast('✅ 평가 저장 완료');
-    }
+    const existing=feedbacks.find(f=>f.applicantName===currentEvalApplicant.name);
+    if(existing) { await api('PATCH',{table:'Interview Feedback',id:existing.id},fields); showToast('✅ 평가 업데이트 완료'); }
+    else { await api('POST',{table:'Interview Feedback'},fields); showToast('✅ 평가 저장 완료'); }
     await loadData();
     buildEvalSidebar();
-  } catch(e) {
-    showToast('❌ 저장 실패: ' + e.message);
-  }
+  } catch(e) { showToast('❌ 저장 실패: '+e.message); }
 }
 
 // ── 3-MONTH REVIEW ──
 function buildReviewSidebar() {
-  const list = document.getElementById('review-applicant-list');
-  const hired = applicants.filter(a => stageMatch(a, '입사확정'));
-  if (!hired.length) {
-    list.innerHTML = '<div style="padding:20px;color:var(--muted);font-size:12px;text-align:center">입사확정 인원 없음<br><span style="font-size:11px;color:#bbb">지원자 수정에서 단계를 입사확정으로 변경하세요</span></div>';
-    return;
-  }
-  list.innerHTML = hired.map(a => `
-    <div class="eval-applicant-item" onclick="selectReviewApplicant('${a.id}', this)">
-      <div class="eval-applicant-name">${a.name}</div>
-      <div class="eval-applicant-meta">${a.position} · ${a.dept}</div>
-      <span class="stage-badge s-입사확정" style="font-size:9px;padding:1px 6px;margin-top:4px;display:inline-block">입사확정</span>
-    </div>`).join('');
+  const list=document.getElementById('review-applicant-list');
+  const hired=applicants.filter(a=>stageMatch(a,'입사확정'));
+  if(!hired.length){list.innerHTML='<div style="padding:20px;color:var(--muted);font-size:12px;text-align:center">입사확정 인원 없음</div>';return;}
+  list.innerHTML=hired.map(a=>`<div class="eval-applicant-item" onclick="selectReviewApplicant('${a.id}',this)">
+    <div class="eval-applicant-name">${a.name}</div>
+    <div class="eval-applicant-meta">${a.position} · ${a.dept}</div>
+    <span class="stage-badge s-입사확정" style="font-size:9px;padding:1px 6px;margin-top:4px;display:inline-block">입사확정</span>
+  </div>`).join('');
 }
 
-function selectReviewApplicant(id, el) {
-  currentReviewApplicant = applicants.find(a => a.id === id);
-  if (!currentReviewApplicant) return;
-  document.querySelectorAll('#review-applicant-list .eval-applicant-item').forEach(e => e.classList.remove('active'));
+function selectReviewApplicant(id,el) {
+  currentReviewApplicant=applicants.find(a=>a.id===id);
+  if(!currentReviewApplicant) return;
+  document.querySelectorAll('#review-applicant-list .eval-applicant-item').forEach(e=>e.classList.remove('active'));
   el.classList.add('active');
-  reviewState = { activeTab: 'manager', managerScores: {}, hrScores: {}, selfScores: {}, managerComment: '', hrComment: '', selfComment: '' };
+  reviewState={activeTab:'manager',managerScores:{},hrScores:{},selfScores:{},managerComment:'',hrComment:'',selfComment:''};
   renderReviewForm();
 }
 
 function renderReviewForm() {
-  const a = currentReviewApplicant;
-  if (!a) return;
-  const el = document.getElementById('review-main');
-  el.innerHTML = `
+  const a=currentReviewApplicant; if(!a) return;
+  const el=document.getElementById('review-main');
+  el.innerHTML=`
     <div class="eval-header">
-      <div class="eval-header-left">
-        <h2>${a.name}</h2>
-        <p>${a.position} · ${a.dept} · 입사 후 3개월 평가</p>
-      </div>
+      <div class="eval-header-left"><h2>${a.name}</h2><p>${a.position} · ${a.dept} · 입사 후 3개월 평가</p></div>
       <span class="eval-dept-badge" style="background:#f5f0ff;color:var(--purple)">3개월 평가</span>
     </div>
     <div class="review-tabs">
@@ -1954,271 +1441,311 @@ function renderReviewForm() {
     <div style="display:flex;gap:10px;justify-content:flex-end;padding-top:16px;border-top:1px solid var(--border);margin-top:20px">
       <button class="btn-cancel" onclick="renderReviewForm()">초기화</button>
       <button class="btn-purple" onclick="saveReview()">💾 평가 저장</button>
-    </div>
-  `;
+    </div>`;
   renderReviewTabContent('manager');
 }
 
 function switchReviewTab(tab) {
-  reviewState.activeTab = tab;
-  ['manager','hr','self'].forEach(t => {
-    const btn = document.getElementById(`rtab-${t}`);
-    if (btn) btn.classList.toggle('active', t === tab);
-  });
+  reviewState.activeTab=tab;
+  ['manager','hr','self'].forEach(t=>{const btn=document.getElementById(`rtab-${t}`);if(btn)btn.classList.toggle('active',t===tab);});
   renderReviewTabContent(tab);
 }
 
 function renderReviewTabContent(tab) {
-  const el = document.getElementById('review-tab-content');
-  if (!el) return;
-  let items, scoreKey, commentKey, title;
-  if (tab === 'manager') {
-    items = REVIEW_ITEMS_MANAGER; scoreKey = 'managerScores'; commentKey = 'managerComment';
-    title = '직속 상사 평가 — 업무 성과 및 역량';
-  } else if (tab === 'hr') {
-    items = REVIEW_ITEMS_HR; scoreKey = 'hrScores'; commentKey = 'hrComment';
-    title = 'HR 평가 — 조직 적응 및 근태';
-  } else {
-    items = REVIEW_ITEMS_SELF; scoreKey = 'selfScores'; commentKey = 'selfComment';
-    title = '본인 자기평가 — 적응 및 만족도';
-  }
-  el.innerHTML = `
+  const el=document.getElementById('review-tab-content'); if(!el) return;
+  let items,scoreKey,commentKey,title;
+  if(tab==='manager'){items=REVIEW_ITEMS_MANAGER;scoreKey='managerScores';commentKey='managerComment';title='직속 상사 평가 — 업무 성과 및 역량';}
+  else if(tab==='hr'){items=REVIEW_ITEMS_HR;scoreKey='hrScores';commentKey='hrComment';title='HR 평가 — 조직 적응 및 근태';}
+  else{items=REVIEW_ITEMS_SELF;scoreKey='selfScores';commentKey='selfComment';title='본인 자기평가 — 적응 및 만족도';}
+  el.innerHTML=`
     <div class="eval-section-title" style="margin-bottom:16px">${title}</div>
     <div class="review-scale-grid">
-      ${items.map((item, i) => `
-        <div class="review-scale-item">
-          <div>
-            <div class="review-scale-name">${item.name}</div>
-            <div class="review-scale-desc">${item.desc}</div>
-          </div>
-          <div class="review-scale-btns">
-            ${[1,2,3,4,5].map(n => `<div class="rs-btn ${(reviewState[scoreKey][i]||0) >= n ? 'sel':''}" onclick="setReviewScore('${scoreKey}',${i},${n})">${n}</div>`).join('')}
-          </div>
-        </div>`).join('')}
+      ${items.map((item,i)=>`<div class="review-scale-item">
+        <div><div class="review-scale-name">${item.name}</div><div class="review-scale-desc">${item.desc}</div></div>
+        <div class="review-scale-btns">
+          ${[1,2,3,4,5].map(n=>`<div class="rs-btn ${(reviewState[scoreKey][i]||0)>=n?'sel':''}" onclick="setReviewScore('${scoreKey}',${i},${n})">${n}</div>`).join('')}
+        </div>
+      </div>`).join('')}
     </div>
-    <div style="margin-top:16px">
-      <label class="form-label">종합 코멘트</label>
-      <textarea class="form-input" id="rv-comment-${tab}" rows="3" placeholder="종합 의견을 작성하세요...">${reviewState[commentKey]}</textarea>
-    </div>
-  `;
+    <div style="margin-top:16px"><label class="form-label">종합 코멘트</label>
+      <textarea class="form-input" id="rv-comment-${tab}" rows="3" placeholder="종합 의견을 작성하세요...">${reviewState[commentKey]}</textarea></div>`;
 }
 
-function setReviewScore(key, idx, val) {
-  const prevTab = reviewState.activeTab;
-  const commentEl = document.getElementById(`rv-comment-${prevTab}`);
-  if (commentEl) {
-    const ck = prevTab === 'manager' ? 'managerComment' : prevTab === 'hr' ? 'hrComment' : 'selfComment';
-    reviewState[ck] = commentEl.value;
-  }
-  reviewState[key][idx] = val;
+function setReviewScore(key,idx,val) {
+  const prevTab=reviewState.activeTab;
+  const commentEl=document.getElementById(`rv-comment-${prevTab}`);
+  if(commentEl){const ck=prevTab==='manager'?'managerComment':prevTab==='hr'?'hrComment':'selfComment';reviewState[ck]=commentEl.value;}
+  reviewState[key][idx]=val;
   renderReviewTabContent(prevTab);
 }
 
 async function saveReview() {
-  if (!currentReviewApplicant) return;
-  const commentEl = document.getElementById(`rv-comment-${reviewState.activeTab}`);
-  if (commentEl) {
-    const ck = reviewState.activeTab === 'manager' ? 'managerComment' : reviewState.activeTab === 'hr' ? 'hrComment' : 'selfComment';
-    reviewState[ck] = commentEl.value;
-  }
-
-  const avgScore = (scores) => {
-    const vals = Object.values(scores);
-    return vals.length ? (vals.reduce((a,b)=>a+b,0) / vals.length).toFixed(1) : 'N/A';
-  };
-
-  const summary = [
-    `직속상사: ${avgScore(reviewState.managerScores)}/5 — ${reviewState.managerComment}`,
-    `HR: ${avgScore(reviewState.hrScores)}/5 — ${reviewState.hrComment}`,
-    `본인: ${avgScore(reviewState.selfScores)}/5 — ${reviewState.selfComment}`,
-  ].join('\n');
-
-  const fields = {
-    [FB_FIELDS.interviewName]:   currentReviewApplicant.name,
-    [FB_FIELDS.feedbackSummary]: summary,
-    [FB_FIELDS.interviewNotes]:  `[3개월 평가]\n${summary}`,
-  };
-
+  if(!currentReviewApplicant) return;
+  const commentEl=document.getElementById(`rv-comment-${reviewState.activeTab}`);
+  if(commentEl){const ck=reviewState.activeTab==='manager'?'managerComment':reviewState.activeTab==='hr'?'hrComment':'selfComment';reviewState[ck]=commentEl.value;}
+  const avgScore=(scores)=>{const vals=Object.values(scores);return vals.length?(vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(1):'N/A';};
+  const summary=[`직속상사: ${avgScore(reviewState.managerScores)}/5 — ${reviewState.managerComment}`,`HR: ${avgScore(reviewState.hrScores)}/5 — ${reviewState.hrComment}`,`본인: ${avgScore(reviewState.selfScores)}/5 — ${reviewState.selfComment}`].join('\n');
+  const fields={[FB_FIELDS.interviewName]:currentReviewApplicant.name,[FB_FIELDS.feedbackSummary]:summary,[FB_FIELDS.interviewNotes]:`[3개월 평가]\n${summary}`};
   try {
-    await api('POST', { table: 'Interview Feedback' }, fields);
+    await api('POST',{table:'Interview Feedback'},fields);
     showToast('✅ 3개월 평가 저장 완료');
     await loadData();
-  } catch(e) {
-    showToast('❌ 저장 실패: ' + e.message);
-  }
+  } catch(e){showToast('❌ 저장 실패: '+e.message);}
+}
+
+// ── REPORT ──
+function buildReport() {
+  const total=applicants.length;
+  const interviewed=applicants.filter(a=>stageMatch(a,'면접')||stageMatch(a,'최종합격')||stageMatch(a,'입사확정')||stageMatch(a,'면접탈락')||stageMatch(a,'보류')).length;
+  const passed=applicants.filter(a=>stageMatch(a,'최종합격')).length;
+  const confirmed=applicants.filter(a=>stageMatch(a,'입사확정')).length;
+  const rejected=applicants.filter(a=>stageMatch(a,'서류탈락')||stageMatch(a,'면접탈락')).length;
+  const docRate=total?((interviewed/total)*100).toFixed(1):'0.0';
+  const intRate=interviewed?((passed/interviewed)*100).toFixed(1):'0.0';
+  const fillRate=jobOpenings.length?((passed/jobOpenings.reduce((s,j)=>s+Number(j.numHires||1),0))*100).toFixed(0):'0';
+  const evalDoneNames=new Set(feedbacks.filter(f=>f.recommendation).map(f=>f.applicantName));
+  const evalDone=evalDoneNames.size;
+  const evalRate=interviewed?((evalDone/interviewed)*100).toFixed(0):'0';
+  const reviewDoneNames=new Set(feedbacks.filter(f=>f.notes?.includes('3개월')).map(f=>f.applicantName));
+  const reviewDone=reviewDoneNames.size;
+
+  document.getElementById('report-kpis').innerHTML=`
+    <div class="report-kpi kpi-c1"><div class="report-kpi-label">서류 → 면접 전환율</div><div class="report-kpi-value" style="color:var(--accent2)">${docRate}%</div><div class="report-kpi-sub">전체 ${total}명 중 면접 ${interviewed}명</div></div>
+    <div class="report-kpi kpi-c2"><div class="report-kpi-label">면접 → 최종합격률</div><div class="report-kpi-value" style="color:var(--green)">${intRate}%</div><div class="report-kpi-sub">면접 ${interviewed}명 중 합격 ${passed}명</div></div>
+    <div class="report-kpi kpi-c3"><div class="report-kpi-label">채용 달성률</div><div class="report-kpi-value" style="color:var(--yellow)">${fillRate}%</div><div class="report-kpi-sub">목표 대비 최종합격 ${passed}명</div></div>
+    <div class="report-kpi kpi-c4"><div class="report-kpi-label">탈락률</div><div class="report-kpi-value" style="color:var(--accent)">${total?((rejected/total)*100).toFixed(1):0}%</div><div class="report-kpi-sub">전체 ${total}명 중 탈락 ${rejected}명</div></div>
+    <div class="report-kpi kpi-c5"><div class="report-kpi-label">평가서 완료율</div><div class="report-kpi-value" style="color:var(--purple)">${evalRate}%</div><div class="report-kpi-sub">면접자 ${interviewed}명 중 평가 ${evalDone}건</div></div>
+    <div class="report-kpi kpi-c6"><div class="report-kpi-label">3개월 평가 완료</div><div class="report-kpi-value" style="color:#0ea5e9">${reviewDone}명</div><div class="report-kpi-sub">입사확정 ${confirmed}명 중</div></div>`;
+
+  const screenedCnt=applicants.filter(a=>!stageMatch(a,'서류검토')).length;
+  const funnelSteps=[{name:'전체 지원',cnt:total,color:'#2a6ec8'},{name:'서류 통과',cnt:screenedCnt,color:'#c8a02a'},{name:'면접 진행',cnt:interviewed,color:'#c8502a'},{name:'최종 합격',cnt:passed,color:'#2a8c5a'}];
+  document.getElementById('report-funnel').innerHTML=funnelSteps.map(s=>{
+    const pct=total?Math.round((s.cnt/total)*100):0;
+    return `<div class="funnel-row"><div style="font-size:13px;font-weight:600">${s.name}</div><div style="font-family:'DM Mono',monospace;font-weight:700;color:${s.color}">${s.cnt}</div><div class="funnel-bar-wrap"><div class="funnel-bar" style="width:${pct}%;background:${s.color}"></div></div><div style="font-size:12px;color:var(--muted)">${pct}%</div></div>`;
+  }).join('');
+
+  const platData=PLATFORMS.map(p=>{
+    const platApps=applicants.filter(a=>a.platform===p);
+    const platPassed=platApps.filter(a=>stageMatch(a,'최종합격')||stageMatch(a,'입사확정')).length;
+    const rate=platApps.length?((platPassed/platApps.length)*100).toFixed(1):'0.0';
+    const rateClass=Number(rate)>=20?'rate-good':Number(rate)>=10?'rate-mid':'rate-low';
+    return {name:p,total:platApps.length,passed:platPassed,rate,rateClass,efficiency:platApps.length>=5&&platPassed>=1?'⭐ 효율':platApps.length===0?'—':'보통'};
+  }).sort((a,b)=>b.total-a.total);
+  document.getElementById('report-platforms').innerHTML=platData.map(p=>`<div class="platform-row">
+    <div style="font-size:13px;font-weight:600">${p.name}</div>
+    <div style="font-family:'DM Mono',monospace;font-weight:700;color:var(--accent2)">${p.total}</div>
+    <div style="font-family:'DM Mono',monospace;font-weight:700;color:var(--green)">${p.passed}</div>
+    <div class="rate-cell ${p.rateClass}">${p.rate}%</div>
+    <div style="font-size:11px;color:var(--muted)">${p.efficiency}</div>
+  </div>`).join('');
+
+  const hiredApps=applicants.filter(a=>stageMatch(a,'입사확정'));
+  document.getElementById('report-onboarding').innerHTML=hiredApps.length
+    ?`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px">${hiredApps.map(a=>{
+      const hasReview=feedbacks.some(f=>f.applicantName===a.name&&f.notes?.includes('3개월'));
+      return `<div style="padding:12px;border:1px solid var(--border);border-radius:8px;background:var(--bg)">
+        <div style="font-weight:700;font-size:13px">${a.name}</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:6px">${a.position} · ${a.dept}</div>
+        <span class="${hasReview?'badge-active':'badge-archived'}">${hasReview?'✓ 평가완료':'평가대기'}</span>
+      </div>`;}).join('')}</div>`
+    :'<div style="color:var(--muted);font-size:13px">입사확정 인원 없음</div>';
+
+  const pendingEval=applicants.filter(a=>stageMatch(a,'면접')&&!hasFeedback(a.name));
+  document.getElementById('report-pending-eval').innerHTML=pendingEval.length
+    ?`<div style="display:flex;flex-wrap:wrap;gap:8px">${pendingEval.map(a=>`<div style="padding:8px 12px;border:1px solid #fad4c8;background:#fff0ee;border-radius:6px;font-size:12px"><strong>${a.name}</strong> <span style="color:var(--muted)">${a.position}</span></div>`).join('')}</div>`
+    :'<div style="color:var(--green);font-size:13px">✅ 모든 면접자 평가 완료</div>';
+}
+
+// ── ARCHIVE ──
+function buildArchiveTable() {
+  const search=(document.getElementById('archive-search')?.value||'').toLowerCase();
+  const stageFilter=document.getElementById('archive-filter-stage')?.value||'전체';
+  let archived=applicants.filter(a=>stageMatch(a,'최종합격')||stageMatch(a,'서류탈락')||stageMatch(a,'면접탈락')||stageMatch(a,'보류'));
+  if(stageFilter!=='전체') archived=archived.filter(a=>stageMatch(a,stageFilter));
+  if(search) archived=archived.filter(a=>a.name.includes(search)||a.position.toLowerCase().includes(search)||a.dept.toLowerCase().includes(search));
+  const tbody=document.getElementById('archive-body');
+  if(!archived.length){tbody.innerHTML=`<tr><td colspan="10" style="text-align:center;color:var(--muted);padding:32px">데이터 없음</td></tr>`;return;}
+  tbody.innerHTML=archived.map(a=>{
+    const fb=feedbacks.find(f=>f.applicantName===a.name);
+    const hasReview=feedbacks.some(f=>f.applicantName===a.name&&f.notes?.includes('3개월'));
+    const isHired=stageMatch(a,'최종합격')||stageMatch(a,'입사확정');
+    const scoreCell=fb?.score?`<td style="font-family:'DM Mono',monospace;font-weight:700;color:var(--accent2);text-align:center">${fb.score}점</td>`:`<td style="color:var(--muted);text-align:center">—</td>`;
+    const verdictColor=fb?.recommendation==='Strong Hire'?'var(--green)':fb?.recommendation==='Hire'?'var(--accent2)':fb?.recommendation==='Hold'?'var(--yellow)':fb?.recommendation==='No Hire'?'var(--accent)':'';
+    const verdictCell=fb?.recommendation?`<td style="font-weight:700;color:${verdictColor};font-size:12px">${fb.recommendation}</td>`:`<td style="color:var(--muted)">—</td>`;
+    const truncate=(str,n)=>str&&str.length>n?str.substring(0,n)+'...':(str||'—');
+    return `<tr>
+      <td style="font-weight:700">${a.name}</td><td style="color:#666;font-size:12px">${a.dept||'—'}</td>
+      <td style="font-size:12px">${a.position||'—'}</td>
+      <td><span class="stage-badge ${stageClass(a.stage)}">${a.stage}</span></td>
+      ${scoreCell}${verdictCell}
+      <td style="font-size:12px;color:#444;max-width:160px" title="${fb?.strengths||''}">${truncate(fb?.strengths,30)}</td>
+      <td style="font-size:12px;color:#444;max-width:160px" title="${fb?.areasFor||''}">${truncate(fb?.areasFor,30)}</td>
+      <td style="font-size:12px;color:var(--muted);max-width:160px" title="${fb?.notes||''}">${truncate(fb?.notes,30)}</td>
+      <td style="text-align:center"><span class="${isHired?(hasReview?'badge-active':'badge-archived'):'badge-archived'}">${isHired?(hasReview?'✓ 완료':'대기'):'—'}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function hasFeedback(name) { return feedbacks.some(f=>f.applicantName===name); }
+
+function downloadEvalCSV() {
+  if(!feedbacks.length){showToast('저장된 평가 데이터가 없어요');return;}
+  const headers=['지원자명','부서','포지션','면접일','채용단계','평가점수','최종판정','강점','개선필요영역','면접메모'];
+  const rows=feedbacks.map(fb=>{
+    const applicant=applicants.find(a=>a.name===fb.applicantName)||{};
+    return [fb.applicantName,applicant.dept||'',applicant.position||'',applicant.interview||'',applicant.stage||'',fb.score||'',fb.recommendation||'',fb.strengths||'',fb.areasFor||'',(fb.notes||'').replace(/\n/g,' ')].map(v=>`"${(v||'').toString().replace(/"/g,'""')}"`);
+  });
+  const csv=[headers,...rows].map(r=>r.join(',')).join('\n');
+  const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download=`HSO_면접평가_${new Date().toLocaleDateString('ko-KR').replace(/\. /g,'-').replace('.','')}.csv`;a.click();URL.revokeObjectURL(url);
+  showToast('✅ 면접 평가 CSV 다운로드 완료');
+}
+
+function downloadArchiveCSV() {
+  const archived=applicants.filter(a=>stageMatch(a,'최종합격')||stageMatch(a,'서류탈락')||stageMatch(a,'면접탈락')||stageMatch(a,'보류'));
+  if(!archived.length){showToast('다운로드할 데이터가 없어요');return;}
+  const headers=['이름','부서','포지션','플랫폼','최종단계','면접일','연락처','평가점수','최종판정','강점','개선필요영역','면접메모','3개월평가'];
+  const rows=archived.map(a=>{
+    const fb=feedbacks.find(f=>f.applicantName===a.name);
+    const hasReview=feedbacks.some(f=>f.applicantName===a.name&&f.notes?.includes('3개월'));
+    const isHired=stageMatch(a,'최종합격')||stageMatch(a,'입사확정');
+    return [a.name,a.dept,a.position,a.platform,a.stage,a.interview,a.contact,fb?.score||'',fb?.recommendation||'',fb?.strengths||'',fb?.areasFor||'',(fb?.notes||'').replace(/\n/g,' '),isHired?(hasReview?'완료':'대기'):'—'].map(v=>`"${(v||'').toString().replace(/"/g,'""')}"`);
+  });
+  const csv=[headers,...rows].map(r=>r.join(',')).join('\n');
+  const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download=`HSO_채용_아카이브_${new Date().toLocaleDateString('ko-KR').replace(/\. /g,'-').replace('.','')}.csv`;a.click();URL.revokeObjectURL(url);
+  showToast('✅ 아카이브 CSV 다운로드 완료');
 }
 
 // ── MODAL ──
 function openAddModal() {
-  editingId = null;
-  document.getElementById('modal-title').textContent    = '지원자 추가';
-  document.getElementById('modal-subtitle').textContent = '새 지원자 정보를 입력하세요';
-  document.getElementById('btn-delete').style.display   = 'none';
-  document.getElementById('btn-submit').textContent     = '추가';
+  editingId=null;
+  document.getElementById('modal-title').textContent='지원자 추가';
+  document.getElementById('modal-subtitle').textContent='새 지원자 정보를 입력하세요';
+  document.getElementById('btn-delete').style.display='none';
+  document.getElementById('btn-submit').textContent='추가';
   clearForm();
   document.getElementById('modal').classList.add('open');
 }
 
 function openEditModal(id) {
-  editingId = id;
-  const a = applicants.find(x => x.id === id);
-  if (!a) return;
-  document.getElementById('modal-title').textContent    = a.name + ' 수정';
-  document.getElementById('modal-subtitle').textContent = `${a.dept} · ${a.position}`;
-  document.getElementById('btn-delete').style.display   = 'block';
-  document.getElementById('btn-submit').textContent     = '저장';
-  document.getElementById('f-name').value      = a.name;
-  document.getElementById('f-dept').value      = a.dept;
-  document.getElementById('f-position').value  = a.position;
-  document.getElementById('f-platform').value  = a.platform || '잡코리아';
-  document.getElementById('f-stage').value     = a.stage    || '서류검토';
-  document.getElementById('f-interview').value = a.interview;
-  document.getElementById('f-resume').value    = a.resume;
-  document.getElementById('f-contact').value   = a.contact;
-  document.getElementById('f-memo').value      = a.memo;
+  editingId=id;
+  const a=applicants.find(x=>x.id===id); if(!a) return;
+  document.getElementById('modal-title').textContent=a.name+' 수정';
+  document.getElementById('modal-subtitle').textContent=`${a.dept} · ${a.position}`;
+  document.getElementById('btn-delete').style.display='block';
+  document.getElementById('btn-submit').textContent='저장';
+  document.getElementById('f-name').value=a.name;
+  document.getElementById('f-dept').value=a.dept;
+  document.getElementById('f-position').value=a.position;
+  document.getElementById('f-platform').value=a.platform||'잡코리아';
+  document.getElementById('f-stage').value=a.stage||'서류검토';
+  document.getElementById('f-interview').value=a.interview;
+  document.getElementById('f-resume').value=a.resume;
+  document.getElementById('f-contact').value=a.contact;
+  document.getElementById('f-memo').value=a.memo;
   document.getElementById('modal').classList.add('open');
 }
 
 function clearForm() {
-  ['f-name','f-dept','f-position','f-interview','f-resume','f-contact','f-memo'].forEach(id => {
-    document.getElementById(id).value = '';
-  });
-  document.getElementById('f-platform').value = '잡코리아';
-  document.getElementById('f-stage').value    = '서류검토';
+  ['f-name','f-dept','f-position','f-interview','f-resume','f-contact','f-memo'].forEach(id=>{document.getElementById(id).value='';});
+  document.getElementById('f-platform').value='잡코리아';
+  document.getElementById('f-stage').value='서류검토';
 }
 
-function closeModal(e) { if (e.target === document.getElementById('modal')) closeModalDirect(); }
-function closeModalDirect() { document.getElementById('modal').classList.remove('open'); editingId = null; }
+function closeModal(e){if(e.target===document.getElementById('modal'))closeModalDirect();}
+function closeModalDirect(){document.getElementById('modal').classList.remove('open');editingId=null;}
 
 async function submitForm() {
-  const name = document.getElementById('f-name').value.trim();
-  if (!name) { showToast('이름을 입력해주세요'); return; }
-  const btn = document.getElementById('btn-submit');
-  btn.disabled = true; btn.textContent = '저장 중...';
-  const fields = {
-    [FIELDS.name]:      name,
-    [FIELDS.dept]:      document.getElementById('f-dept').value,
-    [FIELDS.position]:  document.getElementById('f-position').value,
-    [FIELDS.platform]:  document.getElementById('f-platform').value,
-    [FIELDS.stage]:     document.getElementById('f-stage').value,
-    [FIELDS.interview]: document.getElementById('f-interview').value,
-    [FIELDS.resume]:    document.getElementById('f-resume').value,
-    [FIELDS.contact]:   document.getElementById('f-contact').value,
-    [FIELDS.memo]:      document.getElementById('f-memo').value,
+  const name=document.getElementById('f-name').value.trim();
+  if(!name){showToast('이름을 입력해주세요');return;}
+  const btn=document.getElementById('btn-submit');
+  btn.disabled=true;btn.textContent='저장 중...';
+  const fields={
+    [FIELDS.name]:name,[FIELDS.dept]:document.getElementById('f-dept').value,
+    [FIELDS.position]:document.getElementById('f-position').value,[FIELDS.platform]:document.getElementById('f-platform').value,
+    [FIELDS.stage]:document.getElementById('f-stage').value,[FIELDS.interview]:document.getElementById('f-interview').value,
+    [FIELDS.resume]:document.getElementById('f-resume').value,[FIELDS.contact]:document.getElementById('f-contact').value,
+    [FIELDS.memo]:document.getElementById('f-memo').value,
   };
   try {
-    if (editingId) {
-      await api('PATCH', { table: 'Applicants', id: editingId }, fields);
-      showToast('✅ 수정 완료');
-    } else {
-      await api('POST', { table: 'Applicants' }, fields);
-      showToast('✅ 지원자 추가 완료');
-    }
-    closeModalDirect();
-    await loadData();
-  } catch(e) {
-    showToast('❌ 저장 실패: ' + e.message);
-  }
-  btn.disabled = false;
-  btn.textContent = editingId ? '저장' : '추가';
+    if(editingId){await api('PATCH',{table:'Applicants',id:editingId},fields);showToast('✅ 수정 완료');}
+    else{await api('POST',{table:'Applicants'},fields);showToast('✅ 지원자 추가 완료');}
+    closeModalDirect();await loadData();
+  } catch(e){showToast('❌ 저장 실패: '+e.message);}
+  btn.disabled=false;btn.textContent=editingId?'저장':'추가';
 }
 
 async function deleteApplicant() {
-  if (!editingId) return;
-  if (!confirm('정말 삭제하시겠습니까?')) return;
-  try {
-    await api('DELETE', { table: 'Applicants', id: editingId });
-    showToast('🗑️ 삭제 완료');
-    closeModalDirect();
-    await loadData();
-  } catch(e) {
-    showToast('❌ 삭제 실패: ' + e.message);
-  }
+  if(!editingId) return;
+  if(!confirm('정말 삭제하시겠습니까?')) return;
+  try{await api('DELETE',{table:'Applicants',id:editingId});showToast('🗑️ 삭제 완료');closeModalDirect();await loadData();}
+  catch(e){showToast('❌ 삭제 실패: '+e.message);}
 }
 
-// ── NAV ──
-// ── PASSWORD PROTECTION ──
-// 비밀번호 설정 (여기서 변경하세요)
-const PASSWORDS = {
-  evaluation: '0691',   // 면접 평가서 비밀번호
-  review:     '0691', // 3개월 평가 비밀번호
-  report:     '0691',   // 분기 리포트 비밀번호
-  archive:    '0691',   // 아카이브 비밀번호
-};
-const unlockedTabs = new Set(); // 세션 중 한번 입력하면 유지
-let pendingView = null;
-let pendingBtn  = null;
+// ── PASSWORD ──
+const PASSWORDS={evaluation:'0691',review:'0691',report:'0691',archive:'0691'};
+const unlockedTabs=new Set();
+let pendingView=null,pendingBtn=null;
 
-function showView(name, btn) {
-  // 보호된 탭 체크
-  if (['evaluation','review','report','archive'].includes(name) && !unlockedTabs.has(name)) {
-    pendingView = name;
-    pendingBtn  = btn;
-    openPasswordPrompt(name);
-    return;
+function showView(name,btn) {
+  if(['evaluation','review','report','archive'].includes(name)&&!unlockedTabs.has(name)){
+    pendingView=name;pendingBtn=btn;openPasswordPrompt(name);return;
   }
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('view-' + name).classList.add('active');
-  if (btn) btn.classList.add('active');
-  if (name === 'report') buildReport();
-  if (name === 'archive') buildArchiveTable();
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('view-'+name).classList.add('active');
+  if(btn) btn.classList.add('active');
+  if(name==='report') buildReport();
+  if(name==='archive') buildArchiveTable();
 }
 
 function openPasswordPrompt(tab) {
-  const labels = {
-    evaluation: { icon:'📋', title:'면접 평가서', desc:'HR/면접관 전용 메뉴입니다\n비밀번호를 입력하세요' },
-    review:     { icon:'🌱', title:'3개월 평가',  desc:'HR 전용 메뉴입니다\n비밀번호를 입력하세요' },
-    report:     { icon:'📊', title:'분기 리포트', desc:'HR/임원 전용 메뉴입니다\n비밀번호를 입력하세요' },
-    archive:    { icon:'🗂', title:'아카이브',    desc:'HR 전용 메뉴입니다\n비밀번호를 입력하세요' },
+  const labels={
+    evaluation:{icon:'📋',title:'면접 평가서',desc:'HR/면접관 전용 메뉴입니다\n비밀번호를 입력하세요'},
+    review:{icon:'🌱',title:'3개월 평가',desc:'HR 전용 메뉴입니다\n비밀번호를 입력하세요'},
+    report:{icon:'📊',title:'분기 리포트',desc:'HR/임원 전용 메뉴입니다\n비밀번호를 입력하세요'},
+    archive:{icon:'🗂',title:'아카이브',desc:'HR 전용 메뉴입니다\n비밀번호를 입력하세요'},
   };
-  const l = labels[tab];
-  document.getElementById('pwd-icon').textContent  = l.icon;
-  document.getElementById('pwd-title').textContent = l.title;
-  document.getElementById('pwd-desc').textContent  = l.desc;
-  document.getElementById('pwd-input').value        = '';
-  document.getElementById('pwd-error').style.display = 'none';
+  const l=labels[tab];
+  document.getElementById('pwd-icon').textContent=l.icon;
+  document.getElementById('pwd-title').textContent=l.title;
+  document.getElementById('pwd-desc').textContent=l.desc;
+  document.getElementById('pwd-input').value='';
+  document.getElementById('pwd-error').style.display='none';
   document.getElementById('pwd-input').classList.remove('error');
-  document.getElementById('pwd-overlay').style.display = 'flex';
-  setTimeout(() => document.getElementById('pwd-input').focus(), 100);
+  document.getElementById('pwd-overlay').style.display='flex';
+  setTimeout(()=>document.getElementById('pwd-input').focus(),100);
 }
 
 function checkPassword() {
-  const val = document.getElementById('pwd-input').value;
-  const correct = PASSWORDS[pendingView];
-  if (val === correct) {
+  const val=document.getElementById('pwd-input').value;
+  const correct=PASSWORDS[pendingView];
+  if(val===correct){
     unlockedTabs.add(pendingView);
-    document.getElementById('pwd-overlay').style.display = 'none';
-    // 원래 가려던 탭으로 이동
-    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('view-' + pendingView).classList.add('active');
-    if (pendingBtn) pendingBtn.classList.add('active');
+    document.getElementById('pwd-overlay').style.display='none';
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+    document.getElementById('view-'+pendingView).classList.add('active');
+    if(pendingBtn) pendingBtn.classList.add('active');
     showToast('✅ 접근이 허용됐어요');
   } else {
-    const inp = document.getElementById('pwd-input');
-    inp.classList.add('error');
-    document.getElementById('pwd-error').style.display = 'block';
-    inp.value = '';
-    setTimeout(() => inp.classList.remove('error'), 400);
+    const inp=document.getElementById('pwd-input');
+    inp.classList.add('error');document.getElementById('pwd-error').style.display='block';
+    inp.value='';setTimeout(()=>inp.classList.remove('error'),400);
   }
 }
 
-function cancelPassword() {
-  document.getElementById('pwd-overlay').style.display = 'none';
-  pendingView = null;
-  pendingBtn  = null;
-}
+function cancelPassword(){document.getElementById('pwd-overlay').style.display='none';pendingView=null;pendingBtn=null;}
 
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
 }
 
 loadData();
-// role은 loadData 내부에서 applyRole 호출
 </script>
 </body>
 </html>
