@@ -977,6 +977,11 @@ function buildHiringStatus() {
     tbody.innerHTML = `<tr><td colspan="16" style="text-align:center;color:var(--muted);padding:32px">Job Openings 데이터 없음</td></tr>`;
     return;
   }
+  // ✅ 합계 행 제외 + 가나다순 정렬
+  const rows = jobOpenings
+    .filter(row => row.dept && !row.dept.includes('합') && row.position)
+    .sort((a, b) => a.dept.localeCompare(b.dept, 'ko') || a.position.localeCompare(b.position, 'ko'));
+
   const totals = { numHires:0, jobkorea:0, saramin:0, wanted:0, jobplanet:0, groupby:0, total:0, screened:0, interviewed:0, finalHires:0 };
   const rateCell = (num, den) => {
     if (!den) return `<td class="rate-cell" style="color:var(--muted)">—</td>`;
@@ -984,13 +989,18 @@ function buildHiringStatus() {
     const cls = Number(r) >= 30 ? 'rate-good' : Number(r) >= 10 ? 'rate-mid' : 'rate-low';
     return `<td class="rate-cell ${cls}">${r}%</td>`;
   };
-  tbody.innerHTML = jobOpenings.map(row => {
+  tbody.innerHTML = rows.map(row => {
     const n = (v) => Number(v) || 0;
     const numHires = n(row.numHires) > 0 ? n(row.numHires) : 1;
     const jobkorea = n(row.jobkorea), saramin = n(row.saramin), wanted = n(row.wanted);
     const jobplanet = n(row.jobplanet), groupby = n(row.groupby);
     const totalCnt = jobkorea + saramin + wanted + jobplanet + groupby;
-    const posApplicants = applicants.filter(a => a.dept === row.dept && a.position === row.position);
+    // ✅ 포지션 정확 매칭 우선, 없으면 해당 부서 전체로 매칭
+    let posApplicants = applicants.filter(a => a.dept === row.dept && a.position === row.position);
+    if (!posApplicants.length) {
+      const otherPositions = rows.filter(r => r.dept === row.dept && r.position !== row.position).map(r => r.position);
+      posApplicants = applicants.filter(a => a.dept === row.dept && !otherPositions.includes(a.position));
+    }
     const screenedCnt = posApplicants.length;
     const interviewedCnt = posApplicants.filter(a => stageMatch(a,'면접')||stageMatch(a,'최종합격')||stageMatch(a,'입사확정')||stageMatch(a,'면접탈락')).length;
     const finalCnt = posApplicants.filter(a => stageMatch(a,'최종합격')||stageMatch(a,'입사확정')).length;
