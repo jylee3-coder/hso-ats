@@ -296,6 +296,19 @@ textarea.form-input { resize: vertical; }
 .pwd-btn { width:100%; padding:11px; background:var(--accent2); color:#fff; border:none; border-radius:8px; font-size:14px; font-weight:700; font-family:inherit; cursor:pointer; }
 .pwd-error { color:var(--accent); font-size:12px; margin-top:8px; display:none; }
 @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+/* LOGIN SCREEN */
+.login-screen { position:fixed; inset:0; background:var(--text); z-index:9999; display:flex; align-items:center; justify-content:center; }
+.login-box { background:var(--surface); border-radius:16px; padding:40px; width:380px; text-align:center; box-shadow:var(--shadow-lg); }
+.login-logo { font-family:'DM Mono',monospace; font-size:18px; font-weight:700; margin-bottom:6px; }
+.login-tag { display:inline-block; background:var(--accent); color:#fff; font-size:10px; padding:2px 8px; border-radius:3px; letter-spacing:1px; margin-bottom:24px; }
+.login-title { font-size:15px; font-weight:700; margin-bottom:6px; }
+.login-desc { font-size:12px; color:var(--muted); margin-bottom:20px; }
+.login-input { width:100%; padding:12px 16px; border:2px solid var(--border); border-radius:8px; font-size:18px; font-family:'DM Mono',monospace; text-align:center; letter-spacing:6px; outline:none; margin-bottom:12px; background:var(--bg); }
+.login-input:focus { border-color:var(--accent2); }
+.login-input.error { border-color:var(--accent); animation:shake 0.3s; }
+.login-btn { width:100%; padding:13px; background:var(--accent2); color:#fff; border:none; border-radius:8px; font-size:14px; font-weight:700; font-family:inherit; cursor:pointer; }
+.login-btn:hover { background:#1a5ab8; }
+.login-error { color:var(--accent); font-size:12px; margin-top:8px; display:none; }
 </style>
 </head>
 <body>
@@ -586,6 +599,20 @@ textarea.form-input { resize: vertical; }
     <div style="margin-top:12px">
       <button style="background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;font-family:inherit" onclick="cancelPassword()">취소</button>
     </div>
+  </div>
+</div>
+
+<!-- LOGIN SCREEN -->
+<div class="login-screen" id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">HSO 채용 ATS</div>
+    <div class="login-tag">LIVE</div>
+    <div class="login-title">🔒 접근 제한</div>
+    <div class="login-desc">HR 담당자 전용 시스템입니다<br>비밀번호를 입력해주세요</div>
+    <input class="login-input" id="login-input" type="password" placeholder="••••••" maxlength="20"
+      onkeydown="if(event.key==='Enter')checkLogin()">
+    <button class="login-btn" onclick="checkLogin()">로그인</button>
+    <div class="login-error" id="login-error">비밀번호가 맞지 않아요</div>
   </div>
 </div>
 
@@ -1755,7 +1782,35 @@ function showToast(msg){
   setTimeout(()=>t.classList.remove('show'),3000);
 }
 
-loadData();
+// ── SITE LOGIN ──
+const SITE_PASSWORD = 'hso2024!';
+const SESSION_KEY = 'hso_ats_auth';
+
+function checkLogin() {
+  const val = document.getElementById('login-input').value;
+  if (val === SITE_PASSWORD) {
+    sessionStorage.setItem(SESSION_KEY, 'true');
+    document.getElementById('login-screen').style.display = 'none';
+    loadData();
+  } else {
+    const inp = document.getElementById('login-input');
+    inp.classList.add('error');
+    document.getElementById('login-error').style.display = 'block';
+    inp.value = '';
+    setTimeout(() => inp.classList.remove('error'), 400);
+  }
+}
+
+function initAuth() {
+  if (sessionStorage.getItem(SESSION_KEY) === 'true') {
+    document.getElementById('login-screen').style.display = 'none';
+    loadData();
+  } else {
+    setTimeout(() => document.getElementById('login-input').focus(), 100);
+  }
+}
+
+initAuth();
 </script>
 </body>
 </html>
